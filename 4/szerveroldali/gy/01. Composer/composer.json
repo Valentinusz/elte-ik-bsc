@@ -1,0 +1,11 @@
+{
+    "name": "val/szerveroldali1",
+    "autoload": {
+        "psr-4": {
+            "Val\\Szerveroldali1\\": "src/"
+        }
+    },
+    "require": {
+        "fakerphp/faker": "^1.21"
+    }
+}

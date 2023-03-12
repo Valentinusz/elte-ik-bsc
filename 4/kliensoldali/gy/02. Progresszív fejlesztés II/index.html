@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu-HU">
+<head>
+    <meta charset="UTF-8">
+    <title>Progresszív fejlesztés II.</title>
+
+    <style>
+        .wrong {
+            border: 1px red solid;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <h1>Rendezhető táblázat</h1>
+    <table>
+        <tr>
+            <th>Gyümölcs</th>
+            <th>Megye</th>
+        </tr>
+        <tr>
+            <td>Alma</td>
+            <td>Békés</td>
+        </tr>
+        <tr>
+            <td>Szilva</td>
+            <td>Hajdú-Dorog</td>
+        </tr>
+        <tr>
+            <td>Gesztenye</td>
+            <td>Vas</td>
+        </tr>
+    </table>
+</article>
+
+<article>
+    <h1>Időintervallumok</h1>
+    <form action="">
+        <div class="idopont">
+            <input type="date" name="datum[]">
+            <input type="time" name="tol[]">
+            <input type="time" name="ig[]">
+        </div>
+        <div class="idopont">
+            <input type="date" name="datum[]">
+            <input type="time" name="tol[]">
+            <input type="time" name="ig[]">
+        </div>
+    </form>
+</article>
+
+<article>
+    <h1>Kaszkád legördülők</h1>
+    <label>Please choose one or more pets:
+    <select name="pets">
+        <optgroup label="4-legged pets">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="hamster">Hamster</option>
+        </optgroup>
+        <optgroup label="Flying pets">
+            <option value="parrot">Parrot</option>
+            <option value="macaw">Macaw</option>
+            <option value="albatross">Albatross</option>
+        </optgroup>
+    </select>
+    </label>
+</article>
+
+
+</body>
+<script src='1.js'></script>
+<script src='2.js'></script>
+<script src='3.js'></script>
+</html>

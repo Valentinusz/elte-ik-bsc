@@ -16,7 +16,7 @@ Saját HTML elemeket alapvetően két megközelítés alapján tudunk készíten
 A komponensalapú fejlesztésnek fontos aspektusa az enkapszuláció, a struktúra, a stílus és a logika szétválasztása.
 A `Shadow DOM API` egy lehetséges megoldás erre a problémára. Az API lehetővé teszi, hogy a sima DOM-tól elkülönülő
 Shadow DOM-okat definiáljunk.
-![](shadowdom.svg)
+![](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM/shadowdom.svg)
 A Shadow DOM-okat a sima DOM-al azonos módon manipulálhatjuk, azonban a Shadow DOM-ban szereplő kód semmilyen módon nem
 tud hatni a sima DOM-ra. 
 

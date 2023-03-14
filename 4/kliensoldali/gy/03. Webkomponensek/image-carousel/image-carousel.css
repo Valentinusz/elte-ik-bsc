@@ -1,0 +1,25 @@
+ul {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 20px solid gray;
+  width: 500px;
+  height: 333px;
+  top: 0;
+  left: 0;
+  list-style: none outside none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none outside none;
+  float: left;
+  width: 100%;
+
+}
+
+img {
+  width: 100%;
+}

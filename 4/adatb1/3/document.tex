@@ -1,0 +1,45 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\title{Relációs algebra}
+
+\begin{document}
+	\maketitle	
+	
+	$ \pi $ projekció
+	$ \sigma $ szelekció
+	$ \rho $ átnevezés
+	
+	\begin{tabular}{|c|c|}
+		\hline
+		Név & Gyümölcs \\
+		\hline
+		Micimackó & Alma \\
+		\hline
+		Micimackó & Körte \\
+		\hline
+		Tigris & Alma \\
+		\hline
+		Bagoly & Eper \\
+		\hline
+	\end{tabular}
+
+	Adjuk meg azokat a gyumolcsoket melyeket micimackó sezret!
+	
+	\[
+		\pi_{gyumolcs}{\left(  \sigma_{nev = micimacko}{\left( SZERET  \right) }\right) }
+	\]
+	
+	Minden reláció egy újabb relációt ad vissza, ezért tudunk így láncolni.
+	
+	Értlemezve van a: $  \cup, \; \cap $ és komplementer műveletek.
+	
+	Adjuk meg azokat a gyümölcsöket melyeket miciamckó nem szeret
+	
+	\[
+		\pi_{gyumolcs}{SZERET} \setminus \pi_{gyumolcs}{\left(  \sigma_{nev = micimacko}{\left( SZERET  \right) }\right) }
+	\]
+\end{document}

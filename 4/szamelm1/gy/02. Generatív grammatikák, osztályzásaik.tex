@@ -194,8 +194,20 @@
 	\end{solution}
 
 	\begin{question}
-		Írjuk fel azt a grammatikát, ami az $ L(G) = \left\lbrace a^n, b^m, c^n \; | n \ge 0, \, m \ge 3 \right\rbrace  $, nyelvet generálja!
+		Írjuk fel azt a grammatikát, ami az $ L(G) = \left\lbrace a^n b^m c^n \; | n \ge 0, \, m \ge 3 \right\rbrace  $, nyelvet generálja!
 	\end{question}
+	\begin{solution}
+		Írjuk fel $L(G)$ néhány elemét: $ \left\lbrace bbb, abbbc, aabbbcc \dots \right\rbrace $. Így $ G = (\left\lbrace  S,A,B,C \right\rbrace , \left\lbrace a,b,c \right\rbrace, P, S) $, ahol
+		\begin{align*}
+			P = \left\lbrace \begin{array}{l}
+				S \rightarrow ASC, \\
+				S \rightarrow BBB, \\
+				A \rightarrow a, \\
+				B \rightarrow b, \\
+				C \rightarrow c
+			\end{array} \right\rbrace 
+		\end{align*}
+	\end{solution}
 	
 	\section{Reguláris kifejezések}
 

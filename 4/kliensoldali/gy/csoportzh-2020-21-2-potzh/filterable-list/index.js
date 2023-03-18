@@ -1,20 +1,29 @@
 class FilterableList {
-    list;
-    filterInput;
+    parent;
+    ul;
+    input;
 
-    constructor(list) {
-        this.list = list;
-        this.filterInput = document.createElement('input');
+    constructor(ul) {
+        this.ul = ul;
 
-        this.list.parentNode.insertBefore(this.filterInput, this.list);
-        this.filterInput.addEventListener('input', this.onInput);
+        this.parent = document.createElement('div');
+        this.parent.classList.add('list-container')
+
+        this.input = document.createElement('input');
+
+        this.ul.parentNode.insertBefore(this.parent, this.ul);
+
+        this.parent.append(this.input);
+        this.parent.append(this.ul)
+
+        this.input.addEventListener('input', this.onInput);
     }
 
     onInput = () => {
-        for (const li of this.list.children) {
-            li.style.display = li.innerHTML.includes(this.filterInput.value) ? '' : 'none';
+        for (const li of this.ul.children) {
+            li.hidden = !(li.innerText.includes(this.input.value));
         }
     }
 }
 
-new FilterableList(document.querySelector('ul:first-of-type'));
+new FilterableList(document.querySelector('ul'));

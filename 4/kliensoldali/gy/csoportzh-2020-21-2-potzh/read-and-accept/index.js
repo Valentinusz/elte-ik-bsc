@@ -1,14 +1,16 @@
 const button = document.querySelector('button');
+const container = document.querySelector('#container');
+
+// 1.1
 button.disabled = true;
 
-const container = document.querySelector('#container');
-container.addEventListener('scroll', _.throttle(onScroll, 1000))
-
+// 1.2
 function onScroll() {
-    if ((container.clientHeight + container.scrollTop) >= container.scrollHeight) {
+    if (container.clientHeight + container.scrollTop >= container.scrollHeight) {
+        container.removeEventListener('scroll', onScroll);
         button.disabled = false;
-        container.removeEventListener('scroll', onScroll)
     }
 }
 
-container.dispatchEvent(new Event('scroll'));
+// 1.3
+container.addEventListener('scroll', _.throttle(onScroll, 1000));

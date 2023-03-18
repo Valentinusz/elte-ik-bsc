@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lengthy input</title>
+    <style>
+        input[is=lengthy-input]:defined {
+            border-image-source: linear-gradient(to right, orange 0%, hsla(0, 0%, 90%, 1) 0% 100%);
+            border-image-slice: 1 1 10 1;
+            border-image-width: 1px 1px 5px 1px;
+            border-image-outset: 0 0 5px 0;
+        }
+        input[is=lengthy-input]:defined:focus {
+            border-image-slice: 0 0 10 0;
+            border-image-width: 0px 0px 5px 0px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form action="">
+        <input type="text" maxlength="20" is="lengthy-input" data-color="red">
+    </form>
+
+</body>
+<script src='lengthy-input.js'></script>
+</html>

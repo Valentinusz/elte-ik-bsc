@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inifinite scroll</title>
+    <style>
+        div.row {
+            display: flex;
+            flex-wrap: wrap;
+            border: 5px solid gray;
+            background-color: #333;
+        }
+        div.row.old {
+            background-color: blanchedalmond;
+        }
+        div.row div.item {
+            width: 200px;
+            height: 200px;
+            border: 3px dashed orange;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    div.row.old*10>div.item*3
+
+    <button id="btn-new-content">Load new content</button>
+
+    <template id="newRow">
+        <div class="row">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </template>
+
+</body>
+<script src=" https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js "></script>
+<script src='infinite-scroll.js'></script>
+</html>

@@ -1,0 +1,24 @@
+@import url("https://cdn.jsdelivr.net/gh/elte-fi/www-assets@19.10.16/styles/mdss.min.css");
+
+#container {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  height: 300px;
+  overflow: auto;
+}
+
+button {
+  padding: 10px;
+  font-size: x-large;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  margin: 20px auto;
+  display: block;
+}
+button[disabled] {
+  background-color: lightgray;
+  color: gray;
+}

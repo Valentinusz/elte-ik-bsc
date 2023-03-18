@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Üzenetek</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>Üzenetek</h1>
+  <div id="message-container">
+    
+    <toast-message>
+      <header>Körte</header>
+      <p>Van pár körtefa</p>
+    </toast-message>
+
+    <toast-message closable>
+      <header>Citrom</header>
+      <p>Citromízű banán</p>
+    </toast-message>
+
+    <toast-message timeout="5">
+      <header>Szilva</header>
+      <p>Szilvike kedvence</p>
+    </toast-message>
+
+    <toast-message closable timeout="10">
+      <header>Barack</header>
+      <p>Barack Obama</p>
+    </toast-message>
+
+  </div>
+
+  <template id="toast-message-template">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      div {
+        border: 0px;
+        border-radius: 10px;
+        background-color: #333333;
+        color: #bbbbbb;
+        padding: 10px;
+        position: relative;
+        margin: 10px;
+      }
+      div slot::slotted(header) {
+        font-weight: bold;
+        font-size: larger;
+        margin: 0 0 3px 0;
+      }
+      div slot::slotted(p) {
+        margin: 3px 0;
+      }
+      div progress {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 20px);
+      }
+      div button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+    <div>
+      <slot></slot>
+      <progress max="100" value="20"></progress>
+      <button class="close">X</button>
+    </div>
+  </template>
+  <script src="index.js"></script>
+</body>
+</html>

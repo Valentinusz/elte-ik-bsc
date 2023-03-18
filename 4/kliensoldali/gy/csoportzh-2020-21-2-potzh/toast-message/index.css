@@ -1,0 +1,8 @@
+@import url("https://cdn.jsdelivr.net/gh/elte-fi/www-assets@19.10.16/styles/mdss.min.css");
+
+toast-message header {
+  margin-bottom: 3px;
+}
+toast-message p {
+  margin: 3px 0;
+}

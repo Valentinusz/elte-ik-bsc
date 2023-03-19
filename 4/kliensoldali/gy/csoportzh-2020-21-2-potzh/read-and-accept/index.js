@@ -7,10 +7,12 @@ button.disabled = true;
 // 1.2
 function onScroll() {
     if (container.clientHeight + container.scrollTop >= container.scrollHeight) {
-        container.removeEventListener('scroll', onScroll);
+        container.removeEventListener('scroll', throttledOnScroll);
         button.disabled = false;
     }
 }
 
 // 1.3
-container.addEventListener('scroll', _.throttle(onScroll, 1000));
+const throttledOnScroll = _.throttle(onScroll, 1000);
+
+container.addEventListener('scroll', throttledOnScroll);

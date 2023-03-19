@@ -1,9 +1,10 @@
+//3.a
 class LengthyInput extends HTMLInputElement {
     _color;
 
     constructor() {
         super();
-        this._color = this.dataset.color ?? 'orange';
+        this._color = this.dataset.color ?? 'orange'; //3.c
         this.addEventListener('input', this.updateBorder);
         this.dispatchEvent(new Event('input'));
     }
@@ -11,11 +12,13 @@ class LengthyInput extends HTMLInputElement {
     updateBorder = () => {
         const current = this.value.length;
         console.log(`Jelenlegi hossz: ${current}, Maximális hossz: ${this.maxLength}`);
+
+        // 3.b
         const percentage = (current / this.maxLength) * 100;
-        console.log(`linear-gradient(to right, ${this._color} ${percentage}%, hsla(0, 0%, 90%, 1) ${percentage}% 100%);`);
         this.style.borderImageSource = `linear-gradient(to right, ${this._color} ${percentage}%, hsla(0, 0%, 90%, 1) ${percentage}% 100%)`
     }
 
+    //3.d
     get color() {
         return this._color;
     }
@@ -27,11 +30,13 @@ class LengthyInput extends HTMLInputElement {
     }
 }
 
+//3.a
 customElements.define('lengthy-input', LengthyInput, {extends: 'input'});
 
+// színváltozás teszt
 const input = document.querySelector('input[is="lengthy-input"]');
 input.color = 'blue';
-console.log(input.color);
+
 
 setTimeout(() => {
     input.color = 'goldenrod'

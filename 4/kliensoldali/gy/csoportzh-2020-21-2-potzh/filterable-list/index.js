@@ -1,20 +1,20 @@
 class FilterableList {
-    parent;
+    parentDiv;
     ul;
     input;
 
     constructor(ul) {
         this.ul = ul;
 
-        this.parent = document.createElement('div');
-        this.parent.classList.add('list-container')
+        this.parentDiv = document.createElement('div');
+        this.parentDiv.classList.add('list-container');
 
         this.input = document.createElement('input');
 
-        this.ul.parentNode.insertBefore(this.parent, this.ul);
+        this.ul.parentNode.insertBefore(this.parentDiv, this.ul);
 
-        this.parent.append(this.input);
-        this.parent.append(this.ul)
+        this.parentDiv.append(this.input);
+        this.parentDiv.append(this.ul);
 
         this.input.addEventListener('input', this.onInput);
     }

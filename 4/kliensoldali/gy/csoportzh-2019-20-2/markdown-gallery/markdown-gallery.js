@@ -1,3 +1,4 @@
+// 2.e
 class MarkDownGallery {
     textArea;
     list;
@@ -6,12 +7,17 @@ class MarkDownGallery {
     constructor(textArea) {
         this.list = document.createElement('ul');
         this.textArea = textArea;
+
+        // 2.a
         this.textArea.insertAdjacentElement('afterend', this.list);
-        this.textArea.addEventListener('input', _.throttle(this.onInput, 500));
-        this.images = this.getImages();
+        this.textArea.addEventListener('input', this.onInput);
+        this.images = this.getImageFromTextarea();
+
+        // 2.d
         this.updateGallery();
     }
 
+    // 2.c
     updateGallery = () => {
         this.list.innerHTML = '';
         for (const imageURL of this.images) {
@@ -23,16 +29,19 @@ class MarkDownGallery {
         }
     }
 
+    // 2.b
     onInput = () => {
-        const images = this.getImages();
+        const newImages = this.getImageFromTextarea();
+        console.log(newImages.length);
 
-        if (JSON.stringify(this.images) !== JSON.stringify(images)) {
-            this.images = images;
+        // csak akkor frissítsük a galériát ha megváltozott a képek száma
+        if (this.images.length !== newImages.length) {
+            this.images = newImages;
             this.updateGallery();
         }
     }
 
-    getImages() {
+    getImageFromTextarea() {
         const images = [];
 
         for (const url of this.textArea.value.matchAll( /!\[\]\((.*?)\)/g )) {
@@ -43,4 +52,8 @@ class MarkDownGallery {
     }
 }
 
-new MarkDownGallery(document.querySelector("textarea[data-markdown]"))
+// Adott egy (vagy akár több)
+document.querySelectorAll("textarea[data-markdown]").forEach(e => {
+    new MarkDownGallery(e);
+})
+

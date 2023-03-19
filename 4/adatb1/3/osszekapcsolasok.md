@@ -1,10 +1,3 @@
-<style>
-  div.table {
-    overflow-x: scroll;
-  }
-
-</style>
-
 # 03. Összekapcsolások
 Lehetőségünk van táblák összekapcsolására.
 

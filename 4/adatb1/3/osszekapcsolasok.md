@@ -36,7 +36,7 @@ SELECT * FROM dolgozo d JOIN osztaly o ON d.oazon = o.oazon;
 ```
 
 ## 4. Külső összekapcsolás (`OUTER JOIN`)
-Lehetőségünk van arra, hogy két táblát úgy kapcsoljunk össze, hogy az ereményhez hozzá vesszük a baloldali, a jobboldali vagy esetleg mindkét tábla összes sorát.
+Lehetőségünk van arra, hogy két táblát úgy kapcsoljunk össze, hogy az eredményhez hozzá vesszük a baloldali, a jobboldali vagy esetleg mindkét tábla összes sorát.
 
 ### Bal oldali:
 ```sql

@@ -63,3 +63,9 @@ from dolgozo d join DOLGOZO f on d.fonoke = f.dkod
 WHERE f.fizetes >= d.FIZETES * 2;
 
 SELECT * FROM KDHPNI.GYAK3;
+
+<script>
+  document.querySelectorAll('table').forEach(e => {
+    e.style.background = 'red';
+  })
+</script>

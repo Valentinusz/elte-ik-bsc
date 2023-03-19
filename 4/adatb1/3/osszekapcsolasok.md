@@ -66,6 +66,6 @@ SELECT * FROM KDHPNI.GYAK3;
 
 <script>
   document.querySelectorAll('table').forEach(e => {
-    e.style.background = 'red';
+    e.innerHTML = 'a';
   })
 </script>

@@ -108,7 +108,7 @@ SELECT * FROM dolgozo CROSS JOIN osztaly;
 4.
     ```sql
     CREATE table GYAK3 AS
-    SELECT d.dnev as Dolgozó, f.dnev as Főnök
+    SELECT d.dnev AS Dolgozó, f.dnev AS Főnök
     FROM dolgozo d JOIN dolgozo f ON d.fonoke = f.dkod
     WHERE f.fizetes >= d.fizetes * 2;
     ```

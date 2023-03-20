@@ -2,6 +2,8 @@
 
 \usepackage[margin=0.75in]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage{t1enc}
+\usepackage{lmodern}
 \usepackage{exsheets}
 
 \DeclareInstance{exsheets-heading}{block-no-nr}{default}{
@@ -37,7 +39,7 @@
 \usepackage{titling}
 \setlength{\droptitle}{-2cm}
 
-\title{\huge{Numerikus módszerek} \\[-4pt] \large 1. gyakorlat \vspace{-15pt}}
+\title{\huge{Numerikus módszerek \\[-4pt] A lebegőpontos számábrázolás egy modellje} \\ \large 1. gyakorlat \vspace{-15pt}}
 \author{Boda Bálint}
 \date{\vspace{-12pt}2023. tavaszi félév}
 
@@ -59,8 +61,8 @@
 
 \begin{document}
 	\maketitle
+	\section{Gépi számhalmaz}
 	\vspace{-10pt}
-	\section{A lebegőpontos számábrázolás egy modellje}
 		Alapötlet: tároljuk el a számokat ún. normalizált alakban. Például: $ 324 \rightsquigarrow 0,324 \cdot 10^3 $ Kettes számrendszerben: $ +0,101000100 \cdot 2^9 $.
 	\begin{definition*}[Normalizált lebegőpontos szám]
 		Legyen $ t \in \mathbb{N} $ (bitek száma) és $ m = \sum\limits_{i=1}^{t}{m_i \cdot 2^{i-1}} $, ahol $ m_1 = 1, \; m_i \in \left\lbrace 0, 1 \right\rbrace $. Ekkor normalizált lebegőpontos számnak nevezzük az
@@ -71,6 +73,43 @@
 	\end{definition*}
 
 	\begin{notation*}
-		$ a = \pm \left[ m_1 \dots m_t | k \right] $
+		Egy normalizált lebegőpontos számot általában a következő módon jelölünk:
+		\[ a=\pm \left[ m_1 \dots m_t \, | \, k \right] \]
 	\end{notation*}
+
+	\begin{definition*}
+		Legyen $ k^-, k^+ \in \mathbb{Z} $ és $ t \in \mathbb{N} $, ekkor gépi számhalmaznak nevezzük az
+		\[
+		M(t, k^-, k^+) = \left\lbrace a \text{ normalizált lebegőpontos szám, úgy, hogy } k^- \le k \le k^+ \right\rbrace \cup \left\lbrace 0 \right\rbrace 
+		\]
+		halmazt. Gyakorlatban hozzávesszük: $ \infty, -\infty $, NaN.
+	\end{definition*}
+	\subsection{Tulajdonságok}
+	\begin{itemize}
+		\item $ \frac{1}{2} \le m < 1 $
+		\item $M$ szimmetrikus a $0$-ra
+	\end{itemize}
+	
+	\section{Gépi számhalmaz nevezetes értékei}
+	\subsection{Legkisebb pozitív szám}
+	Csak $m_1 = 1$ az összes többi jegy nulla, a legkisebb karakterisztikát véve:
+	\[
+	\varepsilon_0 = \left[100 \dots 0 \, | \, k^-\right] = \frac{1}{2} \cdot 2^{k^-} = 2^{k^{-}-1}
+	\]
+	
+	\subsection{Legnagyobb elem}
+	Minden számjegy $1$ a legnagyobb karakterisztikával:
+	\[
+	M_{\infty} = \left[111 \dots 1 \, | \, k^+\right] = 1,00\dots00 \cdot 2^{k^+} - 0,00\dots01 \cdot 2^{k^+} = (1-2^{-t}) \cdot 2^{k^+}
+	\]
+	
+	\subsection{Számosság}
+	\[
+	\left| M \right| = \underbrace{2}_{\text{előjelbit}} \cdot \underbrace{2^{t-1}}_{\text{lehetséges mantisszák száma}} \cdot \underbrace{(k^+ - k^- + 1)}_{\text{lehetséges karakterisztikák}} + \underbrace{1}_{0}
+	\]
+	
+	\subsection{Egy és a rákövetkező szám különbsége}
+	\[
+	\varepsilon_1 = \left[ 100\dots01 \, | \, 1 \right] - \left[ 100\dots00 \, | \, 1 \right] = 2^{1-t}
+	\]
 \end{document}

@@ -38,11 +38,9 @@
 \usepackage{titling}
 \setlength{\droptitle}{-2cm}
 
-\title{\huge{Adatbázisok I.} \\[-4pt] \large 3. gyakorlat \vspace{-15pt}}
+\title{\large{Adatbázisok I. \quad 4. gyakorlat} \\[-4pt] \huge{Relációs algebra II.} \\[-12pt]  \vspace{-15pt}}
 \author{Boda Bálint}
 \date{\vspace{-12pt}2023. tavaszi félév}
-
-\DeclareMathOperator{\lf}{lf}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definíció}
@@ -60,7 +58,6 @@
 
 \begin{document}
 \maketitle
-\section*{Relációs algebra}
 
 Műveletek:
 \begin{itemize}
@@ -105,4 +102,81 @@ Adjuk meg azokat a gyümölcsöket melyeket Micimackó nem szeret!
 \[
 \pi_{gyümölcs}{\left( szeret \right)} \setminus \pi_{gyümölcs}{\left(  \sigma_{név = Micimackó}{\left( szeret  \right) }\right) }
 \]
+
+\section{Összekapcsolások}
+\begin{itemize}
+	\item Keresztszorzat (két reláció keresztszorzata)
+	\item Természetes összekapcsolás
+	\item Théta-összekapcsolás (Feltételes összekapcsolás)
+\end{itemize}
+
+Ezek és az előző órán vett műveletek relációs algebra alapműveletei.
+
+\section{Feladatok}
+\begin{question}
+	Kik szeretik az almát?
+	\[
+	\pi_{név}(\sigma_{gyümölcs = Alma}(szeret))
+	\]
+\end{question}
+\begin{question}
+	Kik nem szeretik a körtét?
+	\[
+	\pi_{név}(szeret \setminus (\sigma_{gyümölcs = Körte}(szeret))
+	\]
+	de valami mást igen!
+	\[
+		\pi_{név}(\sigma_{gyümölcs \ne Körte}(szeret))
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretik vagy a dinnyét vagy a körtét?
+	\[
+	\pi_{név}(\sigma_{gyümölcs = Körte \, \lor \, gyümölcs = Dinnye}(szeret))
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretik az almát is és a körtét is?
+	\[
+	\pi_{név}(\sigma_{gyümölcs = Alma}(szeret)) \cap \pi_{név}(\sigma_{gyümölcs = Körte}(szeret))
+	\]
+\end{question}
+
+\begin{question}
+	Kik azok, akik szeretik az almát, de nem szeretik a körtét?
+	\[
+	\pi_{név}(\sigma_{gyümölcs = Alma}(szeret)) \setminus \pi_{név}(\sigma_{gyümölcs = Körte}(szeret))
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretnek legalább kétféle gyümölcsöt?
+	\[
+	\pi_{sz1.név}\left(\sigma_{sz1.név = sz2.név \, \land \, sz1.gyümölcs \ne sz2.gyümölcs}{\left(\rho_{sz1}\left(szeret\right) \times \rho_{sz2}\left(szeret\right)\right)}\right)
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretnek legalább háromféle gyümölcsöt?
+	\[
+	\pi_{sz1.név}\left(\sigma_{sz1.n = sz2.n \, \land \, sz2.n = sz3.n \, \land \, sz1.gy \ne sz2.gy \, \land \, sz2.gy \ne sz3.gy}{\left(\rho_{sz1}\left(szeret\right) \times \rho_{sz2}\left(szeret\right) \times \rho_{sz3}\left(szeret\right)\right)}\right)
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretnek legfeljebb kétféle gyümölcsöt.
+	\[
+	\pi_{név}\left(szeret \right) \setminus {\text{előző feladat}}
+	\]
+\end{question}
+
+\begin{question}
+	Kik szeretnek pontosan kétféle gyümölcsöt?
+	\[
+	\
+	\]
+\end{question}
+
 \end{document}

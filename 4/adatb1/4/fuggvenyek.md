@@ -1,114 +1,52 @@
-# 03. Összekapcsolások
-Lehetőségünk van táblák összekapcsolására.
-
-Tekintsük a következő táblákat:
-
-![](./table1.png)
-
-## 1. Természetes összekapcsolás
-
-Eredménye a két tábla, azon sorainak összevonása, melyekben az azonos nevű oszlopokban szereplő érétkek megegyeznek.
 ```sql
-SELECT * FROM dolgozo NATURAL JOIN osztaly
+--Dolgozók
+SELECT *
+FROM DOLGOZO;
+
+--Kik azok a dolgozók, akik 1982.01.01 után léptek be a céghez?
+SELECT *
+FROM DOLGOZO
+WHERE BELEPES > TO_DATE('1982-01-01', 'YYYY-MM-DD');
+
+--Adjuk meg azon dolgozókat, akik nevének második betűje 'A'.
+SELECT *
+FROM DOLGOZO
+WHERE SUBSTR(DNEV, 2, 1) = 'A';
+
+--Adjuk meg azon dolgozókat, akik nevében van legalább két 'L' betű.
+SELECT *
+FROM DOLGOZO
+WHERE DNEV LIKE '%L%L%';
+
+--Adjuk meg a dolgozók nevének utolsó három betűjét.
+SELECT SUBSTR(DNEV, -3, 3)
+FROM DOLGOZO;
+
+--Adjuk meg a dolgozók fizetéseinek négyzetgyökét két tizedesre, és ennek egészrészét.
+SELECT ROUND(SQRT(FIZETES), 2) AS Rounded, TRUNC(SQRT(FIZETES)) AS Truncated
+FROM DOLGOZO;
+
+--Adjuk meg, hogy hány napja dolgozik a cégnél ADAMS és milyen hónapban lépett be.
+SELECT (TRUNC(SYSDATE) - BELEP) as NAPOK, TO_CHAR(BELEP, 'month') as HÓNAP
+FROM (SELECT BELEPES AS BELEP
+      FROM DOLGOZO
+      WHERE DNEV = 'ADAMS'
+      );
+
+--Adjuk meg azokat a (név, főnök) párokat, ahol a két ember neve ugyanannyi betűből áll.
+SELECT dolgozo.DNEV, fonok.DNEV
+FROM DOLGOZO dolgozo JOIN DOLGOZO fonok ON dolgozo.FONOKE = fonok.DKOD
+WHERE LENGTH(dolgozo.DNEV) = LENGTH(fonok.DNEV);
+
+--Listázzuk ki a dolgozók nevét és fizetését, valamint jelenítsük meg a fizetést grafikusan
+  --úgy, hogy a fizetést 1000 Ft-ra kerekítve, minden 1000 Ft-ot egy '#' jel jelöl.
+SELECT DNEV, FIZETES, RPAD('#', ROUND(FIZETES, -3) / 1000, '#')
+FROM DOLGOZO;
+
+--Listázzuk ki azoknak a dolgozóknak a nevét, fizetését, jutalékát, és a jutalék/fizetés
+  --arányát, akiknek a foglalkozása eladó (salesman). Az arányt két tizedesen jelenítsük meg.
+
+SELECT DNEV, FIZETES, JUTALEK, ROUND(JUTALEK / FIZETES, 2)
+FROM DOLGOZO
+WHERE FOGLALKOZAS = 'SALESMAN'
 ```
-Az összekapcsolás az `OAZON` mező alaphán történik, az eredmény így a következő lesz (részlet):
-
-<div class='table'>
-
-| OAZON | DKOD | DNEV | FOGLALKOZAS | FONOKE | BELEPES | FIZETES | JUTALEK | ONEV | TELEPHELY |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 10 | 7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | null | ACCOUNTING | NEW YORK |
-
-</div>
-
-Ha nincs azonos nevű oszlopoknak más a típusa hibával tér vissza.
-
-## 2. Using
-A `USING` záradékkal lehetőségünk van explicit megadni, mely oszlop egyenlősége alapján történjen a természetes összekapcsolás.
-```sql
-SELECT * FROM dolgozo JOIN osztaly USING (oazon)
-```
-
-## 3. On
-Az `ON` záradékkal lehetőségünk van valamilyen feltételhez kötni az összekapcsolást.
-```sql
-SELECT * FROM dolgozo d JOIN osztaly o ON d.oazon = o.oazon;
-```
-
-## 4. Külső összekapcsolás (`OUTER JOIN`)
-Lehetőségünk van arra, hogy két táblát úgy kapcsoljunk össze, hogy az eredményhez hozzá vesszük a baloldali, a jobboldali vagy esetleg mindkét tábla összes sorát.
-
-### Bal oldali:
-```sql
-SELECT * FROM dolgozo d LEFT OUTER JOIN osztaly o ON d.oazon = o.oazon;
-```
-Ez azt eredményezi hogy az eredményben azok a dolgozók is megjelennek akik nincsenek osztályhoz rendelve.
-
-<div class='table'>
-
-| DKOD | DNEV | FOGLALKOZAS | FONOKE | BELEPES | FIZETES | JUTALEK | OAZON | OAZON | ONEV | TELEPHELY |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 7877 | LOLA | CLERK | 7902 | 1981-01-12 | 800.00 | null | null | null | null | null |
-
-</div>
-
-### Jobb oldali:
-```sql
-SELECT * FROM dolgozo d RIGHT OUTER JOIN osztaly o ON d.oazon = o.oazon;
-```
-Ez azt eredményezi hogy az eredményben azok az osztályok is megjelennek, melyeken nem dolgozik senki.
-<div class='table'>
-
-| DKOD | DNEV | FOGLALKOZAS | FONOKE | BELEPES | FIZETES | JUTALEK | OAZON | OAZON | ONEV | TELEPHELY |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| null | null | null | null | null | null | null | null | 40 | OPERATIONS | BOSTON |
-
-</div>
-
-### Teljes összekapcsolás:
-```sql
-SELECT * FROM dolgozo d FULL OUTER JOIN osztaly o ON d.oazon = o.oazon;
-```
-Az eredményben az osztályhoz nem rendelt dolgozók és a dolgozó nélküli osztályok is megjelennek.
-
-## 5. Descartes-szorzat (keresztszorzat)
-```sql
-SELECT * FROM dolgozo CROSS JOIN osztaly;
-```
-
-## Feladatok
-
-1. Adjuk meg azokat a telephelyeket ahol dolgozik `'ANALYST'` foglalkozású dolgozó!
-2. Adjuk meg azokat a telephelyeket ahol **nem** dolgozik `'ANALYST'` foglalkozású dolgozó!
-3. Adjuk meg king összes beosztottját!
-4. (+/-) Hozz létre egy táblát GYAK3 néven, amely azokat a (beosztott, főnök) neveket tartalmazza, ahol a főnök legalább kétszer többet keres, mint a beosztottja.
-
-## Megoldások
-1.
-    ```sql
-    SELECT DISTINCT telephely
-    FROM osztaly NATURAL JOIN dolgozo
-    WHERE dolgozo.foglalkozas = 'ANALYST';
-    ```
-2.
-    ```sql
-    SELECT telephely
-    FROM osztaly MINUS (
-      SELECT DISTINCT telephely
-      FROM osztaly NATURAL JOIN dolgozo
-      WHERE dolgozo.foglalkozas = 'ANALYST'
-    );
-    ```
-3.
-    ```sql
-    SELECT d.dnev
-    FROM dolgozo d JOIN dolgozo f ON d.fonoke = f.dkod
-    WHERE f.dnev = 'KING';
-    ```
-4.
-    ```sql
-    CREATE table GYAK3 AS
-    SELECT d.dnev AS Dolgozó, f.dnev AS Főnök
-    FROM dolgozo d JOIN dolgozo f ON d.fonoke = f.dkod
-    WHERE f.fizetes >= d.fizetes * 2;
-    ```

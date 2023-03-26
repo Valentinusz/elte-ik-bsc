@@ -1,0 +1,214 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[hungarian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{xsim}
+\usepackage{tasks}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+\newtheorem{notation}{Jelölés}
+\newtheorem*{notation*}{Jelölés}
+
+\DeclareExerciseTranslation{magyar}{exercise}{feladat}
+\DeclareExerciseEnvironmentTemplate{feladat}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\GetExerciseProperty{counter}.~ \XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+
+\DeclareExerciseEnvironmentTemplate{megoldas}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+\xsimsetup{
+	exercise/name=\XSIMtranslate{exercise},
+	exercise/within=section,
+	exercise/template=feladat,
+	exercise/the-counter=\arabic{exercise},
+	solution/name=megoldás,
+	solution/print,
+	solution/template=megoldas,
+}
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+\title{\large{Adatbázisok I.} \\[-4pt] \huge{Relációs algebra} \\[-12pt]  \vspace{-15pt}}
+\author{Boda Bálint}
+\date{\vspace{-12pt}2023. tavaszi félév}
+
+
+
+\begin{document}
+\maketitle
+
+\section{Alapműveletek}
+\begin{itemize}
+	\item {
+		$ \pi_{A,B}{\left( R \right) } $ \textbf{projekció}, egy olyan relációt ad vissza, mely $R$ adott attribútumainak levetítéséből áll
+	}
+	\item {
+		$ \sigma_{P}{\left( R \right)} $ \textbf{szelekció}, egy olyan relációt ad vissza, mely $R$ azon sorait tartalmazza, melyek megfelelnek a $P$ predikátumnak
+	}
+	\item {
+		$ \rho_{(S_{(C,B)})}{\left( R \right)} $ \textbf{átnevezés}, egy olyan $S$ relációt ad vissza, mely sorai megegyeznek $R$ soraival, de attribútumai pedig rendre $ C,B $
+	}
+	\item {
+		halmazműveletek ($ \cup $, $ \cap $, $ \setminus $)
+	}
+	\item {
+		Descartes-szorzat ($ \times $, [SQL: CROSS JOIN])
+	}
+	\item {
+	Természetes összekapcsolás ($ \bowtie $, [SQL: NATURAL JOIN]), egy olyan relációt add vissza, mely olyan sorpárokból áll, ahol $ R $ és $ S $ azonos attribútumain megegyeznek.
+	}
+
+	\item {
+		Théta-összekapcsolás ($ \bowtie_\theta $, [SQL: JOIN és ON]), $ R \bowtie_P S = \sigma_P{\left( R \times S \right) } $, ahol $P$ egy feltétel.
+	}
+\end{itemize}
+\section{Feladatok}
+Tekintsük a $ szeret $ táblát:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		nev & gyumolcs \\
+		\hline
+		Micimacko & Alma \\
+		\hline
+		Micimacko & Korte \\
+		\hline
+		Tigris & Alma \\
+		\hline
+		Bagoly & Eper \\
+		\hline
+	\end{tabular}
+\end{table}
+	
+\begin{exercise}
+	Adjuk meg azokat a gyümölcsöket melyeket Micimackó szeret!
+	
+	\[
+	\pi_{gyumolcs}{\left(  \sigma_{nev = Micimacko}{\left( szeret  \right) }\right) }
+	\]
+\end{exercise}
+
+\begin{exercise}
+Adjuk meg azokat a gyümölcsöket melyeket Micimackó nem szeret!
+	\[
+	\pi_{gyumolcs}{\left( szeret \right)} \setminus \pi_{gy\ddot{u}umolcs}{\left(  \sigma_{nev = Micimacko}{\left( szeret  \right) }\right) }
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretik az almát?
+	\[
+	\pi_{nev}(\sigma_{gyumolcs = Alma}(szeret))
+	\]
+\end{exercise}
+\newpage
+\begin{exercise}
+	\begin{tasks}
+		\task{Kik nem szeretik a körtét?
+			\[
+			\pi_{nev}(szeret \setminus (\sigma_{gyumolcs = Korte}(szeret))
+			\]
+		}
+		\task{Kik nem szeretik a körtét, de valami mást igen?
+			\[
+			\pi_{nev}(\sigma_{gyumolcs \ne Körte}(szeret))
+			\]
+		}
+	\end{tasks}
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretik vagy a dinnyét vagy a körtét?
+	\[
+	\pi_{nev}(\sigma_{gyumolcs = Korte \, \lor \, gyumolcs = Dinnye}(szeret))
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretik az almát is és a körtét is?
+	\[
+	\pi_{nev}(\sigma_{gyumolcs = Alma}(szeret)) \cap \pi_{nev}(\sigma_{gyumolcs = Korte}(szeret))
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik azok, akik szeretik az almát, de nem szeretik a körtét?
+	\[
+	\pi_{nev}(\sigma_{gyumolcs = Alma}(szeret)) \setminus \pi_{nev}(\sigma_{gyumolcs = Korte}(szeret))
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretnek legalább kétféle gyümölcsöt?
+	\[
+	\pi_{sz1.nev}\left(\sigma_{sz1.nev = sz2.nev \, \land \, sz1.gyumolcs \ne sz2.gyumolcs}{ \left( \rho_{sz1}\left(szeret \right) \times \rho_{sz2} \left( szeret \right) \right) }\right)
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretnek legalább háromféle gyümölcsöt?
+	\begin{align*}
+	& S = \rho_{sz1}\left(szeret\right) \times \rho_{sz2}\left(szeret\right) \times \rho_{sz3}\left(szeret\right) \\
+	&\pi_{sz1.nev}\left(\sigma_{sz1.nev = sz2.nev \, \land \, sz2.nev = sz3.nev \, \land \, sz1.gyumolcs \ne sz2.gyumolcs \, \land \, sz2.gyumolcs \ne sz3.gyumolcs}\right){\left( S \right) }
+	\end{align*}
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretnek legfeljebb kétféle gyümölcsöt.
+	\[
+	\pi_{név}\left(szeret \right) \setminus {\text{9. feladat}}
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Kik szeretnek pontosan kétféle gyümölcsöt?
+	\[
+	\text{8. feladat} \setminus \text{9. feladat}
+	\]
+\end{exercise}
+
+\end{document}

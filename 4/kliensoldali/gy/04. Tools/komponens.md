@@ -1,1 +1,0 @@
-# Komponensalapú fejlesztés

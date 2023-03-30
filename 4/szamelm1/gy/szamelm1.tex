@@ -1,0 +1,88 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{t1enc}
+\usepackage{lmodern}
+
+\usepackage{xsim}
+\usepackage{tasks}
+
+\DeclareExerciseTranslation{magyar}{exercise}{feladat}
+\DeclareExerciseEnvironmentTemplate{feladat}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\GetExerciseProperty{counter}.~ \XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+
+\DeclareExerciseEnvironmentTemplate{megoldas}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+\xsimsetup{
+	exercise/name=\XSIMtranslate{exercise},
+	exercise/within=section,
+	exercise/template=feladat,
+	exercise/the-counter=\arabic{exercise},
+	solution/name=megoldás,
+	solution/print,
+	solution/template=megoldas,
+}
+
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+\newtheorem{notation}{Jelölés}
+\newtheorem*{notation*}{Jelölés}
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\title{\huge{A számításelmélet alapjai} \\[-4pt] \large gyakorlati jegyzet \vspace{-15pt}}
+\author{Boda Bálint}
+\date{\vspace{-12pt}2023. tavaszi félév}
+
+\begin{document}
+	\maketitle
+	\vspace{-10pt}
+	\tableofcontents
+	\chapter{Alapfogalmak}
+	\include{01}
+	\chapter{Generatív grammatika}
+	\include{02}
+	\chapter{Véges automaták}
+	\include{03}
+\end{document}

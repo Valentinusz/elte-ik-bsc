@@ -1,0 +1,150 @@
+\section{Generatív grammatika}
+\begin{definition*}[grammatika]
+	Egy $ G = (N, T, P, S) $ rendezett négyest (generatív) grammatikának vagy nyelvtannak nevezünk, ha $N$ és $T$ diszjunkt (azaz $N \cap T = \emptyset $) véges ábécék. Ekkor 
+	\begin{itemize}
+		\item $N$ a nem terminális szimbólumok halmaza,
+		\item $T$ (vagy $ \Sigma $) a terminális szimbólumok halmaza,
+		\item $S \in N$ a grammatika kezdőszimbóluma,
+		\item $P = \left\lbrace (x,y) \; | \; x,y \in \left( N \cup T \right)^*  \text{ szavak úgy, hogy } x \text{ legalább egy nem terminális betűt tartalmaz} \right\rbrace $, az ún. (átírási) szabályok (vagy produkciók) halmaza.
+	\end{itemize}
+\end{definition*}
+
+\begin{notation*}
+	Gyakran $(x,y)$ helyett az $x \rightarrow y$ jelölést használjuk, egy szabály leírására. Természetesen ez csak akkor lehetséges ha az adott ábécének nem eleme $\rightarrow$. 
+\end{notation*}
+\vspace{6pt}
+\begin{definition*}[egylépéses levezetés]
+	Legyen $ G = (N, T, P, S) $ egy grammatika és legyen $u, v \in (N \cup T)^*$. Azt mondjuk $v$ közvetlen levezethető az $u$ szóból $G$-ben (jelekkel: $ u \Rightarrow_G v $), ha
+	\[
+	\exists (x, y) \in P: \; u = u_1xu_2 \text{ és } v = u_1yu_2, \quad \left(u_1, u_2 \in (N \cup T)^*\right)
+	\]  
+\end{definition*}
+\vspace{6pt}
+\begin{definition*}[többlépéses levezetés]
+	Legyen $ G = (N, T, P, S) $ egy grammatika és legyen $u, v \in (N \cup T)^*$. Azt mondjuk $v$ több lépésben levezethető az $u$ szóból $G$-ben (jelekkel: $ u \Rightarrow_G^* v $), ha
+	\[
+	u = v \lor \exists \left( n \ge 1 \land w_0,\dots,w_n \in (N \cup T)^* \right)  \text{, hogy } w_{i-1} \Rightarrow_G w_i \, (1 \le i \le n), \; w_0 = u \text{ és } w_n = v
+	\]
+\end{definition*}
+\vspace{6pt}
+\begin{definition*}[generált nyelv]
+	Legyen $ G = (N, T, P, S) $ egy grammatika, ekkor a $G$ által generált nyelvnek nevezzük az $S$ kezdőszimbólumból több lépésben levezethető terminális szavak halmazát, azaz a
+	\[
+		L(G) = \left\lbrace u \in T^* \; | \; S \Rightarrow_G^* u \right\rbrace 
+	\]
+	nyelvet.
+\end{definition*}
+
+\begin{example}
+	Legyen
+	\begin{align*}
+		G &= \left( \left\lbrace S, A, B \right\rbrace, \left\lbrace a,b \right\rbrace P, S \right) \\
+		P &= \left\lbrace S \rightarrow B | bb, \; B \rightarrow aaA, \; A \rightarrow a | \varepsilon \ \right\rbrace 
+	\end{align*}
+	Adjuk meg $L(G)$-t!
+
+	\begin{remark}
+		Egy $ S \rightarrow B | bb $ az $ S \rightarrow B $ és $ S \rightarrow bb $ szabályokat jelöli.
+	\end{remark}
+
+	\begin{align*}
+		S &\rightarrow bb \\
+		S &\rightarrow B \rightarrow aaA \rightarrow a \\
+		S &\rightarrow B \rightarrow aaA \rightarrow \varepsilon
+	\end{align*}
+	Így: $L(G) = \left\lbrace bb, aa, a \right\rbrace $. 
+\end{example}
+
+\subsection{Feladatok}
+
+\begin{exercise}
+	Legyen $ G_i = (\left\lbrace S, A, B \right\rbrace, \left\lbrace a,b \right\rbrace, P_i, S) $. Határozzuk meg az $L(G_i)$ nyelvet, ha
+	\begin{itemize}
+		\item $P_1 = \left\lbrace S \rightarrow aaS | a \right\rbrace $
+		\item $P_2 = \left\lbrace S \rightarrow aSb | \varepsilon \right\rbrace $
+		\item $P_3 = \left\lbrace S \rightarrow ASB | \varepsilon, \, AB \rightarrow BA, \, BA \rightarrow AB, \, A \rightarrow a, \, B \rightarrow b \right\rbrace $
+	\end{itemize}
+\end{exercise}
+		
+\begin{solution}
+	\begin{align*}
+		L(G_1) &= \left\lbrace a, aaa, aaaaa \dots \right\rbrace = \left\lbrace a^{(2n+1)} \; | \; n \ge 0 \right\rbrace \\
+		L(G_2) &= \left\lbrace \varepsilon, ab, aabb \dots \right\rbrace = \left\lbrace a^nb^n \; | \; n \ge 0 \right\rbrace
+	\end{align*}
+	A harmadik nyelv meghatározása már nehezebb feladat. Tekintsünk pár példa levezetést:
+	\begin{align*}
+		S &\rightarrow A\underline{S}B \rightarrow \underline{A}B \rightarrow a\underline{B} \rightarrow ab \\
+		S &\rightarrow ASB \rightarrow AB \rightarrow BA \rightarrow bA \rightarrow ba \\
+		S &\rightarrow A\underline{S}B \rightarrow AA\underline{S}BB \rightarrow A\underline{AB}B \rightarrow \underline{AB}AB \rightarrow BA\underline{AB} \rightarrow \underline{B}ABA \rightarrow \dots \rightarrow baba \\
+		S &\rightarrow ASB \rightarrow AASBB \rightarrow AABB \rightarrow ABAB \rightarrow BAAB \rightarrow baab
+	\end{align*}
+	Ezek alapján $L(G_3) = \left\lbrace u \in \left\lbrace a,b \right\rbrace^* \; | \; l_a(u) = l_b(u) \right\rbrace $.
+\end{solution}
+
+\section{A grammatikák Chomsky féle osztályzása}
+Legyen $ G = (N, T, P, S) $ egy grammatika. A $G$ grammatika $i$-típusú $ (i = 0,1,2,3) $, ha a $P$ szabályhalmazra teljesülnek a következők:
+\begin{itemize}
+	\item $ i = 0 $ (mondatszerkezetű grammatika): nincs korlátozás
+	\item { $ i = 1 $ (környezetfüggő grammatika):
+		\begin{itemize}
+			\item $P$ minden szabálya $u_1Au_2 \rightarrow u_1vu_2 $ alakú, ahol $u_1, u_2, v \in (N \cup T)^*, A \in N $ és $ v \ne \varepsilon $
+			\item Kivétel: $P$ tartalmazhatja az $ S \rightarrow \varepsilon $ szabályt, de csak akkor, ha $S$ nem fordul elő egyetlen szabály jobb oldalán sem.
+		\end{itemize}
+	}
+	\item { $ i = 2 $ (környezetfüggetlen): $ P $ minden szabálya $A \rightarrow v $ alakú ($A \in N, \; v \in (N \cup T)^*) $
+	}
+	\item { $ i = 3 $ (reguláris): $ P $ minden szabálya $A \rightarrow uB $ vagy $A \rightarrow u $ alakú ($A,B \in N, \; u \in T^*) $
+	}
+\end{itemize}
+Az adott osztályokat $\mathcal{G}_i$-vel jelöljük.
+
+\begin{definition*}[nyelvosztály]
+	Az $i$ típusú nyelvek osztályának nevezzük a 
+	\[
+	\mathcal{L}_i = \left\lbrace L \; | \; \exists G \in \mathcal{G}_i \text{, hogy } L = L(G) \right\rbrace 
+	\]
+\end{definition*}
+
+\begin{theorem}[Chomsky nyelvhierarchia tétel]
+	\[
+		\mathcal{L}_3 \subset \mathcal{L}_2 \subset \mathcal{L}_1 \subset \mathcal{L}_0
+	\]
+\end{theorem}
+
+\subsection{Feladatok}
+\setcounter{exercise}{0}
+\begin{exercise}
+	Írjuk fel azt a grammatikát, mely a 4-el osztható bináris számok nyelvét generálja! Milyen osztályba sorolható a generált nyelv?
+\end{exercise}
+
+\begin{solution}
+	Egy kettes számrendszerbeli szám akkor osztható néggyel, ha utolsó két számjegye 0. Gondoskodnunk kell továbbá arról, hogy ne legyenek felesleges nullák az elején. Így
+	\[
+	G = \left( \left\lbrace S, B \right\rbrace, \, \left\lbrace 0,1, \varepsilon \right\rbrace, \, \left\lbrace  S \rightarrow \underbrace{0}_{3.} | \underbrace{1B00}_{2.}, \,  B \rightarrow \underbrace{\varepsilon}_3.|\underbrace{0B}_{3.}|\underbrace{1B}_{3.} \right\rbrace , \, S \right)
+	\]
+	(Az adott szabály jobb oldala alatt tüntettem fel annak szintjét.) Mivel kettes a legkisebb szint ezért a generált nyelv is 2-es szintű.
+	\\[4pt]
+	A feladat megoldható más módon is:
+	\[
+	G = \left( \left\lbrace S, A \right\rbrace, \, \left\lbrace 0,1, \varepsilon \right\rbrace, \, \left\lbrace  S \rightarrow 0 | 1A, \,  A \rightarrow \varepsilon|0A|1A \right\rbrace , \, S \right)
+	\]
+	amiből már reguláris nyelv adódik.
+\end{solution}
+
+\begin{exercise}
+	Írjuk fel azt a grammatikát, ami az $ L(G) = \left\lbrace a^n b^m c^n \; | n \ge 0, \, m \ge 3 \right\rbrace  $, nyelvet generálja!
+\end{exercise}
+\begin{solution}
+	Írjuk fel $L(G)$ néhány elemét: $ \left\lbrace bbb, abbbc, aabbbcc \dots \right\rbrace $. Így $ G = (\left\lbrace  S,A,B,C \right\rbrace , \left\lbrace a,b,c \right\rbrace, P, S) $, ahol
+	\begin{align*}
+		P = \left\lbrace \begin{array}{l}
+			S \rightarrow ASC, \\
+			S \rightarrow BBB, \\
+			A \rightarrow a, \\
+			B \rightarrow b, \\
+			C \rightarrow c
+		\end{array} \right\rbrace 
+	\end{align*}
+\end{solution}
+
+\section{Reguláris kifejezések}

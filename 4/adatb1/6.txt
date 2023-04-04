@@ -1,0 +1,55 @@
+-- Adjuk meg a maximális fizetést!
+SELECT MAX(FIZETES) FROM DOLGOZO;
+
+-- Adjuk meg a 20-as osztályon dolgozók átlagfizetését!
+SELECT AVG(FIZETES) FROM DOLGOZO WHERE OAZON = 20;
+
+-- Adjuk meg a dolgozók jutalékainak statisztikáit!
+SELECT MIN(JUTALEK), MAX(JUTALEK), COUNT(JUTALEK), AVG(JUTALEK) FROM DOLGOZO;
+
+-- countba nem számolódik bele
+-- min max avg sum mintha nem lenne
+
+-- Adjuk meg hány különböző foglalkozás van!
+SELECT COUNT(DISTINCT FOGLALKOZAS) FROM DOLGOZO;
+
+-- Adjuk meg az ÖSSZES osztály dolgozóinak átlagfizetését!
+SELECT OAZON, AVG(FIZETES) FROM DOLGOZO GROUP BY OAZON;
+
+-- Adjuk meg a foglalkozásonkénti átlagfizetését!
+SELECT FOGLALKOZAS, AVG(FIZETES) FROM DOLGOZO GROUP BY FOGLALKOZAS;
+
+-- Adjuk meg az különböző osztályokon belüli foglalkozásonkénti átlagfizetését!
+SELECT OAZON, FOGLALKOZAS, AVG(FIZETES) FROM DOLGOZO GROUP BY OAZON, FOGLALKOZAS ORDER BY OAZON;
+
+-- Adjuk meg az egyes osztályokon hányan dolgoznak!
+SELECT OAZON, COUNT(*) FROM DOLGOZO GROUP BY OAZON;
+
+-- Adjuk meg azon osztályok átlagizetését, ahol ez az átlag nagyobb mint 2000.
+SELECT OAZON, AVG(FIZETES) FROM DOLGOZO GROUP BY OAZON HAVING AVG(FIZETES) > 2000;
+
+-- Having a csoportokra alkalmazza a leírt feltételt.
+
+
+-- Adjuk meg azon osztályok átlagfizetését ahol legalább négyen dolgoznak.
+SELECT OAZON, AVG(FIZETES) FROM DOLGOZO GROUP BY OAZON HAVING COUNT(*) >= 4;
+
+-- Kapcsoljuk össze a FIZ
+SELECT * FROM DOLGOZO JOIN FIZ_KATEGORIA ON FIZ_KATEGORIA.ALSO <= FIZETES AND FIZETES <= FIZ_KATEGORIA.FELSO;
+
+-- Adjuk meg azokat melyekbe pontosan 3 dolgozó fizetése esik
+SELECT KATEGORIA
+FROM DOLGOZO JOIN FIZ_KATEGORIA ON FIZ_KATEGORIA.ALSO <= FIZETES AND FIZETES <= FIZ_KATEGORIA.FELSO
+GROUP BY KATEGORIA
+HAVING COUNT(KATEGORIA) = 3;
+
+-- hozz létre tábla gyak6, melybe foglalkozásonként szerepel az általgfizetés!
+CREATE TABLE KDHPNI.GYAK6 AS
+SELECT FOGLALKOZAS, AVG(FIZETES) atlag
+FROM
+DOLGOZO
+GROUP BY FOGLALKOZAS;
+
+SELECT *
+FROM
+KDHPNI.GYAK6

@@ -211,4 +211,34 @@ Adjuk meg azokat a gyümölcsöket melyeket Micimackó nem szeret!
 	\]
 \end{exercise}
 
+\section{A relációs algebra kiterjesztése}
+Halmaz helyett multihalmazt használ és 3 új művelet is magába foglal.
+
+\begin{exercise}
+	Adjuk meg osztályonként az átlagfizetést!
+	\[
+	\delta_{OAZON, AVG(FIZ)}{\left( D \right) }
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Adjuk meg, hogy az egyes osztályokon hány ember dolgozik!
+	\[
+	\gamma_{OAZON, COUNT(*)}{\left( D \right) }
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Adjuk meg osztályonként a telephelyet és az átlagfizetést!
+	\[
+	\pi_{OAZON, TELEPHELY, AVG(FIZETES)}{\left( \gamma_{OAZON, AVG(*)}{\left( D \bowtie O \right) } \right) }
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Adjuk meg az átlagfizetést azokon az osztályokon, ahol legalább 4-en dolgoznak.
+	\[
+	\sigma_{COUNT(*) \ge 4}{\left( \gamma_{OAZON, COUNT(*)}{\left( D \right) }\right)}
+	\]
+\end{exercise}
 \end{document}

@@ -1,0 +1,479 @@
+Véges automatának nevezünk egy olyan analitikus eszközt, mely képes eldönteni egy adott szóról, hogy az általa ismert reguláris nyelv eleme-e.
+
+\section{Alapfogalmak}
+\begin{definition*}
+	\textbf{Determinisztikus véges automatának} (DVA) nevezünk egy $ A = \left( Q, \Sigma, \delta, Q_0, F \right) $ rendezett ötöst, ahol
+	\begin{itemize}
+		\item $ Q $ a lehetséges állapotok véges nemüres halmaza
+		\item $ \Sigma $ az inputszimbólumok ábécéje
+		\item $ \delta: Q \times \Sigma \rightarrow Q $ az ún. állapotátmeneti függvény
+		\item $ q_0 \in Q $ a kezdőállapot
+		\item $ F \subseteq Q $ az elfogadó állapotok halmaza.
+	\end{itemize}
+\end{definition*}
+
+\noindent
+Legyen $ A = \left( \left\lbrace q_0, q_1, q_2 \right\rbrace , \left\lbrace a,b \right\rbrace , \delta, q_0, \left\lbrace q_2 \right\rbrace \right) $
+$ \delta $ több módon is megadható:
+\begin{itemize}
+	\item{
+		Függvény: $ \delta{\left( q_0, a \right) } = q_1, \; \delta{\left( q_0, b \right) } = q_2, \; \delta{\left( q_1, a \right) } = q_0 $
+	}
+	\item{
+		Grammatikaszerűen: $ M_\delta = \left\lbrace q_0 a \rightarrow q_1, \; q_0 b \rightarrow q_2, \; q_1a \rightarrow q_0 \right\rbrace $
+	}
+	\item{
+		Táblázatosan:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$ $ & $ a $ & $ b $ \\
+				\hline
+				$ \rightarrow q_0 $ & $ q_1 $  & $ q_2 $  \\
+				\hline
+				$ q_1 $ & $ q_0 $  & $ - $  \\
+				\hline
+				$ \leftarrow q_2 $ & $ - $  & $ - $  \\
+				\hline
+			\end{tabular}
+		\end{table}
+		A kezdőállapotot $ \rightarrow $-val, az elfogadó állapotokat $ \leftarrow $-val jelöljük.
+	}
+	\item{
+		Állapotátmeneti gráffal:
+		
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+				\node[state,initial, initial text=] (q_0)   {$q_0$}; 
+				\node[state] (q_1) [below right=of q_0] {$q_1$}; 
+				\node[state, accepting] (q_2) [below left=of q_0] {$q_2$}; 
+				\path[->] 
+				(q_0) edge [bend left] node {a} (q_1)
+				(q_1) edge [bend left] node {a} (q_0)
+				(q_0) edge node {b} (q_2);
+			\end{tikzpicture}
+		\end{figure}
+		
+		ahol, $ \rightarrow $ jelöli a kezdőállapotot és dupla kör az elfogadó állapotokat.
+	}
+\end{itemize}
+\newpage
+\begin{definition*}
+	\textbf{Nemdeterminisztikus véges automatát} hasonlóan definiáljuk, annyi különbséggel, hogy a $ \delta $  függvény $ Q $ helyett, $ Q $ hatványhalmazába  képez, azaz $ \delta: Q \times \Sigma \rightarrow \mathcal{P}{\left( Q \right) } $.
+\end{definition*}
+\noindent
+$ \delta $ hasonlóan adható meg mint DVA esetén, és a nemdeterminisztikusság minden esetben könnyen leolvasható:
+\begin{itemize}
+	\item függvény értéke halmaz lesz
+	\item grammatika szerű jelölésben vagy ($ | $) jelenik meg valamelyik kifejezés jobb oldalán
+	\item táblázatban halmazok vannak
+	\item egy csúcsból több azonos címkéjű él vezet ki
+\end{itemize}
+
+\begin{definition*}[konfiguráció]
+	Legyen $ A = \left( Q, \Sigma, \delta, Q_0, F \right) $ egy véges automata, ekkor \textbf{konfigurációnak} nevezünk egy $ u \in Q\Sigma^* $ szót.
+\end{definition*}
+
+\begin{definition*}[egylépéses redukció]
+	Legyen $ A = \left( Q, \Sigma, \delta, Q_0, F \right) $ egy véges automata és legyenek $u, v$ konfigurációk. Azt mondjuk $u$ egy lépésben \text{redukálható} $v$-re, ha létezik $ p \in \delta(q, a) $ szabály és $ w \in \Sigma^* $ szó, hogy $ u = qaw $ és $ v = pw $.
+\end{definition*}
+
+\begin{definition*}[redukció]
+	Az $ A = \left( Q, \Sigma, \delta, Q_0, F \right) $ véges automata az $ u \in Q\Sigma^* $ szót a
+	$ v \in Q\Sigma^* $ szóra redukálja (jelölés: $ u \Rightarrow_A^* v $), ha vagy $ u = v $ vagy
+	valamely $ k \ge 1 $-re léteznek $w_0, \dots , w_k $ konfigurációk melyekre
+	$ w_{i-1} \Rightarrow_A w_i (1 \ge i \ge k ) $, $ w_0 = u $ és $ w_k = v $.
+\end{definition*}
+
+\begin{definition*}[felismert nyelv]
+	Legyen $ A = \left( Q, \Sigma, \delta, Q_0, F \right) $ egy véges automata. Az $A$ automata által elfogadott (vagy felismert) nyelvnek nevezzük az
+	\[
+	L(A) = \left\lbrace u \in \Sigma^* | q_0u \Rightarrow_A^*p \, \land \, q_0 \in Q \, \land \, p \in F \right\rbrace 
+	\]
+	nyelvet. 
+\end{definition*}
+\newpage
+\subsection{Feladatok}
+\begin{exercise}
+	Adjunk meg automatát és generatív grammatikát a következő reguláris kifejezésekhez:
+	\begin{tasks}
+		\task $ \left(a+b\right)^*a $
+		\task $ 1\left(1+0\right)^*0+0 $
+		\task $ a\left(a+b+c\left(a+b\right)\right)^* $
+	\end{tasks}
+\end{exercise}
+\begin{solution}[print]
+	\begin{tasks}
+		\task{
+			Grammatika: $ \left( \left\lbrace S \right\rbrace, \, \left\lbrace a,b \right\rbrace, \, \left\lbrace S \rightarrow aS \mid bS \mid a \right\rbrace  \right) $
+			\\[8pt]
+			Automata:
+			\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+					\node[state,initial, initial text=] (q_0)   {$q_0$}; 
+					\node[state, accepting] (q_1) [right=of q_0] {$q_1$}; 
+					\path[->] 
+					(q_0) edge [loop above] node {b}
+					(q_0) edge [bend left] node {a} (q_1)
+					(q_1) edge [loop above] node {a}
+					(q_1) edge [bend left] node {b} (q_0);
+				\end{tikzpicture}
+			\end{figure}
+		}
+		\task{
+			Grammatika: $ \left( \left\lbrace S, C \right\rbrace, \, \left\lbrace 0,1 \right\rbrace, \, P, \, S  \right) $, ahol \\
+			$ P = \left\lbrace S \rightarrow 0 \mid 1C, \, C \rightarrow 0C \mid 1C \mid 0 \right\rbrace $
+			\\[8pt]
+			Automata:
+			\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+					\node[state,initial, initial text=] (q_0)   {$q_0$}; 
+					\node[state] (q_1) [below left=of q_0] {$q_1$};
+					\node[state, accepting] (q_2) [below right=of q_1] {$q_2$};
+					\node[state, accepting] (q_3) [below right=of q_0] {$q_3$};
+					\path[->]
+					(q_0) edge node {1} (q_1)
+					(q_0) edge node {0} (q_3)
+					(q_1) edge [loop left] node {1} ()
+					(q_1) edge node {0} (q_2)
+					(q_2) edge [loop right] node {0} ()
+					;
+				\end{tikzpicture}
+			\end{figure}
+		}
+		\task{
+			Grammatika: $ \left( \left\lbrace S, C, E \right\rbrace, \, \left\lbrace a,b,c \right\rbrace, \, P, \, S  \right) $, ahol
+			\[ P =  \left\lbrace \begin{array}{c}
+				S \rightarrow aE, \\
+				E \rightarrow \varepsilon \mid aE \mid bE \mid cC, \\
+				C \rightarrow aE \mid bE 
+			\end{array} \right\rbrace \]
+			Automata:
+			\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+					\node[state,initial, initial text=] (q_0)   {$q_0$}; 
+					\node[state, accepting] (q_1) [below =of q_0] {$q_1$};
+					\node[state] (q_2) [right=of q_1] {$q_2$};
+					\path[->]
+					(q_0) edge node {a} (q_1)
+					(q_1) edge [loop below] node {a} ()
+					(q_1) edge [loop left] node {b} ()
+					(q_1) edge [bend left] node {c} (q_2)
+					(q_2) edge [bend left] node {a, b} (q_1)
+					;
+				\end{tikzpicture}
+			\end{figure}
+		}
+	\end{tasks}
+\end{solution}
+
+\begin{exercise}
+	Adjunk meg automatát, mely felismeri a következő nyelveket:
+	\begin{tasks}
+		\task 3-al osztható természetes számok (vezető nullákat nem kezelve)
+		\task 3-al osztható egész számok (vezető nullákat kezelve)
+	\end{tasks}
+\end{exercise}
+\begin{solution}
+	\begin{tasks}
+		\task{
+			Egy szám akkor osztható hárommal, ha számjegyeinek összege osztható hárommal. Az automata azonban nem képes sem aritmetikai műveletekre, sem ezek eredményének eltárolására. Megfeleltethetjük, azonban a különböző állapotokat a hárommal való osztás maradékosztályainak.
+			
+			Például: Legyen a vizsgálandó szó 156. Az automata először feldolgozza az 1-es szimbólumot, melynek hatására a $ q_1 $ állapotba kerül, mivel $1 \mod 3 = 1$. Ezt követően, mivel jelenleg a $ q_1$ állapotban vagyunk és $5 \mod 3 = 2$, ezért a 0-ás maradékosztályba azaz $q_0$-ba kerülünk.Ezután mivel $ 6 \mod 3 = 0 $, ezért a $ q_0$ állapotban maradunk.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[shorten >=1pt,node distance=4cm,on grid,auto] 
+					\node[state,initial, initial text=, accepting] (q_0)   {$q_0$}; 
+					\node[state] (q_1) [above right =of q_0] {$q_1$};
+					\node[state] (q_2) [below right=of q_1] {$q_2$};
+					\path[->]
+					(q_0) edge [loop below] node {0,3,6,9} ()
+					(q_0) edge [bend left] node {1, 4, 7} (q_1)
+					(q_1) edge node {2, 5, 8} (q_0)
+					(q_1) edge [loop above] node {0,3,6,9} ()
+					(q_1) edge [bend left] node {1, 4, 7} (q_2)
+					(q_2) edge node {2, 5, 8} (q_1)
+					(q_2) edge [loop below] node {0,3,6,9} ()
+					(q_2) edge [bend left] node {1, 4, 7} (q_0)
+					(q_0) edge node {2, 5, 8} (q_2)
+					;
+				\end{tikzpicture}
+			\end{figure}
+		}
+		\task{
+			A megoldás nagyon hasonló annyi különbséggel, hogy fel kell vennünk két extra állapotot. Az egyik állapot a mínusz jelet a másik pedig a vezető nullákat fogja kezelni.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[shorten >=1pt,node distance=5cm,on grid,auto]
+					\node[state,initial, initial text=] (q_0)   {$q_0$};
+					\node[state] (q_1) [right =of q_0] {$q_1$};
+					\node[state, accepting] (q_2) [below=of q_1] {$q_2$};
+					\node[state] (q_3) [left =of q_2] {$q_3$};
+					\node[state] (q_4) [right =of q_2] {$q_4$};
+					\path[->]
+					(q_0) edge node {-, 1-9} (q_1)
+					(q_1) edge node {0, 3, 6, 9} (q_2)
+					(q_1) edge node {1, 4, 7} (q_3)
+					(q_1) edge node {2, 5, 8} (q_4)
+					(q_2) edge [loop below] node {0,3,6,9} ()
+					(q_2) edge [bend left, pos=0.35] node {1, 4, 7} (q_3)
+					(q_3) edge node {2, 5, 8} (q_2)
+					(q_3) edge [loop below] node {0,3,6,9} ()
+					(q_3) edge [bend left, pos = 0.6] node {1, 4, 7} (q_4)
+					(q_4) edge [bend left] node {2, 5, 8} (q_3)
+					(q_4) edge [loop below] node {0,3,6,9} ()
+					(q_4) edge [bend left, pos=0.65] node {1, 4, 7} (q_2)
+					(q_2) edge node {2, 5, 8} (q_4)
+					;
+				\end{tikzpicture}
+			\end{figure}
+		}
+	\end{tasks}
+\end{solution}
+	\section{Automaták determinizálása}
+Alapötlet: hozzunk létre összevont állapotokat pl. az $ \left\lbrace q_1, q_2, q_3 \right\rbrace $ állapotot vonjuk össze a $ q_{123} $ állapottá. 
+\begin{example}
+	Tekintsük a következő automatát:
+	
+	\begin{multicols}{2}
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+				\node[state,initial,initial text=] (q_0)   {$q_0$}; 
+				\node[state, accepting] (q_1) [below =of q_0] {$q_1$}; 
+				\node[state] (q_2) [right=of q_0] {$q_2$}; 
+				\node[state,accepting](q_3) [below=of q_2] {$q_3$};
+				\path[->] 
+				(q_0) edge  node {b} (q_1)
+				edge  node {a} (q_2)
+				(q_2) edge [loop above] node {a,b} ()
+				(q_2) edge  node {b} (q_3) ;
+			\end{tikzpicture}
+		\end{figure}
+		\begin{table}[H]
+			\centering
+			$$
+			\begin{array}{|c|c|c|}
+				\hline
+				& a & b \\
+				\hline
+				\rightarrow q_0 & \left\lbrace q_2 \right\rbrace & \left\lbrace q_1 \right\rbrace \\
+				\hline
+				q_1 & \varnothing  &  \varnothing \\
+				\hline
+				\leftarrow q_2 & \left\lbrace q_2 \right\rbrace & \left\lbrace q_2, q_3 \right\rbrace   \\
+				\hline
+				\leftarrow q_3 & \varnothing  & \varnothing \\
+				\hline
+			\end{array}
+			$$
+		\end{table}
+	\end{multicols}
+	\begin{remark}
+		A nemdeterminisztikus automaták esetében a táblázatban gyakran egyelemű állapothalmazok helyett csak magát az állapotot írjuk le.
+	\end{remark}
+	\noindent
+	Világos hogy az automata nem determinisztikus, ezért determinizáljuk: Az $q_0$ és $q_1$ sorokat változatlanul leírjuk a $q_2$ sorban azonban el kell végeznünk a $q_2$ és a $q_3$ összevonását.
+	\begin{table}[H]
+		\centering
+		$$
+		\begin{array}{|c|c|c|}
+			\hline
+			& a & b \\
+			\hline
+			\rightarrow q_0 &  q_2 & q_1 \\
+			\hline
+			q_1 & \varnothing  &  \varnothing \\
+			\hline
+			\leftarrow q_2 & q_2 & q_{23}    \\
+			\hline
+			\leftarrow q_3 & \varnothing  & \varnothing \\
+			\hline
+			? q_{23}& ? & ? \\
+			\hline
+		\end{array}
+		$$
+	\end{table}
+	\noindent
+	Mivel $q_2$ és $q_3$ közül legalább az egyik elfogadó állapot volt így az összevont állapot is elfogadó lesz. Ezt követően már csak az összevonásokat kell elvégeznünk:
+	\begin{enumerate}
+		\item $ \tr{(q_{23}, a)} = \tr{(q_2, a)} \, \cup \, \tr{(q_3, a)} = \left\lbrace q_2 \right\rbrace \, \cup \, \varnothing = \left\lbrace q_2 \right\rbrace \quad \text{Egyelemű, nem kell további összevonás} $
+		\item $ \tr{(q_{23}, b)} = \tr{(q_2, b)} \, \cup \, \tr{(q_3, b)} = \left\lbrace q_{23} \right\rbrace \, \cup \, \varnothing = \left\lbrace q_{23} \right\rbrace \quad \text{Egyelemű, nem kell további összevonás} $
+	\end{enumerate}
+	\noindent
+	Így az automata:
+	
+	\begin{multicols}{2}
+		\begin{table}[H]
+			\centering
+			$$
+			\begin{array}{|c|c|c|}
+				\hline
+				& a & b \\
+				\hline
+				\rightarrow q_0 & q_2  & q_1 \\
+				\hline
+				q_1 & \varnothing  &  \varnothing \\
+				\hline
+				\leftarrow q_2 & q_2 & q_{23}   \\
+				\hline
+				\leftarrow q_3 & \varnothing  & \varnothing \\
+				\hline
+				\leftarrow q_{23} & q_2 & q_{23} \\
+				\hline
+			\end{array}
+			$$
+		\end{table}
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+				\node[state,initial,initial text=] (q_0)   {$q_0$}; 
+				\node[state] (q_1) [below =of q_0] {$q_1$}; 
+				\node[state, accepting] (q_2) [right=of q_0] {$q_2$}; 
+				\node[state,accepting](q_3) [below=of q_2] {$q_3$};
+				\node[state,accepting](q_23) [right=of q_2] {$q_{23}$};
+				\path[->] 
+				(q_0) edge  node {b} (q_1)
+				edge  node {a} (q_2)
+				(q_2) edge [loop above] node {a} ()
+				(q_2) edge [bend left] node {b} (q_23)
+				(q_23) edge [bend left]  node {a} (q_2)
+				(q_23) edge [loop above] node {b} ();
+			\end{tikzpicture}
+		\end{figure}
+	\end{multicols}
+	Észrevehetjük, hogy a $q_3$ állapot elérhetetlenné vált, azaz az automata elvesztette összefüggőségét. Az összefüggőség megőrzéséhez bevezethetünk egy egyszerű változtatást az algoritmusba, hogy egy sort állapotot csak akkor veszünk az új automatához, ha arra egy korábbi sor már hivatkozik.
+\end{example}
+\newpage
+\noindent
+Tekintsünk egy bonyolultabb példát:
+\begin{example}
+	Determinizáljuk a következő automatát az optimalizált algoritmus alapján!
+	\begin{table}[H]
+		\centering
+		$$
+		\begin{array}{|c|c|c|}
+			\hline
+			& a & b \\
+			\hline
+			\rightarrow q_0 & \left\lbrace q_1, q_2 \right\rbrace & \varnothing \\
+			\hline
+			\leftarrow q_1 & q_1 &  q_2 \\
+			\hline
+			\leftarrow q_2 & q_0 & q_1   \\
+			\hline
+			q_3 & \left\lbrace q_1, q_3 \right\rbrace  & q_0 \\
+			\hline
+		\end{array}
+		$$
+	\end{table}
+	\begin{enumerate}
+		\item $ \tr(q_0,a) $ állapotokat össze kell vonni ($ q_{12} $)
+		
+		\item Meg kell határozni a $q_{12}$ sort:
+		\begin{enumerate}
+			\item $ \tr(q_{12},a) = \tr(q_{1},a) \cup \tr(q_{2},a) = q_{01} $
+			\item $ \tr(q_{12},b) = \tr(q_{1},b) \cup \tr(q_{2},b) = q_{12} $
+		\end{enumerate}
+		
+		\item Meg kell határozni a $q_{01}$ sort:
+		\begin{enumerate}
+			\item $ \tr(q_{01},a) = \tr(q_{0},a) \cup \tr(q_{1},a) = q_{12} \cup q_{1} =  q_{12} $
+			\item $ \tr(q_{01},b) = \tr(q_{0},b) \cup \tr(q_{1},b) = q_{2} $
+		\end{enumerate}
+		
+		\item Meg kell határozni a $q_{2}$ sort.
+		\item Meg kell határozni a $q_{1}$ sort.
+	\end{enumerate}
+	\begin{table}[H]
+		\centering
+		$$
+		\begin{array}{|c|c|c|}
+			\hline
+			& a & b \\
+			\hline
+			\rightarrow q_0 & q_{12} & \varnothing \\
+			\hline
+			\leftarrow q_{12} & q_{01} & q_{12}  \\
+			\hline
+			\leftarrow q_{01} & q_{12} & q_2   \\
+			\hline
+			\leftarrow q_{2} & q_0 & q_1   \\
+			\hline
+			\leftarrow q_{1} & q_1 & q_2   \\
+			\hline
+		\end{array}
+		$$
+	\end{table}
+	Mivel minden állapot ismert az algoritmus optimalizált verziója véget ér.
+\end{example}
+
+\begin{example}
+	Determinizáljuk a következő automatát az optimalizált algoritmus alapján!
+	
+	\begin{multicols}{2}
+		\begin{table}[H]
+			\centering
+			$$
+			\begin{array}{|c|c|c|}
+				\hline
+				& a & b \\
+				\hline
+				\rightarrow q_0 & \left\lbrace q_0, q_1 \right\rbrace  & \left\lbrace q_0, q_2 \right\rbrace  \\
+				\hline
+				q_1 & q_3 & \varnothing  \\
+				\hline
+				q_2 & \varnothing & q_4   \\
+				\hline
+				\leftarrow q_3 & q_3 & q_3   \\
+				\hline
+				\leftarrow q_4 & q_4 & q_4   \\
+				\hline
+			\end{array}
+			$$
+		\end{table}
+		\begin{table}[H]
+			\centering
+			$$
+			\begin{array}{|c|c|c|}
+				\hline
+				& a & b \\
+				\hline
+				\rightarrow q_0 & q_{01} & q_{02} \\
+				\hline
+				q_{01} & q_{013} & q_{02}  \\
+				\hline
+				q_{02} & q_{01} & q_{024}   \\
+				\hline
+				\leftarrow q_{013} & q_{013} & q_{023}   \\
+				\hline
+				\leftarrow q_{024} & q_{014} & q_{024}   \\
+				\hline
+				\leftarrow q_{023} & q_{013} & q_{0234}   \\
+				\hline
+				\leftarrow q_{014} & q_{0134} & q_{024}   \\
+				\hline
+				\leftarrow q_{0234} & q_{0134} & q_{0234}   \\
+				\hline
+				\leftarrow q_{0134} & q_{0134} & q_{0234}   \\
+				\hline
+			\end{array}
+			$$
+		\end{table}
+	\end{multicols}
+\end{example}
+\newpage
+\section{Véges automaták összefüggővé alakítása}
+Egy automata összefüggő, ha minden állapot elérhető. Az összefüggővé alakítás algoritmusa a következő:
+\begin{itemize}
+	\item $ H_0 = \left\lbrace q_0 \right\rbrace $
+	\item $ H_{i+1} = H_i \cup \left\lbrace H_i \text{ valamely eleméből elérhető állapotok} \right\rbrace $ 
+\end{itemize}
+Az algoritmus akkor áll meg, ha $ H_{i+1} = H_i $. Az automata összefüggő, ha $ Q = H $. Az automata összefüggővé alakítható ha lecseréljük $ Q $-t $Q \cap H$-ra.

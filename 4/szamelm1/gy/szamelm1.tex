@@ -71,7 +71,18 @@
 \usepackage{tikz}
 \usetikzlibrary{automata,positioning}
 
-\title{\huge{A számításelmélet alapjai} \\[-4pt] \large gyakorlati jegyzet \vspace{-15pt}}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+\DeclareMathOperator{\tr}{\delta}
+
+\title{\huge{A számításelmélet alapjai I.} \\[-4pt] \large gyakorlati jegyzet \vspace{-15pt}}
 \author{Boda Bálint}
 \date{\vspace{-12pt}2023. tavaszi félév}
 
@@ -81,7 +92,7 @@
 	\tableofcontents
 	\chapter{Alapfogalmak}
 	\include{01}
-	\chapter{Generatív grammatika}
+	\chapter{Grammatikák}
 	\include{02}
 	\chapter{Véges automaták}
 	\include{03}

@@ -4,4 +4,4 @@
 | ----------- | ------------ | ------------ |
 | Óraszám     |    2         |     2        |
 | Kreditérték |    2         |     3        |
-| Oktató      | Gombos Gergő | Varga Dániel |
+| Oktató      | | |

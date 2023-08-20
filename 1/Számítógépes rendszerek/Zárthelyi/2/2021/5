@@ -1,0 +1,40 @@
+#!/bin/bash
+
+n=1
+m=1
+
+while [[ $((n%3)) -ne 0 || $n -ge 20 || $m -ge 70 ]]
+do
+        read n
+        read m
+done
+
+if [[ $((n%2)) -eq 0 ]]
+then
+        kovifokp=3
+else
+        kovifokp=2
+fi
+
+kovifok=2
+for i in $(seq 1 $n)
+do
+        for j in $(seq 1 $((m+2)))
+        do
+                if [[ $j -eq 1 || $j -eq $((m+2)) ]]
+                then
+                        echo -n "#"
+                elif [[ $i -eq $kovifok ]]
+                then
+                        echo -n "#"
+                        if [[ $j -eq $((m+1)) ]]
+                        then
+                                kovifok=$((kovifok+kovifokp))
+                        fi
+
+                else
+                        echo -n " "
+                fi
+        done
+        echo
+done

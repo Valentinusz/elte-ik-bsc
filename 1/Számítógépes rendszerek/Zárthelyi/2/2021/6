@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -s nevek2.txt ]
+then
+        echo '' > nevek2.txt
+fi
+
+while read line
+do
+        NEV=$(echo $line | cut -f1 -d' ')
+        KERESET=$(echo $line | cut -f2 -d' ')
+
+        if [[ $NEV == $KERESET ]]
+        then
+                KERESET=$((RANDOM % 280 + 120))
+        fi
+        echo $NEV $KERESET >> nevek2.txt
+done < nevek.txt

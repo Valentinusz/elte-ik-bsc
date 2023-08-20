@@ -1,0 +1,8 @@
+for i in $(ls)
+do
+        ./$i 2> /dev/null
+        if [[ $? ]]
+        then
+                echo WAT
+        fi
+done

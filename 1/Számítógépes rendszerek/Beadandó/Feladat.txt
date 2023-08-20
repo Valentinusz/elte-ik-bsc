@@ -1,0 +1,17 @@
+Az okosvárosokban rengeteg adatot gyűjtenek a különböző mérőeszközök, ezeket továbbítják a központnak. Városunkban hőmérséklet adatokat gyűjtünk különböző helyeken rögzített mérőeszközökkel, amelyeket időnként a központba küldünk.
+
+A szöveges adatfile így épüljön fel: GPS koordináták(szélesség, hosszúság), dátum, idő, mért érték
+
+A GPS koordináták megadásánál használjuk a tizedes ponttal megadott formátumot (DD), pl: 47.6498634, 19.1404118
+
+1.  Készítsen homerseklet.sh néven szkriptet, amelyik a megadja, hogy egy adott GPS koordinátájú helyen hány különböző napon végeztek méréseket. (./homerseklet.sh szélesség hosszúság)
+2. Készítsen max_homerseklet.sh néven szkriptet, amelyik a megadja, hogy hol és mikor volt a legmagasabb hőmérséklet.
+3. Készítsen legtobb_eredmeny.sh néven szkriptet, amelyik megadja azt a helyet, ahol a legtöbb mérési eredmény született.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Egy önvezető autó századmásodpercenként méri mozgás közben, hogy milyen távolságba van előtte vagy utána "valami" és ez alapján dönt arról, gyorsítania kell vagy lassítani vagy esetleg megállni. Ezeket az adatokat most egy adatfájlban tároljuk: időpont (év.hó.nap óra:perc:mperc:szmp), sebesség, tavolsagelejétől, tavolsaghátuljától)
+
+4. Készítsen onvezeto.sh néven egy szkriptet, ami megadja, hogy hányszor állt meg az autó. (Hány olyan hely van, ahol a következő adat több, mint 1 perc múlva érkezett. Ha áll az autó, nem mér.)!
+5. Készítsen fekez.sh néven szkriptet, ami megadja, hogy mikor kellett fékezni. Fékezni akkor kell, ha az előtte levő autó távolsága K-méternél kisebb.  pl: ./fekez.sh 100)
+6. Készítsen legkozelebb.sh néven szkriptet, ami megadja, hogy mikor volt a legközelebb hozzá valami (bármelyik irányból).

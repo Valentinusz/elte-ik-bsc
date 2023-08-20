@@ -1,0 +1,19 @@
+#!/bin/bash
+
+read N
+
+if [[ $N -gt 0 ]]
+then
+        for i in $(seq $N)
+        do
+                if [[ ! -e "$i.file" ]]
+                then
+                        touch "$i.file"
+                else
+                        echo "Az $i.file már létezik."
+                fi
+        done
+else
+        echo "Hiba a paraméter nem pozitív egész szám." >&2
+        exit 1
+fi

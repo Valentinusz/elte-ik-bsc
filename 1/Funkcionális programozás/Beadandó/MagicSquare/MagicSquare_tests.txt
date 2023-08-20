@@ -1,0 +1,91 @@
+isSameSize [] []
+isSameSize [[1,2]] [[5,6]]
+isSameSize [[1,2,3]] [[5,6,7]]
+isSameSize [[1,2,3], []] [[5,7,6], []]
+isSameSize [[1,2,3], [5,5]] [[5,7,6], [6,7]]
+not $ isSameSize [[1,2]] [[5]]
+not $ isSameSize [[1,2]] [[5,6,7]]
+not $ isSameSize [[1,2,3]] [[5,6,7,6]]
+not $ isSameSize [[1,2,3], []] [[5,6,7,6], []]
+not $ isSameSize [[1,2,3], []] [[5,7,6], [6]]
+not $ isSameSize [[1,2,3], []] [[5,7,6], [6,7]]
+not $ isSameSize [[1,2,3], [5,5]] [[5,7,6], [6,7,8]]
+not $ isSameSize [[1,2,3], [5,5]] [[5,7,6], [6,7,8]]
+not $ isSameSize [[1,2,3], [5,5]] [[5,7,6], [1,2..]]
+not $ isSameSize [[1,2,3], [5,5]] [[5,6..], [1,2..]]
+not $ isSameSize [[1..], [5,5]] [[5,6,7], [1,2..]]
+
+magicSquare [[2,9,4], [7,5,3], [6,1,8]] == Just 15
+magicSquare [[7, 12, 1, 14], [2, 13, 8, 11], [16,3, 10, 5], [9, 6, 15, 4]] == Just 34
+magicSquare [[1,1,1], [1,1,1], [1,1,1]] == Nothing
+magicSquare [[2,9,4], [7,5,3], [6,1,16]] == Nothing
+magicSquare [[2,9,4], [7,0,3], [6,1,8]] == Nothing
+magicSquare [[2,1,4], [7,0,3], [6,1,16]] == Nothing
+magicSquare [[4,11,6], [9,7,5], [8,3,10]] == Nothing
+magicSquare [[2,9,4], [7,5,3], [6,1,16]] == Nothing
+magicSquare [[2,9,4], [7,0,3], [6,1,8]] == Nothing
+magicSquare [[2,1,4], [7,0,3], [6,1,16]] == Nothing
+magicSquare [[1,2,3], [4,5,6], [7,8,9]] == Nothing
+magicSquare [[7, 12, 1, 14], [2, 13, 8, 11], [16, 3, 10, 5]] == Nothing
+magicSquare [[1,2,5,6],[3,4,5,6],[8,9,10,11],[12,13,14,15]] == Nothing
+magicSquare [[1,1], [2,2]] == Nothing
+magicSquare [[1,2], [2,2]] == Nothing
+magicSquare [[1]] == Just 1
+magicSquare [[1,2],[3,4]] == Nothing
+magicSquare [[7, 12, 1, 5, 14], [2, 13, 8, 11], [16,3, 10, 5], [9, 6, 15, 4]] == Nothing
+magicSquare [[7, 12, 1, 14], [2, 13, 8, 11], [16, 3, 10, 5], [9, 6, 15, 9, 4]] == Nothing
+
+minimalCost [[2,9,4], [7,5,3], [6,1,8]] == Just 0
+minimalCost [[7, 12, 1, 14], [2, 13, 8, 11], [16,3, 10, 5], [9, 6, 15, 4]] == Nothing
+minimalCost [[1,1,1], [1,1,1], [1,1,1]] == Just 36 
+minimalCost [[2,9,4], [7,5,3], [6,1,16]] == Just 8 
+minimalCost [[2,9,4], [7,0,3], [6,1,8]] == Just 5
+minimalCost [[4,11,6], [9,7,5], [8,3,10]] == Just 18 
+minimalCost [[4,9,8], [11,7,3], [6,5,10]] == Just 18 
+minimalCost [[8,9,4], [3,7,11], [10,5,6]] == Just 18 
+minimalCost [[2,9,4], [7,5,3], [6,1,16]] == Just 8 
+minimalCost [[2,9,4], [7,0,3], [6,1,8]] == Just 5 
+minimalCost [[2,1,4], [7,0,3], [6,1,16]] == Just 21 
+minimalCost [[1,2,3], [4,5,6], [7,8,9]] == Just 24 
+minimalCost [[7, 12, 1, 14], [2, 13, 8, 11], [16, 3, 10, 5]] == Nothing
+minimalCost [[1,2,5,6],[3,4,5,6],[8,9,10,11],[12,13,14,15]] == Nothing
+minimalCost [[1,1], [2,2]] == Nothing 
+minimalCost [[1,2], [2,2]] == Nothing 
+minimalCost [[1,2],[3,4]] == Nothing 
+minimalCost [[1]] == Nothing 
+minimalCost [[7, 12, 1, 5, 14], [2, 13, 8, 11], [16,3, 10, 5], [9, 6, 15, 4]] == Nothing 
+minimalCost [[7, 12, 1, 14], [2, 13, 8, 11], [16, 3, 10, 5], [9, 6, 15, 9, 4]] == Nothing 
+minimalCost [] == Nothing 
+minimalCost [[1,2]] == Nothing 
+minimalCost [[5,6]] == Nothing 
+minimalCost [[1,2,3]] == Nothing 
+minimalCost [[5,6,7]] == Nothing 
+minimalCost [[1,2,3], []] == Nothing 
+minimalCost [[5,7,6], []] == Nothing 
+minimalCost [[1,2,3], [5,5]] == Nothing 
+minimalCost [[5,7,6], [6,7]] == Nothing 
+minimalCost [[1,2]] == Nothing 
+minimalCost [[5]] == Nothing 
+minimalCost [[1,2]] == Nothing 
+minimalCost [[5,6,7]] == Nothing 
+minimalCost [[1,2,3]] == Nothing 
+minimalCost [[5,6,7,6]] == Nothing 
+minimalCost [[1,2,3], []] == Nothing 
+minimalCost [[5,6,7,6], []] == Nothing 
+minimalCost [[1,2,3], []] == Nothing 
+minimalCost [[5,7,6], [6]] == Nothing 
+minimalCost [[1,2,3], []] == Nothing 
+minimalCost [[5,7,6], [6,7]] == Nothing 
+minimalCost [[1,2,3], [5,5]] == Nothing 
+minimalCost [[5,7,6], [6,7,8]] == Nothing 
+minimalCost [[1,2,3], [5,5]] == Nothing 
+minimalCost [[5,7,6], [6,7,8]] == Nothing 
+minimalCost [[1,2,3], [5,5]] == Nothing 
+minimalCost [[5,7,6], [1,2..]] == Nothing 
+minimalCost [[1,2,3], [5,5]] == Nothing 
+minimalCost [[5,6..], [1,2..]] == Nothing 
+minimalCost [[1..], [5,5]] == Nothing 
+minimalCost [[5,6,7], [1,2..]] == Nothing 
+minimalCost [[1..]] == Nothing 
+minimalCost [ replicate 1 x | x <- [1..]] == Nothing
+

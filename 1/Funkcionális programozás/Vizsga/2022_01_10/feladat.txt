@@ -1,0 +1,289 @@
+Feladatok
+Két szám négyzetösszege (1 pont)
+
+Definiáljunk azt a függvényt, amely egy rendezett párból, egy rendezett hármast ad vissza, ahol a számhármas első két komponense a kapott pár értékeivel egyezik meg, a harmadik komponens pedig a két szám négyzetösszege legyen!
+
+squareSum :: Num a => (a, a) -> (a, a, a)
+
+squareSum ( 1 , 1) == (1,1,2)
+squareSum (-3, 3) == (-3,3,18)
+squareSum ( -1, -1) == (-1,-1,2)
+squareSum (-3, -3) == (-3,-3,18)
+squareSum (0,0) == (0,0,0)
+squareSum (2.5 ,2.5) == (2.5, 2.5, 12.5)
+
+Teljes nevek (1 pont)
+
+Egy listában egy osztály tanulóinak vezetéknevei, egy másikban a tanulók keresztnevei szerepelnek. Definiáljuk azt a függvényt, ami megadja a tanulók neveit!
+
+Az eredménylista hossza, a rövidebb lista hosszával egyezzen meg.
+
+A függvény tartsa meg az eredeti listák sorrendjét!
+
+names :: [String] -> [String] -> [String]
+
+names [] [] == []
+names ["Bokros"] ["Gizella"] == ["Bokros Gizella"]
+names ["Kovács", "Nagy", "Szabó"] ["Sára", "Zoltán", "Géza"] == ["Kovács Sára", "Nagy Zoltán", "Szabó Géza"]
+names (replicate 4 "Berényi") ["András", "Zoltán", "Miklós", "Attila"] == ["Berényi András", "Berényi Zoltán", "Berényi Miklós", "Berényi Attila"]
+names (replicate 5 "Berényi") ["András", "Zoltán", "Miklós", "Attila"] == ["Berényi András", "Berényi Zoltán", "Berényi Miklós", "Berényi Attila"]
+names (repeat "Berényi") ["András", "Zoltán", "Miklós", "Attila"] == ["Berényi András", "Berényi Zoltán", "Berényi Miklós", "Berényi Attila"]
+names (replicate 3 "Berényi") ["András", "Zoltán", "Miklós", "Attila"] == ["Berényi András", "Berényi Zoltán", "Berényi Miklós"]
+
+Megszerkeszthető derékszögű háromszög területe (1 pont)
+
+Definiáljuk a triangleArea függvényt, amely megvizsgálja, hogy egy derékszögű háromszög oldalainak
+hosszát kapta-e meg paraméterül, majd kiszámolja annak területét!
+
+A függvény egy rendezett hármast kap paraméterül, melynek első két komponense a háromszög befogóinak hossza,
+a harmadik komponens az átfogó hossza. Amennyiben a háromszög megszerkeszthető és derékszögű, adja meg a
+területét egy Just konstruktorba csomagolva, ellenkező esetben adjon vissza Nothing-ot.
+
+Segítség:
+
+    A háromszög megszerkeszthető, ha minden oldal hossza pozitív, és bármely két oldal hosszának összege nagyobb
+    a harmadik oldal hosszánál.
+    A háromszög derékszögű, ha a befogói hosszainak négyzetösszege megegyezik az átfogó hosszának négyzetével.
+    A derékszögű háromszög területe = a befogók hosszának szorzata / 2.
+
+triangleArea :: (Double, Double, Double) -> Maybe Double
+
+triangleArea (4,0.9,4.1) == Just 1.8
+triangleArea (9,40,41) == Just 180
+triangleArea (4,3,5) == Just 6
+triangleArea (5.04,6.72,8.4) == Just 16.9344
+triangleArea (3.36,2.52,4.2) == Just 4.2336
+triangleArea (8.0,6,10.0) == Just 24.0
+triangleArea (8,6,10) == triangleArea (6,8,10)
+triangleArea (21,21,21) == Nothing
+triangleArea (2,-1,5.0) == Nothing
+triangleArea (-2,4,5.0) == Nothing
+triangleArea (0,0,0) == Nothing
+triangleArea (5,3,2) == Nothing
+triangleArea (-4,3,5) == Nothing
+triangleArea (4,-3,5) == Nothing
+triangleArea (3,4,-5) == Nothing
+
+Megegyező elemek (2 pont)
+
+Adjuk meg azt a függvényt, ami kap egy rendezett párokból álló listát és visszaadja azon párok sorszámát, ahol a pár két komponense megegyezik! Amennyiben léteznek ilyen elemek, az eredményt Just konstruktorba csomagolva adja meg, ellenkező esetben az eredmény legyen Nothing.
+
+Az indexelés kezdjük 1-től.
+
+doubleIdxs:: Eq a  => [(a,a)] -> Maybe [Int]
+
+doubleIdxs [] == Nothing
+doubleIdxs [(1,2)] == Nothing
+doubleIdxs [(1,0), (5,6)] == Nothing
+doubleIdxs [(1,0), (5,5)] == Just [2]
+doubleIdxs (zip [1..10] [1..10]) == Just [1..10]
+doubleIdxs [ (i,j)| i <- [1..6], j <- [1..5]] == Just [1,7,13,19,25]
+doubleIdxs [ (i,j)| i <- "zold tea", j <- "fekete tea"] == Just [47,55,58,62,64,66,69,80]
+
+Snake case (2 pont)
+
+A snake_case és a camelCase a programozásban használt konvenciók a változók nevére. Előbbiben a különálló szavakat az '_' karakterrel kötjük össze és csak kisbetűket használunk (pl.: snake_case_valtozonev), utóbbiban a különálló szavakat egybe írjuk, de minden új szó kezdetét nagybetűvel írjuk, kivéve az elsőt (pl.: mindenUjSzoNagybetuvel). Írjunk egy függvényt, amely snake_case stílusból camelCase stílusba konvertál változóneveket! Feltételezhető, hogy a bemenet megfelelő lesz.
+
+snakeToCamel :: String -> String
+
+snakeToCamel "" == ""
+snakeToCamel "a" == "a"
+snakeToCamel "apple" == "apple"
+snakeToCamel "snake_to_camel" == "snakeToCamel"
+snakeToCamel "snake_2_camel" == "snake2Camel"
+snakeToCamel "i_am_in_snake_case" == "iAmInSnakeCase"
+take 32 (snakeToCamel ("very_long_variable" ++ cycle "_name")) == "veryLongVariableNameNameNameName"
+
+Legkisebb és legnagyobb értékek eltávolítása (2 pont)
+
+Definiáld a removeExtremes függvényt, ami egy lista elemei közül eltávolítja a legkisebb és legnagyobb értékeket! Ha többször is szerepelnek ezek az értékek, akkor minden előfordulásukat távolítsuk el.
+
+Feltehető, hogy a lista véges.
+
+removeExtremes :: Ord a => [a] -> [a]
+
+removeExtremes [] == []
+removeExtremes [4] == []
+removeExtremes [1,2] == []
+removeExtremes [1..10] == [2..9]
+removeExtremes [5,6,3,4,1,2,7,1,2] == [5,6,3,4,2,2]
+removeExtremes "haskell" == "hkell"
+
+Utolsó előfordulás lecserélése (2 pont)
+
+Készíts egy függvényt, amely a kapott listában a keresett elem utolsó előfordulását kicseréli a paraméterben megadott értékre! Ha a csere sikeres volt, az eredményt Just konstruktorba csomagolva adja meg, ellenkező esetben az eredmény legyen Nothing.
+
+Feltehető, hogy a lista véges elemszámú.
+
+replaceLastOcc :: Eq a => a {-mit-} -> a {-mire-} -> [a] -> Maybe [a]
+
+replaceLastOcc 'a' 'e' "alma" == Just "alme"
+replaceLastOcc 1   2   [1,2,23,23,2,1,3,21,2,3] == Just [1,2,23,23,2,2,3,21,2,3]
+replaceLastOcc 1   2   [1,2,23,23,2,3,21,2,3] == Just [2,2,23,23,2,3,21,2,3]
+replaceLastOcc 42 0 [] == Nothing
+replaceLastOcc 'x' 'y' "haskell" == Nothing
+
+Anagramma (2 pont)
+
+Az anagramma egy szójáték, melynek lényege, hogy egy szó, vagy mondat betűit összekeverve, egy új szót, vagy mondatot kapunk, amelyben minden karakter (szóközöket is beleértve) pontosan annyiszor szerepel, ahányszor a kiindulási karaktersorozatban.
+
+Definiáljuk azt a függvényt, amely két paraméterül kapott szövegről eldönti, hogy azok egymás anagrammái-e!
+
+anagram :: String -> String -> Bool
+
+anagram "élet" "étel"
+anagram "lakó" "kóla"
+anagram "szekrény" "kényszer"
+not $ anagram "szekrény" "kényszerű"
+not $ anagram "kalap" "alak"
+anagram "eleven plus two" "twelve plus one"
+anagram "ronald wilson reagan" "insane anglo warlord"
+not $ anagram "alma" "llama"
+
+Adott hosszú listák összege (2 pont)
+
+Definiáld azt a függvényt, ami egy listák listájában összegzi az n hosszúságú listák elemeit! A listák listájáról feltehető hogy véges, de az elemek nem biztos hogy végesek.
+
+sumWithLenghtN :: Num a => Int -> [[a]] -> a
+
+sumWithLenghtN 0 [] == 0
+sumWithLenghtN (-1) [] == 0
+sumWithLenghtN (-1) [[1,2,3], [32,2,1]] == 0
+sumWithLenghtN 4 [[1,2,3], [32,2,1]] == 0
+sumWithLenghtN 4 [ replicate i (2*i+1) | i <- [2,4,5]] == 36
+sumWithLenghtN 2 [ replicate i (2*i+1) | i <- [2,4,5]] == 10
+sumWithLenghtN 5 [ replicate i (2*i+1) | i <- [2,4,5]] == 55
+sumWithLenghtN 2 [repeat 4 , [2,3], [1,2,3], repeat 5] == 5
+sumWithLenghtN 2 [[], repeat 4 , [2,3], [1,2,3], repeat 5, []] == 5
+
+Azonos érték (2 pont)
+
+Definiáljuk azt a függvényt, amely eldönti egy paraméterül kapott függvényről, hogy mindig ugyanazzal az értékkel tér-e vissza a megadott értelmezési tartományon!
+
+isSteady :: Eq b => (a -> b) -> [a] -> Bool
+
+isSteady (*0) [] == True
+isSteady (*2) (replicate 10 2) == True
+isSteady (*0) [1..100] == True
+isSteady (\x -> mod x 2) [2,4..100] == True
+isSteady length ["alma", "toll", "baba"] == True
+isSteady id ([] :: [Int]) == True
+isSteady id "a" == True
+isSteady id (replicate 42 'a') == True
+
+isSteady (*1) ([1..100]) == False
+isSteady (\x -> mod x 2) [2,4,6,7,8,10,12] == False
+isSteady length ["alma", "barack", "baba"] == False
+isSteady id ['a'..'z'] == False
+
+Norvég mitológiai futárszolgálat
+
+A norvég mitológiában 9 világ van, a különböző lényeknek. A futárszolgálat most Asgardba, Vanaheimba (Istenek és Istennők világa), Midgardba (az emberek világa) és Alfheimba (elfek világa) szállít.
+Adattípus definiálása (1 pont)
+
+Definiáljunk egy adatszerkezetet, ami egy csomagot (Parcell) fog reprezentálni. A típushoz egy konstruktor tartozik (P), amelynek három pramétere legyen:
+
+    cím: String,
+    súly: Double,
+    utánvét összege: Int.
+
+Kérjünk a fordítótól automatikus példányosítást a Show és Eq típusosztályokra!
+Szállítási költség (1 pont)
+
+A különböző világokba a Bifrost (amin keresztül a világok közti utazás lehetséges, tekinthetjük most ezt a futárszolgálatnak is) különböző díjakért szállít. A megadott költségek kg-onként értendőek, amelyek a következő szerint alakulnak:
+
+Asgard - 100
+Midgard - 10
+Vanaheim - 80
+Alfheim - 50
+
+A megadott költségek figyelembevételével, add meg azt a függvényt, ami kiszámítja, hogy egy csomagnak mennyi a szállítási költsége. A szállítási költséget Just konstruktorba csomagolva adjuk meg. Ha az adott világba nem szállít, akkor az eredmény legyen Nothing.
+
+deliveryFee :: Parcell -> Maybe Double
+
+deliveryFee (P "Asgard" 10 1500) == Just 1000
+deliveryFee (P "Midgard" 5.2 2800) == Just 52
+deliveryFee (P "Vanaheim" 4 3400) == Just 320
+deliveryFee (P "Alfheim" 3.5 1860 ) == Just 175
+deliveryFee (P "Alfa Centauri" 2.3 1400) == Nothing
+
+Futár bevétele (2 pont)
+
+Adjuk meg azt a függvényt, amivel kiszámítható a futárnak az aznapi bevétele! A bevétele a szállítási díjakból
+és az utánvétekből áll. Előfordulhat, hogy a futár olyan csomagot kap, amit nem tud kiszállítani
+(mert olyan helyre van címezve), ez esetben azt a nap végén visszaviszi a raktárba, de természetesen ez nem
+fog bevételt (sem kiadást) generálni.
+
+delivery :: [Parcell] -> Double
+
+delivery  [(P "Asgard" 12.34 2500)] == 3734
+delivery [(P "Asgard" 12.34 2500), (P "Midgard" 18.24 2350)] == 6266.4
+delivery  [(P "Asgard" 12.34 2500),  (P "Midgard" 18.24 2350), (P "Alfa Centauri" 56.3 5600)] == 6266.4
+delivery [(P "Alfa Centauri" 56.3 5600)] == 0
+delivery [(P "Asgard" 12.34 2500), (P "Midgard" 18.24 2350), (P "Vanaheim" 12.34 2500), (P "Alfheim" 12.34 2500), (P "Alfa Centauri" 56.3 5600)] == 12870.599999999999
+
+Növekvő elemszámú listák (3 pont)
+
+Készíts egy függvényt, mely egy lista sorozatról eldönti, hogy a benne található listák elemszáma szigorú monoton növekszik-e! A függvény adjon vissza Nothing értéket, ha a tulajdonság igaz. Illetve adja meg azon listák sorszámát, rendezett pár formájában, Just konstruktorba csomagolva, ahol ez a tulajdonság először sérül.
+
+Az indexelést 0-tól kezdjük.
+
+Megjegyzés: A sorozatban előfordulhatnak végtelen listák is, azonban az feltételezhető, hogy két szomszédos lista nem lesz végtelen!
+
+inconsistencyInGrowing :: [[a]] -> Maybe (Int, Int)
+
+inconsistencyInGrowing [] == Nothing
+inconsistencyInGrowing [[]] == Nothing
+inconsistencyInGrowing [[1]] == Nothing
+inconsistencyInGrowing [[1..10]] == Nothing
+inconsistencyInGrowing [[1..]] == Nothing
+inconsistencyInGrowing [[],[5,4],[1,2,4], [0,6,3,6,3]] == Nothing
+inconsistencyInGrowing ["bb", repeat 'a'] == Nothing
+inconsistencyInGrowing [ replicate i True | i <- [1..100]] == Nothing
+inconsistencyInGrowing [[],[5,3],[2,23,1], [0..]] == Nothing
+
+
+inconsistencyInGrowing [[4], [5], [1,2], [0,6,3]] == Just (0,1)
+inconsistencyInGrowing [[4], [5,6], [1,2], [0,6,3]] == Just (1,2)
+inconsistencyInGrowing [[4], [5,6], [1,2], [0,6]] == Just (1,2)
+inconsistencyInGrowing [[4], [5,6], [1,2], [0,6]] == Just (1,2)
+inconsistencyInGrowing [[4..], [5,6], [1,2], [0,6,3]] == Just (0,1)
+inconsistencyInGrowing [[4..], [5,6], [1..], [0,6,3]] == Just (0,1)
+
+Szöveg helyettesítése (3 pont)
+
+Definiáld a findAndReplace függvényt, ami egy szövegben megkeresi és helyettesíti az összes előfordulását egy adott részszövegnek! Ha a keresett szöveg átfedésekkel többször is illeszkedne, akkor az átfedő előfordulások közül csak az elsőt helyettesítsük.
+
+A keresett (második paraméterként kapott) szövegről feltehető, hogy véges és nem üres.
+
+findAndReplace :: String {- miben -} -> String {- mit -} -> String {- mire -} -> String
+
+findAndReplace "almafa" "alma" "korte" == "kortefa"
+findAndReplace "eme" "e" "a" == "ama"
+findAndReplace "igen, ez egy teljes szoveg" "eg" "eG" == "igen, ez eGy teljes szoveG"
+findAndReplace "" "alma" "korte" == ""
+findAndReplace "itt vannak szokozok" " " "" == "ittvannakszokozok"
+findAndReplace "ez egy szoveg" " " ". " == "ez. egy. szoveg"
+findAndReplace "aaa" "aa" "bb" == "bba"
+findAndReplace "Nem minden tarka fajta szarka farka tarka, csak a tarka farku szarkafajta szarka farka tarka." "szarka" "roka" == "Nem minden tarka fajta roka farka tarka, csak a tarka farku rokafajta roka farka tarka."
+take 100 (findAndReplace (concat (repeat "alma")) "ma" "ap") == take 100 (concat (repeat "alap"))
+take 7 (findAndReplace "haskell" "kell" (repeat 'x')) == "hasxxxx"
+
+Zárójelben lévő szöveg kihagyása (3 pont)
+
+Definiáld a shrinkText függvényt, amely egy paraméterként kapott szövegből kihagyja a zárójelben lévő részeket! A szöveg feldolgozásánál egymásba ágyazott zárójelekkel nem kell törődni, az első összeillő zárójelpárban lévő szöveget kell elhagyni.
+
+shrinkText :: String -> String
+
+shrinkText "" == ""
+shrinkText "minden fontos!" == "minden fontos!"
+shrinkText "(elhagyando)" == ""
+shrinkText "(minden)(elhagyando)" == ""
+shrinkText "ez a lenyeg(de ez nem fontos), de ez is fontos" == "ez a lenyeg, de ez is fontos"
+shrinkText "(nincs befejezve" == "(nincs befejezve"
+shrinkText "ez (nincs befejezve" == "ez (nincs befejezve"
+shrinkText "nincs eleje)" == "nincs eleje)"
+shrinkText "ebben minden ()fontos " == "ebben minden fontos "
+shrinkText "(ebben)(semmi)(sem)fontos" == "fontos"
+shrinkText "(elhagyando (meg ez is)de ez mar nem)" == "de ez mar nem)"
+take 1 (shrinkText ("(erdekesen) (hosszu" ++ cycle "zarojel")) == " "

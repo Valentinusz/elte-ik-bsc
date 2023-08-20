@@ -1,0 +1,71 @@
+footer {
+    margin-top: 0;
+}
+
+main.background-main {
+    margin: 0;
+    background-image: url("../media/images/1aU.jpg");
+}
+
+h1 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    text-shadow: 1px 1px 12px black;
+}
+
+#form-container {
+    opacity: 0.95;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 80%;
+    background-color: white;
+	padding-bottom: 30px;
+}
+
+label {
+    color: black;
+    font-size: 1.3em;
+}
+
+input {
+    margin-bottom: 25px;
+}
+
+p input {
+    margin-bottom: 5px;
+}
+
+p input:last-of-type {
+    margin-bottom: 25px;
+}
+
+p label {
+    font-size: 1em;
+}
+
+input[type=text], input[type=email] {
+    border: 2px solid #6c9c34;
+    border-radius: 5px;
+}
+
+form p {
+    font-size: 1.3em;
+    margin-bottom: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+label#text-area {
+    width: 75%;
+}

@@ -1,0 +1,44 @@
+main figure img {
+    text-align: center;
+    width: 60%;
+}
+
+section.flex {
+    display: flex;
+    gap: 10px;
+}
+
+.left {
+    width: 45%;
+    text-align: center;
+}
+
+.right {
+    width: 55%;
+}
+
+section div.left {
+    text-align: left;
+}
+
+section#next h3, section#next {
+    text-align: center;
+}
+
+/* evil responsive iframe */
+#iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 75%;
+    padding-top: 25%;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}

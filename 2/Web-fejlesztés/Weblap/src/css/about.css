@@ -1,0 +1,64 @@
+div#video {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: left;
+}
+
+video {
+    max-width: 75%;
+}
+
+/* aside */
+aside {
+    float: right;
+    min-width: 35%;
+    max-width: 40%;
+    padding: 10px;
+    margin: 0 10px 10px 20px
+}
+
+aside table, aside th, aside td {
+    border: 1px solid;
+    vertical-align: middle;
+}
+
+aside table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+aside table td {
+    padding: 2px;
+}
+
+aside table tr {
+    text-align: center;
+}
+
+table caption {
+    text-align: center;
+}
+
+#aside-div img {
+    min-width: 40%;
+    max-width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#aside-div {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1023px) {
+    #aside-div aside {
+        float: none; /* ne lebegjen az elem */
+        width: 450px; /* szélesség*/
+        margin: 0;
+
+    }
+}

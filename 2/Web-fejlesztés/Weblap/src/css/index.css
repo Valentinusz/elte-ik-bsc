@@ -1,0 +1,42 @@
+section#intro figure, section#intro p, hr {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.flex {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+section.next article {
+    text-align: center;
+}
+
+section.next article#feedback-article {
+    margin-top: 30px;
+}
+
+#carousel-print {
+    display: none;
+}
+
+@media only screen and (max-width: 1023px) {
+    #intro {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    main {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .flex {
+        flex-direction: column;
+    }
+}

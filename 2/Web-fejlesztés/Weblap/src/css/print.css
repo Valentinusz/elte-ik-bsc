@@ -1,0 +1,58 @@
+#carousel-print {
+    display: flex;
+}
+
+#carousel-print img {
+    width: 25%;
+}
+
+#carousel {
+    display: none;
+}
+
+section#intro p {
+    margin: 0;
+    width: 100%;
+}
+
+section#next {
+    display: none;
+}
+
+div#video {
+    display: none;
+}
+
+#aside-div aside {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
+    border: #080404 1px solid;
+    page-break-after: always;
+}
+
+header {
+    display: none;
+}
+
+h1, h2, h3, a {
+    text-shadow: none;
+    color: black;
+}
+
+img {
+    width: 50%;
+}
+
+.next {
+    display: none;
+}
+
+input[type=text], input[type=email] {
+    border: 2px solid black;
+    border-radius: 5px;
+}

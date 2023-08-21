@@ -1,0 +1,20 @@
+r6 ip addr add 25.0.0.254/8 dev r6-eth0
+r6 ip addr add 35.0.0.254/8 dev r6-eth2
+r6 ip addr add 192.168.107.1/24 dev r6-eth1
+r7 ip addr add 25.0.0.253/8 dev r7-eth0
+r7 ip addr add 45.0.0.254/8 dev r7-eth2
+r7 ip addr add 192.168.100.1/24 dev r7-eth1
+r8 ip addr add 192.168.107.2/24 dev r8-eth0
+r8 ip addr add 192.168.100.2/24 dev r8-eth1
+r8 ip addr add 55.0.0.254/8 dev r8-eth2
+h1 ip route add default via 25.0.0.254 dev h1-eth0
+h2 ip route add default via 25.0.0.254 dev h2-eth0
+h3 ip route add default via 25.0.0.253 dev h3-eth0
+h4 ip route add default via 55.0.0.254 dev h4-eth0
+h5 ip route add default via 35.0.0.254 dev h5-eth0
+h6 ip route add default via 45.0.0.254 dev h6-eth0
+r8 ip route add 25.0.0.0/8 via 192.168.107.1 dev r8-eth0
+r6 iptables --table nat -A PREROUTING --in-interface r6-eth2 --protocol tcp --dport 122 -j DNAT --to-destination 25.0.0.1:22
+r6 iptables --table nat -A PREROUTING --in-interface r6-eth2 --protocol tcp --dport 222 -j DNAT --to-destination 25.0.0.2:22
+r6 iptables --table nat -A PREROUTING --in-interface r6-eth2 --protocol tcp --dport 322 -j DNAT --to-destination 25.0.0.3:22
+r6 iptables -A FORWARD --in-interface r6-eth2 --source 35.0.0.254/8 --destination 25.0.0.254/8 --protocol tcp -j DROP

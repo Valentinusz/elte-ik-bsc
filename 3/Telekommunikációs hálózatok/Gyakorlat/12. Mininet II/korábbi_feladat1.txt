@@ -1,0 +1,10 @@
+r1 ip addr add 10.0.1.254/24 dev r1-eth1
+r1 ip addr add 172.16.100.1/24 dev r1-eth0
+r2 ip addr add 192.168.100.254/24 dev r2-eth1
+r2 ip addr add 172.16.100.2/24 dev r2-eth0
+h1 ip route add default via 10.0.1.254 dev h1-eth0
+h2 ip route add default via 10.0.1.254 dev h2-eth0
+h3 ip route add default via 192.168.100.254 dev h3-eth0
+h4 ip route add default via 192.168.100.254 dev h4-eth0
+r1 ip route add default via 172.16.100.2 dev r1-eth0
+r2 ip route add default via 172.16.100.1 dev r2-eth0

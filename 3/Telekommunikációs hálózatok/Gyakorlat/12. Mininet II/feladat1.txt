@@ -1,0 +1,4 @@
+r1 iptables -t nat -A PREROUTING -i r1-eth0 -p tcp -d 172.16.100.1 --dport 20000 -j DNAT --to-destination 10.0.1.1:10000
+h1 iptables -t filter -A INPUT -i h1-eth0 -s 192.168.100.0/24 -p tcp -j DROP
+h1 iptables -t filter -A OUTPUT -o h1-eth0 -d 192.168.100.0/24 -p tcp -j DROP
+r1 iptables -t nat -A POSTROUTING -p tcp -d 10.0.1.1 --dport 10000 -j SNAT --to-source 172.16.100.1:20000

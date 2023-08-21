@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>2022-10-03-140121.sagews</title>
+    <meta name="description" content="automatically generated from '5e3791c8-af73-4ce5-96ae-6b76786aeac3:2022-10-03-140121.sagews' on CoCalc">
+    <meta name="date" content="2022-10-15T19:58:41">
+    <meta data-name="smc-generated" content="version:2">
+
+    <style>
+        html {
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; padding: 0;
+        }
+        body {
+            width: 50rem;
+            counter-reset: line;
+            padding: .5rem;
+        }
+        @media print {
+          body { width: 100%; margin: 1rem 1rem 1rem 6rem; font-size: 10pt; }
+        }
+        pre { margin: 0; }
+        div.output + pre.input { margin-top: 1rem; }
+        div.output {
+            border-left: .2rem solid #33a;
+            padding: .3rem;
+            margin-left: -.5rem;
+            line-height: 1.5;
+        }
+        div.output img {
+            max-width: 70%;
+            width: auto;
+            height: auto;
+        }
+        div.output.stdout,
+        div.output.stderr,
+        div.output.javascript { font-family: monospace; white-space: pre-wrap; }
+        div.output.stderr { color: #F00; border-color: #F33; }
+
+        span.sagews-output-image > img,
+        span.sagews-output-html > img
+        { vertical-align: top; }
+
+        pre.input {
+            border-left: .2rem solid #3a3;
+            padding: .5rem;
+            margin-left: -.5rem;
+        }
+        pre.input > code {
+            display: block;
+            line-height: 1.1rem;
+        }
+        pre.input > code:before {
+            margin-left: -3rem;
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            padding: 0 .3rem 0 0;
+            margin-right: .5rem;
+            color: #888;
+            min-width: 2rem;
+            text-align: right;
+            user-select: none;
+        }
+        div.header { margin-bottom: 1rem; }
+        table.header td { border: 0; }
+        table.header tr>td:nth-child(2) {
+            font-weight: bold;
+            font-family: monospace;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            border-color: #888;
+        }
+        table td, table th {
+            padding: .5rem;
+        }
+        table tr>td {
+            vertical-align: top;
+            border-top: .05rem solid #888;
+        }
+        table tr>th {
+            vertical-align: bottom;
+            border-bottom: .1rem solid #888;
+        }
+        footer {
+            margin-top: 1rem;
+            border-top: .1rem solid #888;
+            font-size: 70%;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+
+
+    <!-- the styling of the highlighted code; should be printer friendly -->
+    <style>
+        .cm-keyword { font-weight: bold; color: #339; }
+        .cm-atom { color: #666; }
+        .cm-number { color: #333; }
+        .cm-def { color: #333; font-weight: bold; }
+        .cm-variable { color: black; }
+        .cm-variable-2 { color:black; }
+        .cm-variable-3 { color: black; }
+        .cm-property { color: black; }
+        .cm-operator { color: black; font-weight: bold; }
+        .cm-comment { color: #777; }
+        .cm-string { color: #333; }
+        .cm-meta { color: #039; }
+        .cm-qualifier { color: #666; }
+        .cm-builtin { color: #393; font-weight: bold; }
+        .cm-bracket { color: #666; }
+        .cm-tag { color: #444; font-weight: bold; }
+        .cm-attribute { color: #777; }
+        .cm-error { color: #000; }
+        .cm-header { font-weight: bold; }
+        .cm-header-1 { font-size: 1.2rem; }
+        .cm-header-2 { font-size: 1.15rem; }
+        .cm-header-3 { font-size: 1.12rem; }
+        .cm-header-4 { font-size: 1.1rem; }
+        .cm-header-5 { font-size: 1rem; }
+        .cm-em { font-style: italic; }
+        .cm-strong { font-weight: bold; }
+    </style>
+
+    <script type="text/javascript">window.MathJax = {"skipStartupTypeset":false,"extensions":["tex2jax.js","asciimath2jax.js","Safe.js"],"jax":["input/TeX","input/AsciiMath","output/SVG"],"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"ignoreClass":"tex2jax_ignore","skipTags":["script","noscript","style","textarea","pre","code"]},"TeX":{"MAXBUFFER":100000,"extensions":["autoload-all.js","noUndefined.js","noErrors.js"],"Macros":{"Bold":["\\mathbb{#1}",1],"ZZ":["\\Bold{Z}",0],"NN":["\\Bold{N}",0],"RR":["\\Bold{R}",0],"CC":["\\Bold{C}",0],"FF":["\\Bold{F}",0],"QQ":["\\Bold{Q}",0],"QQbar":["\\overline{\\QQ}",0],"CDF":["\\Bold{C}",0],"CIF":["\\Bold{C}",0],"CLF":["\\Bold{C}",0],"RDF":["\\Bold{R}",0],"RIF":["\\Bold{I} \\Bold{R}",0],"RLF":["\\Bold{R}",0],"CFF":["\\Bold{CFF}",0],"GF":["\\Bold{F}_{#1}",1],"Zp":["\\ZZ_{#1}",1],"Qp":["\\QQ_{#1}",1],"Zmod":["\\ZZ/#1\\ZZ",1]},"noErrors":{"inlineDelimiters":["$","$"],"multiLine":true,"style":{"font-size":"85%","text-align":"left","color":"red","padding":"1px 3px","background":"#FFEEEE","border":"none"}},"noUndefined":{"attributes":{"mathcolor":"red","mathbackground":"#FFEEEE","mathsize":"90%"}}},"HTML-CSS":{"linebreaks":{"automatic":true},"scale":80},"SVG":{"linebreaks":{"automatic":true}},"showProcessingMessages":true,"CommonHTML":{"scale":80}};</script>
+    <script type="text/javascript" async
+        src="https://cocalc.com/static/mathjax/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+<div class="header">
+    <h1>2022-10-03-140121.sagews</h1>
+    <table class="header">
+    <tr><td>Author</td><td> Valentinusz</td></tr>
+    <tr><td>Date</td><td>2022-10-15T19:58:41</td></tr>
+    <tr><td>Project</td><td>5e3791c8-af73-4ce5-96ae-6b76786aeac3</td></tr>
+    <tr><td>Location</td><td><a href="https:/cocalc.com/projects/5e3791c8-af73-4ce5-96ae-6b76786aeac3/files/2022-10-03-140121.sagews">2022-10-03-140121.sagews</a></td></tr>
+    <tr><td>Original file</td><td><a href="data:application/octet-stream;base64,77igODg0YTE2MGItNzQ3NS00YjU3LTg0N2EtMjJjZTI3ZGUzNzY177igCiMgKy8tCiMgITEuIFpIIDIwMjIuIDEwLiAxNyEKZGVmIGlzVHJhbnNpdGl2ZShzZXQscmVsKToKICAgIGNwcm9kID0gWyhpLGosaykgZm9yIGkgaW4gc2V0IGZvciBqIGluIHNldCBmb3IgayBpbiBzZXRdCiAgICBmb3IgKGksaixrKSBpbiBjcHJvZDoKICAgICAgICBpZiBbaSxqXSBpbiByZWwgYW5kIFtqLGtdIGluIHJlbCBhbmQgbm90IFtpLGtdIGluIHJlbDoKICAgICAgICAgICAgcmV0dXJuIEZhbHNlCiAgICByZXR1cm4gVHJ1ZQoKZGVmIFdoaWxlX05vdF9UcmFueml0aXZlKEEsUik6CiAgICBmdWxsID0gW1thLGJdIGZvciBhIGluIEEgZm9yIGIgaW4gQV0KCiAgICBpID0gMAogICAgd2hpbGUobm90IGlzVHJhbnNpdGl2ZShBLFIpKToKICAgICAgICBpZiBmdWxsW2ldIG5vdCBpbiBSOgogICAgICAgICAgICBSLmFwcGVuZChmdWxsW2ldKQogICAgICAgIGkgKz0gMQogICAgcmV0dXJuIFIKCgojS8Opc3rDrXRzw7xuayBlbGrDoXLDoXNva2F0LCBtZWx5ZWsgYXogw7puLiAzbisxIHByb2Jsw6Ftw6F0IHZpc3pnw6FsasOhay4KI0xlZ3llbiBmIGF6IGEgcG96aXTDrXYgZWfDqXN6IHN6w6Ftb2tvbiDDqXJ0ZWxtZXpldHQgZsO8Z2d2w6lueSwgbWVseSBww6Fyb3Mgbi1yZSBuLzIsIHDDoXJhdGxhbiBuLXJlIDNuKzEgw6lydMOpa2V0IHZlc3ogZmVsLgojRWd5IHNlanTDqXMgc3plcmludCBlenQga2VsbMWRZW4gc29rc3pvciBpc23DqXRlbHRlbiBhbGthbG1henZhLCBiw6FybWlseWVuIGtpaW5kdWzDoXNpIG4tcmUgbGVzeiBvbHlhbiwgaG9neSAxLWV0IGthcHVuayAocGwuIDctMjItMTEtMzQtMTctNTItMjYtMTMtNDAtMjAtMTAtNS0xNi04LTQtMi0xKS4KI8ONcmp1bmsgZWd5IG9seWFuIGVsasOhcsOhc3QsIG1lbHkgbWVnaGF0w6Fyb3p6YSwgaG9neSBhIHBhcmFtw6l0ZXJrw6ludCBtZWdhZG90dCBuLXJlIGjDoW55IGzDqXDDqXMgbcO6bHZhIGvDtnZldGtlemlrIGV6IGJlIChwbC4gNy1yZSAxNiBsw6lww6lzIGtlbGwpLiBFZ3kgbcOhc2lrIGVsasOhcsOhc3NhbCBwZWRpZyBzesOhbW9sanVrIG1lZywgaG9neSBtaW5kZWvDtnpiZW4gaMOhbnkgcMOhcm9zIHN6w6FtIHZvbHQgYSBzb3JvemF0YmFuIChhIGtpaW5kdWzDoXNpIMOpcnTDqWtrZWwgZWd5w7x0dCkuCgpkZWYgdGhyZWVfbl9wbHVzX29uZShuKToKICAgIGlmIGlzX2V2ZW4obik6CiAgICAgICAgcmV0dXJuIG4vMgogICAgZWxzZToKICAgICAgICByZXR1cm4gMypuKzEKCmRlZiByZXBlYXRfd2hpbGVfbm90X29uZShuKToKICAgIGxpc3QgPSBbXQogICAgbGlzdC5hcHBlbmQobikKICAgIHdoaWxlIChsaXN0Wy0xXSAhPSAxKToKICAgICAgICBsaXN0LmFwcGVuZCh0aHJlZV9uX3BsdXNfb25lKGxpc3RbLTFdKSkKICAgIHJldHVybiBsaXN0CgpkZWYgZXZlbl93aGlsZV9ub3Rfb25lKG4pOgogICAgcmV0dXJuIGxlbihsaXN0KGZpbHRlcihpc19ldmVuLCByZXBlYXRfd2hpbGVfbm90X29uZShuKSkpKQoKZGVmIG51bWJlcl9vZl9zdGVwcyhuKToKICAgIHJldHVybiBsZW4ocmVwZWF0X3doaWxlX25vdF9vbmUobikpLTEKCnJlcGVhdF93aGlsZV9ub3Rfb25lKDcpCmV2ZW5fd2hpbGVfbm90X29uZSg3KQpudW1iZXJfb2Zfc3RlcHMoNykK77ihMWIzZjRmNjktZTU1NS00NjcyLThmMGQtYmM3MWFiNWJiMjA077iheyJzdGRvdXQiOiJbNywgMjIsIDExLCAzNCwgMTcsIDUyLCAyNiwgMTMsIDQwLCAyMCwgMTAsIDUsIDE2LCA4LCA0LCAyLCAxXVxuIn3vuKF7InN0ZG91dCI6IjExXG4ife+4oXsic3Rkb3V0IjoiMTZcbiJ977iheyJkb25lIjp0cnVlfQrvuKA2MDBkYzllOS04MTk4LTQzNDItOTVlOS0wOWQyYWVmNTYwMTlz77igCgoKZGVmIGxua28oYSxiKToKICAgIGlmIGEgPT0gYjoKICAgICAgICByZXR1cm4gYQogICAgaWYgYSA8IGI6CiAgICAgICAgYSwgYiA9IGIsIGEKICAgIHdoaWxlIChiID4gMCk6CiAgICAgICAgYSwgYiA9IGIsIGEgJSBiCiAgICByZXR1cm4gYQoKCmxua28oMzAsNzApCmxua28oMTI2LDE1MCkKbG5rbygxMDUsMjMxKQpsbmtvKDEzMiwyNzUpCmxua28oMzMsMjEpCu+4oTk3M2RjYTE3LTNmYjEtNDA1My04ZjQxLTBjMzc3YTJmMzY1Ze+4oXsic3Rkb3V0IjoiMTBcbiJ977iheyJzdGRvdXQiOiI2XG4ife+4oXsic3Rkb3V0IjoiMjFcbiJ977iheyJzdGRvdXQiOiIxMVxuIn3vuKF7InN0ZG91dCI6IjNcbiJ977iheyJkb25lIjp0cnVlfQoKCgoKCgoKCgo=" download="2022-10-03-140121.sagews">2022-10-03-140121.sagews</td></tr>
+    <script type="text/javascript">
+    var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+    var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+    if (is_safari && !is_chrome) {
+        document.write("<tr><td colspan='2'>(when downloading, rename file to 2022-10-03-140121.sagews)</td></tr>");
+    }
+    </script>
+    </table>
+</div>
+<pre class="input"><code><span class="cm-comment"># +/-</span></code><code><span class="cm-comment"># !1. ZH 2022. 10. 17!</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">isTransitive</span>(<span class="cm-builtin">set</span>,<span class="cm-variable">rel</span>):</code><code>    <span class="cm-variable">cprod</span> = [(<span class="cm-variable">i</span>,<span class="cm-variable">j</span>,<span class="cm-variable">k</span>) <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-builtin">set</span> <span class="cm-keyword">for</span> <span class="cm-variable">j</span> <span class="cm-keyword">in</span> <span class="cm-builtin">set</span> <span class="cm-keyword">for</span> <span class="cm-variable">k</span> <span class="cm-keyword">in</span> <span class="cm-builtin">set</span>]</code><code>    <span class="cm-keyword">for</span> (<span class="cm-variable">i</span>,<span class="cm-variable">j</span>,<span class="cm-variable">k</span>) <span class="cm-keyword">in</span> <span class="cm-variable">cprod</span>:</code><code>        <span class="cm-keyword">if</span> [<span class="cm-variable">i</span>,<span class="cm-variable">j</span>] <span class="cm-keyword">in</span> <span class="cm-variable">rel</span> <span class="cm-keyword">and</span> [<span class="cm-variable">j</span>,<span class="cm-variable">k</span>] <span class="cm-keyword">in</span> <span class="cm-variable">rel</span> <span class="cm-keyword">and</span> <span class="cm-keyword">not</span> [<span class="cm-variable">i</span>,<span class="cm-variable">k</span>] <span class="cm-keyword">in</span> <span class="cm-variable">rel</span>:</code><code>            <span class="cm-keyword">return</span> <span class="cm-builtin">False</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">True</span></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">While_Not_Tranzitive</span>(<span class="cm-variable">A</span>,<span class="cm-variable">R</span>):</code><code>    <span class="cm-variable">full</span> = [[<span class="cm-variable">a</span>,<span class="cm-variable">b</span>] <span class="cm-keyword">for</span> <span class="cm-variable">a</span> <span class="cm-keyword">in</span> <span class="cm-variable">A</span> <span class="cm-keyword">for</span> <span class="cm-variable">b</span> <span class="cm-keyword">in</span> <span class="cm-variable">A</span>]</code><code></code><code>    <span class="cm-variable">i</span> = <span class="cm-number">0</span></code><code>    <span class="cm-keyword">while</span>(<span class="cm-keyword">not</span> <span class="cm-variable">isTransitive</span>(<span class="cm-variable">A</span>,<span class="cm-variable">R</span>)):</code><code>        <span class="cm-keyword">if</span> <span class="cm-variable">full</span>[<span class="cm-variable">i</span>] <span class="cm-keyword">not</span> <span class="cm-keyword">in</span> <span class="cm-variable">R</span>:</code><code>            <span class="cm-variable">R</span>.<span class="cm-variable">append</span>(<span class="cm-variable">full</span>[<span class="cm-variable">i</span>])</code><code>        <span class="cm-variable">i</span> += <span class="cm-number">1</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">R</span></code><code></code><code></code><code><span class="cm-comment">#Készítsünk eljárásokat, melyek az ún. 3n+1 problámát viszgálják.</span></code><code><span class="cm-comment">#Legyen f az a pozitív egész számokon értelmezett függvény, mely páros n-re n/2, páratlan n-re 3n+1 értéket vesz fel.</span></code><code><span class="cm-comment">#Egy sejtés szerint ezt kellően sokszor ismételten alkalmazva, bármilyen kiindulási n-re lesz olyan, hogy 1-et kapunk (pl. 7-22-11-34-17-52-26-13-40-20-10-5-16-8-4-2-1).</span></code><code><span class="cm-comment">#Írjunk egy olyan eljárást, mely meghatározza, hogy a paraméterként megadott n-re hány lépés múlva következik ez be (pl. 7-re 16 lépés kell). Egy másik eljárással pedig számoljuk meg, hogy mindeközben hány páros szám volt a sorozatban (a kiindulási értékkel együtt).</span></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">three_n_plus_one</span>(<span class="cm-variable">n</span>):</code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">is_even</span>(<span class="cm-variable">n</span>):</code><code>        <span class="cm-keyword">return</span> <span class="cm-variable">n</span><span class="cm-operator">/</span><span class="cm-number">2</span></code><code>    <span class="cm-keyword">else</span>:</code><code>        <span class="cm-keyword">return</span> <span class="cm-number">3</span><span class="cm-operator">*</span><span class="cm-variable">n</span><span class="cm-operator">+</span><span class="cm-number">1</span></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">repeat_while_not_one</span>(<span class="cm-variable">n</span>):</code><code>    <span class="cm-builtin">list</span> = []</code><code>    <span class="cm-builtin">list</span>.<span class="cm-variable">append</span>(<span class="cm-variable">n</span>)</code><code>    <span class="cm-keyword">while</span> (<span class="cm-builtin">list</span>[<span class="cm-operator">-</span><span class="cm-number">1</span>] <span class="cm-operator">!=</span> <span class="cm-number">1</span>):</code><code>        <span class="cm-builtin">list</span>.<span class="cm-variable">append</span>(<span class="cm-variable">three_n_plus_one</span>(<span class="cm-builtin">list</span>[<span class="cm-operator">-</span><span class="cm-number">1</span>]))</code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">list</span></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">even_while_not_one</span>(<span class="cm-variable">n</span>):</code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">len</span>(<span class="cm-builtin">list</span>(<span class="cm-builtin">filter</span>(<span class="cm-variable">is_even</span>, <span class="cm-variable">repeat_while_not_one</span>(<span class="cm-variable">n</span>))))</code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">number_of_steps</span>(<span class="cm-variable">n</span>):</code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">len</span>(<span class="cm-variable">repeat_while_not_one</span>(<span class="cm-variable">n</span>))<span class="cm-operator">-</span><span class="cm-number">1</span></code><code></code><code><span class="cm-variable">repeat_while_not_one</span>(<span class="cm-number">7</span>)</code><code><span class="cm-variable">even_while_not_one</span>(<span class="cm-number">7</span>)</code><code><span class="cm-variable">number_of_steps</span>(<span class="cm-number">7</span>)</code></pre>
+<div class="output stdout">[7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+</div>
+<div class="output stdout">11
+</div>
+<div class="output stdout">16
+</div>
+ 
+<pre class="input"><code></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">lnko</span>(<span class="cm-variable">a</span>,<span class="cm-variable">b</span>):</code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">a</span> <span class="cm-operator">==</span> <span class="cm-variable">b</span>:</code><code>        <span class="cm-keyword">return</span> <span class="cm-variable">a</span></code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">a</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">b</span>:</code><code>        <span class="cm-variable">a</span>, <span class="cm-variable">b</span> = <span class="cm-variable">b</span>, <span class="cm-variable">a</span></code><code>    <span class="cm-keyword">while</span> (<span class="cm-variable">b</span> <span class="cm-operator">&gt;</span> <span class="cm-number">0</span>):</code><code>        <span class="cm-variable">a</span>, <span class="cm-variable">b</span> = <span class="cm-variable">b</span>, <span class="cm-variable">a</span> <span class="cm-operator">%</span> <span class="cm-variable">b</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">a</span></code><code></code><code></code><code><span class="cm-variable">lnko</span>(<span class="cm-number">30</span>,<span class="cm-number">70</span>)</code><code><span class="cm-variable">lnko</span>(<span class="cm-number">126</span>,<span class="cm-number">150</span>)</code><code><span class="cm-variable">lnko</span>(<span class="cm-number">105</span>,<span class="cm-number">231</span>)</code><code><span class="cm-variable">lnko</span>(<span class="cm-number">132</span>,<span class="cm-number">275</span>)</code><code><span class="cm-variable">lnko</span>(<span class="cm-number">33</span>,<span class="cm-number">21</span>)</code></pre>
+<div class="output stdout">10
+</div>
+<div class="output stdout">6
+</div>
+<div class="output stdout">21
+</div>
+<div class="output stdout">11
+</div>
+<div class="output stdout">3
+</div>
+ 
+<footer>
+    <div>generated 2022-10-15T19:58:41 on
+    <a href="https://cocalc.com">CoCalc</a>
+    </div>
+</footer>
+</body>
+</html>

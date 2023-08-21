@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>2022-09-26-135329.sagews</title>
+    <meta name="description" content="automatically generated from '83a078c8-8e24-473c-868c-3b783d7ef9dc:2022-09-26-135329.sagews' on CoCalc">
+    <meta name="date" content="2022-09-28T17:43:39">
+    <meta data-name="smc-generated" content="version:2">
+
+    <style>
+        html {
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; padding: 0;
+        }
+        body {
+            width: 50rem;
+            counter-reset: line;
+            padding: .5rem;
+        }
+        @media print {
+          body { width: 100%; margin: 1rem 1rem 1rem 6rem; font-size: 10pt; }
+        }
+        pre { margin: 0; }
+        div.output + pre.input { margin-top: 1rem; }
+        div.output {
+            border-left: .2rem solid #33a;
+            padding: .3rem;
+            margin-left: -.5rem;
+            line-height: 1.5;
+        }
+        div.output img {
+            max-width: 70%;
+            width: auto;
+            height: auto;
+        }
+        div.output.stdout,
+        div.output.stderr,
+        div.output.javascript { font-family: monospace; white-space: pre-wrap; }
+        div.output.stderr { color: #F00; border-color: #F33; }
+
+        span.sagews-output-image > img,
+        span.sagews-output-html > img
+        { vertical-align: top; }
+
+        pre.input {
+            border-left: .2rem solid #3a3;
+            padding: .5rem;
+            margin-left: -.5rem;
+        }
+        pre.input > code {
+            display: block;
+            line-height: 1.1rem;
+        }
+        pre.input > code:before {
+            margin-left: -3rem;
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            padding: 0 .3rem 0 0;
+            margin-right: .5rem;
+            color: #888;
+            min-width: 2rem;
+            text-align: right;
+            user-select: none;
+        }
+        div.header { margin-bottom: 1rem; }
+        table.header td { border: 0; }
+        table.header tr>td:nth-child(2) {
+            font-weight: bold;
+            font-family: monospace;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            border-color: #888;
+        }
+        table td, table th {
+            padding: .5rem;
+        }
+        table tr>td {
+            vertical-align: top;
+            border-top: .05rem solid #888;
+        }
+        table tr>th {
+            vertical-align: bottom;
+            border-bottom: .1rem solid #888;
+        }
+        footer {
+            margin-top: 1rem;
+            border-top: .1rem solid #888;
+            font-size: 70%;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+
+
+    <!-- the styling of the highlighted code; should be printer friendly -->
+    <style>
+        .cm-keyword { font-weight: bold; color: #339; }
+        .cm-atom { color: #666; }
+        .cm-number { color: #333; }
+        .cm-def { color: #333; font-weight: bold; }
+        .cm-variable { color: black; }
+        .cm-variable-2 { color:black; }
+        .cm-variable-3 { color: black; }
+        .cm-property { color: black; }
+        .cm-operator { color: black; font-weight: bold; }
+        .cm-comment { color: #777; }
+        .cm-string { color: #333; }
+        .cm-meta { color: #039; }
+        .cm-qualifier { color: #666; }
+        .cm-builtin { color: #393; font-weight: bold; }
+        .cm-bracket { color: #666; }
+        .cm-tag { color: #444; font-weight: bold; }
+        .cm-attribute { color: #777; }
+        .cm-error { color: #000; }
+        .cm-header { font-weight: bold; }
+        .cm-header-1 { font-size: 1.2rem; }
+        .cm-header-2 { font-size: 1.15rem; }
+        .cm-header-3 { font-size: 1.12rem; }
+        .cm-header-4 { font-size: 1.1rem; }
+        .cm-header-5 { font-size: 1rem; }
+        .cm-em { font-style: italic; }
+        .cm-strong { font-weight: bold; }
+    </style>
+
+    <script type="text/javascript">window.MathJax = {"skipStartupTypeset":false,"extensions":["tex2jax.js","asciimath2jax.js","Safe.js"],"jax":["input/TeX","input/AsciiMath","output/SVG"],"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"ignoreClass":"tex2jax_ignore","skipTags":["script","noscript","style","textarea","pre","code"]},"TeX":{"MAXBUFFER":100000,"extensions":["autoload-all.js","noUndefined.js","noErrors.js"],"Macros":{"Bold":["\\mathbb{#1}",1],"ZZ":["\\Bold{Z}",0],"NN":["\\Bold{N}",0],"RR":["\\Bold{R}",0],"CC":["\\Bold{C}",0],"FF":["\\Bold{F}",0],"QQ":["\\Bold{Q}",0],"QQbar":["\\overline{\\QQ}",0],"CDF":["\\Bold{C}",0],"CIF":["\\Bold{C}",0],"CLF":["\\Bold{C}",0],"RDF":["\\Bold{R}",0],"RIF":["\\Bold{I} \\Bold{R}",0],"RLF":["\\Bold{R}",0],"CFF":["\\Bold{CFF}",0],"GF":["\\Bold{F}_{#1}",1],"Zp":["\\ZZ_{#1}",1],"Qp":["\\QQ_{#1}",1],"Zmod":["\\ZZ/#1\\ZZ",1]},"noErrors":{"inlineDelimiters":["$","$"],"multiLine":true,"style":{"font-size":"85%","text-align":"left","color":"red","padding":"1px 3px","background":"#FFEEEE","border":"none"}},"noUndefined":{"attributes":{"mathcolor":"red","mathbackground":"#FFEEEE","mathsize":"90%"}}},"HTML-CSS":{"linebreaks":{"automatic":true},"scale":80},"SVG":{"linebreaks":{"automatic":true}},"showProcessingMessages":true,"CommonHTML":{"scale":80}};</script>
+    <script type="text/javascript" async
+        src="https://cocalc.com/static/mathjax/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+<div class="header">
+    <h1>2022-09-26-135329.sagews</h1>
+    <table class="header">
+    <tr><td>Author</td><td> Valentinusz</td></tr>
+    <tr><td>Date</td><td>2022-09-28T17:43:39</td></tr>
+    <tr><td>Project</td><td>83a078c8-8e24-473c-868c-3b783d7ef9dc</td></tr>
+    <tr><td>Location</td><td><a href="https:/cocalc.com/projects/83a078c8-8e24-473c-868c-3b783d7ef9dc/files/2022-09-26-135329.sagews">2022-09-26-135329.sagews</a></td></tr>
+    <tr><td>Original file</td><td><a href="data:application/octet-stream;base64,77igODNjOGFiNTAtOTJlMi00M2M4LWJhMjAtYjRlYzI2ODQwMTQ477igCnMxID0gc2V0KFsxLDIsM10pICMgbcOzZG9zw610aGF0w7MgKG11dGFibGUpIG9zenTDoWx5CnMyID0gU2V0KFsxLDIsM10pICMgbmVtIG3Ds2Rvc8OtdGhhdMOzIChpbW11dGFibGUpIG9zenTDoWx5CgpkZWYgZnVuY3Rpb25fdmFsdWUoZix4KToKICAgIGZvciBpIGluIGY6CiAgICAgICAgaWYgKHggPT0gaVswXSk6CiAgICAgICAgICAgIHJldHVybiBpWzFdCiAgICByZXR1cm4gbm9uZSAgIyBub25lID09IG51bGwKCmYgPSBbWzEsMl0sWzIsMV0sWzMsMV0sWzQsM11dCmZ1bmN0aW9uX3ZhbHVlKGYsMikK77ihODFjMTZhZmItNTgyMy00ZDQ1LWIzNzYtNjQ4Y2M0YzE2OWZh77iheyJzdGRvdXQiOiIxXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igZTk1M2Q0MjEtNjMwZC00NTZmLThmMTUtOGQwMzAwZDE5Nzkwc++4oAoKZGVmIGlzX3N1cmplY3RpdmUoZixBKToKICAgIHZhbHVlcyA9IHNldChbXSkKICAgIGZvciBpIGluIHZhbHVlczoKICAgICAgICB2YWx1ZXMuYWRkKGlbMV0pCiAgICByZXR1cm4gdmFsdWVzID09IEEKCmlzX3N1cmplY3RpdmUoZix7MSwyLDN9KQrvuKEyZTIyMDUwZC01YWY5LTQ0MWItOGU1MC1mMGU2NjhiYjg5MDTvuKF7InN0ZG91dCI6IkZhbHNlXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igMTViNGI1ZDctZGM5ZS00NTZhLTk5ZDctMjE1YjBiNDdkZTQ4c++4oAoKZGVmIGlzX2luamVrdGl2ZShmKToKICAgIGZvciBpIGluIHNldChbeCBmb3IgW3gseV0gaW4gZl0pOgogICAgICAgIGlmIChsZW4oW3kgZm9yIFt4LHldIGluIGYgaWYgeCA9PSBpXSkgIT0gMSk6CiAgICAgICAgICAgIHJldHVybiBmYWxzZQogICAgcmV0dXJuIHRydWUKCmYxID0gW1sxLCdhJ10sWzQsJ2UnXSxbNSwnZCddXQpmMiA9IFtbMSwnYSddLFs0LCdlJ10sWzUsJ2QnXSxbMSwnYiddXQppc19pbmpla3RpdmUoZjEpCmlzX2luamVrdGl2ZShmMikK77ihN2ZlYzNlOGQtNWMwYy00NzdkLWE5MTAtZmNiMzEwZTVmNzg277iheyJzdGRvdXQiOiJUcnVlXG4ife+4oXsic3Rkb3V0IjoiRmFsc2VcbiJ977iheyJkb25lIjp0cnVlfQrvuKA5NDVmY2NiZS04YTEzLTQ1NGUtYjZhNy05MDM5YTE5MGQyZGRz77igCgpkZWYgaXNfaXJyZWR1Y2libGUoeCk6ICAjIGZlbGJvbnRoYXRhdGxhbiBoYSDDtm5tYWdhIMOpcyAxIG9zenTDs2phIGNzYWsKICAgIGEgPSBhYnMoeCkKICAgIGlmIGEgPT0gMCBvciBhID09IDE6CiAgICAgICAgcmV0dXJuIGZhbHNlCiAgICBmb3IgYiBpbiBbMi4uYS0xXToKICAgICAgICBmb3IgYyBpbiBbMi4uYS0xXToKICAgICAgICAgICAgaWYgYipjID09IGE6CiAgICAgICAgICAgICAgICByZXR1cm4gZmFsc2UKICAgIHJldHVybiB0cnVlCgppc19pcnJlZHVjaWJsZSgyKQppc19pcnJlZHVjaWJsZSgzKQppc19pcnJlZHVjaWJsZSg0KQppc19pcnJlZHVjaWJsZSg1KQppc19pcnJlZHVjaWJsZSg5KQppc19pcnJlZHVjaWJsZSg5NykK77ihMGJiNmFiOGUtNjZjZi00MjNkLThhNTUtZjNhOTU0Y2IwYTdj77iheyJzdGRvdXQiOiJUcnVlXG4ife+4oXsic3Rkb3V0IjoiVHJ1ZVxuIn3vuKF7InN0ZG91dCI6IkZhbHNlXG4ife+4oXsic3Rkb3V0IjoiVHJ1ZVxuIn3vuKF7InN0ZG91dCI6IkZhbHNlXG4ife+4oXsic3Rkb3V0IjoiVHJ1ZVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oGY5ZmViNmFmLTNkZTktNDE3OS1hYWY0LTU1OTE5MjMwMjljNu+4oAojIG4gc3rDoW0taG96IG4gaG9zc3rDuiBsaXN0YSBhbWliZW4gb2x5YW4gZWd5bcOhc3Qga8O2dmV0xZEgc3rDoW1vayB2YW5uYWsgYWhvbCBtaW5kIGF6IG4gc3rDoW0gw7Zzc3pldGV0dApkZWYgY29tcG91bmRfbGlzdChuKToKICAgIGkgPSAwCiAgICB3aGlsZSh0cnVlKToKICAgICAgICBudW1zID0gW2ogZm9yIGogaW4gcmFuZ2UoaSxpK24rMSkgaWYgbm90IGlzX2lycmVkdWNpYmxlKGopXQogICAgICAgIGlmIChsZW4obnVtcykgPT0gbik6CiAgICAgICAgICAgIHJldHVybiBudW1zCiAgICAgICAgaSA9IG5leHRfcHJpbWUoaSkKY29tcG91bmRfbGlzdCgxMCkK77ihZjI5NWM5M2YtMmNlYi00N2Y1LWFiNDgtODcxNjRiZTE3MWIy77iheyJzdGRvdXQiOiJbMTE0LCAxMTUsIDExNiwgMTE3LCAxMTgsIDExOSwgMTIwLCAxMjEsIDEyMiwgMTIzXSJ977iheyJzdGRvdXQiOiJcbiJ977iheyJkb25lIjp0cnVlfQrvuKA4NGFiYmY0ZC0wYmMzLTRlNjEtYjdlMS01MTZmZjRkZWUwMTLvuKAKCgojIG1pbmRlbiBrZXR0xZFuw6lsIG5hZ3lvYmIgcMOhcm9zIHN6w6FtIGZlbMOtcmhhdMOzIGvDqXQgcMOtcm0gc3rDoW0gw7Zzc3plZ2Vrw6ludCArIEhpYmFrZXplbMOpcwojIHRocm93ID0gcmFpc2UKIyBleGNlcHQgPSBjYXRjaApkZWYgZXZlbl9Hb2xkYmFjaChhKToKICAgIGlmIGEgJSAyID09IDEgb3IgYSA8PSAyOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoKQogICAgZm9yIGkgaW4gcHJpbWVfcmFuZ2UoYS8yKzEpOgogICAgICAgIGlmIChpc19wcmltZShhLWkpKToKICAgICAgICAgICAgcmV0dXJuIFtpLCBhLWldCgp0cnk6CiAgICBldmVuX0dvbGRiYWNoKDYpCiAgICBldmVuX0dvbGRiYWNoKDEpCmV4Y2VwdCBWYWx1ZUVycm9yOgogICAgcHJpbnQoIlJvc3N6IGFydWdtZW50dW0uIikKZmluYWxseToKICAgIGV2ZW5fR29sZGJhY2goMjgpCu+4oTVlMTU2MmJjLTMxZTQtNGUwNi05MTRmLTdiZmEzZGJhZDY2N++4oXsic3Rkb3V0IjoiWzMsIDNdXG5Sb3NzeiBhcnVnbWVudHVtLlxuWzUsIDIzXVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oGQxMzMwNzRhLWM1NGQtNDBhYS04YTkxLWYzMWQ5ZTgwNzc5Oe+4oAojw61yanVuayBmw7xnZ3bDqW55dCBtZWx5IGVsZMO2bnRpIGvDqXQgc3rDoW0gYmFydMOhc8OhZ29zLWUgKMO2bm1hZ8OhbiBrw612w7xsaSBvc3p0w7NrIMO2c3N6ZWdlIGEgbcOhc2lrIHN6w6FtKSBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9BbWljYWJsZV9udW1iZXJzCmRlZiBpc19hbWljYWJsZShhLGIpOgogICAgaWYgYSA8PSAwIG9yIGIgPD0gMCBvciBhID09IGI6CiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcgogICAgcmV0dXJuIHN1bShkaXZpc29ycyhhKSktYSA9PSBiIGFuZCBzdW0oZGl2aXNvcnMoYikpLWIgPT0gYSAgIyBkaXZpc29ycyBsaXN0w6FiYW4gdmlzc3phZGphIGEgc3rDoW0gb3N6dMOzaXQKCnRyeToKICAgIGlzX2FtaWNhYmxlKC01LDEpCiAgICBpc19hbWljYWJsZSgxLDEpCmV4Y2VwdCBWYWx1ZUVycm9yOgogICAgcHJpbnQoIlJvc3N6IGFyZ3VtZW50dW0uIikKZmluYWxseToKICAgIGlzX2FtaWNhYmxlKDIyMCwyODQpCiAgICBpc19hbWljYWJsZSgxMTg0LCAxMjEwKQogICAgaXNfYW1pY2FibGUoNSwxMCkK77ihOWFkOTg0ZGMtMzYwZC00YzQ5LTgyYWYtOWRiMTUyYjM3Y2Zi77iheyJzdGRvdXQiOiJSb3NzeiBhcmd1bWVudHVtLlxuVHJ1ZVxuVHJ1ZVxuRmFsc2VcbiJ977iheyJkb25lIjp0cnVlfQrvuKA5OWFmY2EyYy1mZGQzLTQwNTUtOGNmOC0yMTg3NGY5ODlmNzXvuKAKeCA9IGludChyYXdfaW5wdXQoJ0VudGVyIGFuIGludGVnZXI6ICcpKSAgIyBpbnB1dCBiZWvDqXLDqXNlIChpbnB1dCgpIG5lbSBoYXN6bsOhbGhhdMOzKQp5ID0gaW50KHJhd19pbnB1dCgnRW50ZXIgYW5vdGhlciBpbnRlZ2VyOiAnKSkKaXNfYW1pY2FibGUoeCx5KQrvuKExMjVjMDk4NC1lNDBiLTRlZjAtYmRiZC0xZjkxZTQ3YzYxMjXvuKF7InJhd19pbnB1dCI6eyJwcm9tcHQiOiJFbnRlciBhbiBpbnRlZ2VyOiAifX3vuKF7ImRlbGV0ZV9sYXN0Ijp0cnVlfe+4oXsicmF3X2lucHV0Ijp7InByb21wdCI6IkVudGVyIGFuIGludGVnZXI6ICIsInN1Ym1pdHRlZCI6dHJ1ZSwidmFsdWUiOiIyMjAifX3vuKF7InJhd19pbnB1dCI6eyJwcm9tcHQiOiJFbnRlciBhbm90aGVyIGludGVnZXI6ICJ9fe+4oXsiZGVsZXRlX2xhc3QiOnRydWV977iheyJyYXdfaW5wdXQiOnsicHJvbXB0IjoiRW50ZXIgYW5vdGhlciBpbnRlZ2VyOiAiLCJzdWJtaXR0ZWQiOnRydWUsInZhbHVlIjoiMjg0In1977iheyJzdGRvdXQiOiJUcnVlXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igZWI3NmQxMDMtYThkMi00YzZlLWJmY2UtMjkwYjEzNTgyYmMx77igCiN0w7Zrw6lsZXRlcyBzesOhbTogw7ZubWFnw6F2YWwgYmFyw6F0c8OhZ29zCmRlZiBpc19wZXJmZWN0KHgpOgogICAgcmV0dXJuIHN1bShkaXZpc29ycyh4KSkteCA9PSB4OwoKaXNfcGVyZmVjdCg0KQppc19wZXJmZWN0KDYpCu+4oWY0ZDFiNWZlLWNlZTUtNGJkNi1iMWRkLTMyMDU4ZDZhODQ4Ne+4oXsic3Rkb3V0IjoiRmFsc2VcbiJ977iheyJzdGRvdXQiOiJUcnVlXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igZmFkZDI1ODctZjAxNS00MDJhLTkxOTQtZWQwYWQzYzg3OWYw77igCgojIEVyYXRvc3p0aGVuw6lzemkgc3ppdGEgYWxnb3JpdG11cywgbWVnYWRqYSBheiBbMC4ubl0gaW50ZXJ2YWxsdW1iZWxpIHByw61tZWtldCBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9TaWV2ZV9vZl9FcmF0b3N0aGVuZXMKZXJhdG9zdGhlbmVzKDExKQrvuKFmYTFhNDcxNi05NDc5LTQ0MDUtYTllMy1kYzYxNmU0NTU3YTbvuKF7InN0ZG91dCI6IlsyLCAzLCA1LCA3LCAxMV1cbiJ977iheyJkb25lIjp0cnVlfQoKCgoKCgoKCgo=" download="2022-09-26-135329.sagews">2022-09-26-135329.sagews</td></tr>
+    <script type="text/javascript">
+    var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+    var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+    if (is_safari && !is_chrome) {
+        document.write("<tr><td colspan='2'>(when downloading, rename file to 2022-09-26-135329.sagews)</td></tr>");
+    }
+    </script>
+    </table>
+</div>
+<pre class="input"><code><span class="cm-variable">s1</span> = <span class="cm-builtin">set</span>([<span class="cm-number">1</span>,<span class="cm-number">2</span>,<span class="cm-number">3</span>]) <span class="cm-comment"># módosítható (mutable) osztály</span></code><code><span class="cm-variable">s2</span> = <span class="cm-variable">Set</span>([<span class="cm-number">1</span>,<span class="cm-number">2</span>,<span class="cm-number">3</span>]) <span class="cm-comment"># nem módosítható (immutable) osztály</span></code><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">function_value</span>(<span class="cm-variable">f</span>,<span class="cm-variable">x</span>):</code><code>    <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-variable">f</span>:</code><code>        <span class="cm-keyword">if</span> (<span class="cm-variable">x</span> <span class="cm-operator">==</span> <span class="cm-variable">i</span>[<span class="cm-number">0</span>]):</code><code>            <span class="cm-keyword">return</span> <span class="cm-variable">i</span>[<span class="cm-number">1</span>]</code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">none</span>  <span class="cm-comment"># none == null</span></code><code></code><code><span class="cm-variable">f</span> = [[<span class="cm-number">1</span>,<span class="cm-number">2</span>],[<span class="cm-number">2</span>,<span class="cm-number">1</span>],[<span class="cm-number">3</span>,<span class="cm-number">1</span>],[<span class="cm-number">4</span>,<span class="cm-number">3</span>]]</code><code><span class="cm-variable">function_value</span>(<span class="cm-variable">f</span>,<span class="cm-number">2</span>)</code></pre>
+<div class="output stdout">1
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">is_surjective</span>(<span class="cm-variable">f</span>,<span class="cm-variable">A</span>):</code><code>    <span class="cm-variable">values</span> = <span class="cm-builtin">set</span>([])</code><code>    <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-variable">values</span>:</code><code>        <span class="cm-variable">values</span>.<span class="cm-variable">add</span>(<span class="cm-variable">i</span>[<span class="cm-number">1</span>])</code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">values</span> <span class="cm-operator">==</span> <span class="cm-variable">A</span></code><code></code><code><span class="cm-variable">is_surjective</span>(<span class="cm-variable">f</span>,{<span class="cm-number">1</span>,<span class="cm-number">2</span>,<span class="cm-number">3</span>})</code></pre>
+<div class="output stdout">False
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">is_injektive</span>(<span class="cm-variable">f</span>):</code><code>    <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-builtin">set</span>([<span class="cm-variable">x</span> <span class="cm-keyword">for</span> [<span class="cm-variable">x</span>,<span class="cm-variable">y</span>] <span class="cm-keyword">in</span> <span class="cm-variable">f</span>]):</code><code>        <span class="cm-keyword">if</span> (<span class="cm-builtin">len</span>([<span class="cm-variable">y</span> <span class="cm-keyword">for</span> [<span class="cm-variable">x</span>,<span class="cm-variable">y</span>] <span class="cm-keyword">in</span> <span class="cm-variable">f</span> <span class="cm-keyword">if</span> <span class="cm-variable">x</span> <span class="cm-operator">==</span> <span class="cm-variable">i</span>]) <span class="cm-operator">!=</span> <span class="cm-number">1</span>):</code><code>            <span class="cm-keyword">return</span> <span class="cm-variable">false</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">true</span></code><code></code><code><span class="cm-variable">f1</span> = [[<span class="cm-number">1</span>,<span class="cm-string">'a'</span>],[<span class="cm-number">4</span>,<span class="cm-string">'e'</span>],[<span class="cm-number">5</span>,<span class="cm-string">'d'</span>]]</code><code><span class="cm-variable">f2</span> = [[<span class="cm-number">1</span>,<span class="cm-string">'a'</span>],[<span class="cm-number">4</span>,<span class="cm-string">'e'</span>],[<span class="cm-number">5</span>,<span class="cm-string">'d'</span>],[<span class="cm-number">1</span>,<span class="cm-string">'b'</span>]]</code><code><span class="cm-variable">is_injektive</span>(<span class="cm-variable">f1</span>)</code><code><span class="cm-variable">is_injektive</span>(<span class="cm-variable">f2</span>)</code></pre>
+<div class="output stdout">True
+</div>
+<div class="output stdout">False
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-keyword">def</span> <span class="cm-def">is_irreducible</span>(<span class="cm-variable">x</span>):  <span class="cm-comment"># felbonthatatlan ha önmaga és 1 osztója csak</span></code><code>    <span class="cm-variable">a</span> = <span class="cm-builtin">abs</span>(<span class="cm-variable">x</span>)</code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">a</span> <span class="cm-operator">==</span> <span class="cm-number">0</span> <span class="cm-keyword">or</span> <span class="cm-variable">a</span> <span class="cm-operator">==</span> <span class="cm-number">1</span>:</code><code>        <span class="cm-keyword">return</span> <span class="cm-variable">false</span></code><code>    <span class="cm-keyword">for</span> <span class="cm-variable">b</span> <span class="cm-keyword">in</span> [<span class="cm-number">2.</span>.<span class="cm-variable">a</span><span class="cm-operator">-</span><span class="cm-number">1</span>]:</code><code>        <span class="cm-keyword">for</span> <span class="cm-variable">c</span> <span class="cm-keyword">in</span> [<span class="cm-number">2.</span>.<span class="cm-variable">a</span><span class="cm-operator">-</span><span class="cm-number">1</span>]:</code><code>            <span class="cm-keyword">if</span> <span class="cm-variable">b</span><span class="cm-operator">*</span><span class="cm-variable">c</span> <span class="cm-operator">==</span> <span class="cm-variable">a</span>:</code><code>                <span class="cm-keyword">return</span> <span class="cm-variable">false</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-variable">true</span></code><code></code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">2</span>)</code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">3</span>)</code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">4</span>)</code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">5</span>)</code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">9</span>)</code><code><span class="cm-variable">is_irreducible</span>(<span class="cm-number">97</span>)</code></pre>
+<div class="output stdout">True
+</div>
+<div class="output stdout">True
+</div>
+<div class="output stdout">False
+</div>
+<div class="output stdout">True
+</div>
+<div class="output stdout">False
+</div>
+<div class="output stdout">True
+</div>
+ 
+<pre class="input"><code><span class="cm-comment"># n szám-hoz n hosszú lista amiben olyan egymást követő számok vannak ahol mind az n szám összetett</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">compound_list</span>(<span class="cm-variable">n</span>):</code><code>    <span class="cm-variable">i</span> = <span class="cm-number">0</span></code><code>    <span class="cm-keyword">while</span>(<span class="cm-variable">true</span>):</code><code>        <span class="cm-variable">nums</span> = [<span class="cm-variable">j</span> <span class="cm-keyword">for</span> <span class="cm-variable">j</span> <span class="cm-keyword">in</span> <span class="cm-builtin">range</span>(<span class="cm-variable">i</span>,<span class="cm-variable">i</span><span class="cm-operator">+</span><span class="cm-variable">n</span><span class="cm-operator">+</span><span class="cm-number">1</span>) <span class="cm-keyword">if</span> <span class="cm-keyword">not</span> <span class="cm-variable">is_irreducible</span>(<span class="cm-variable">j</span>)]</code><code>        <span class="cm-keyword">if</span> (<span class="cm-builtin">len</span>(<span class="cm-variable">nums</span>) <span class="cm-operator">==</span> <span class="cm-variable">n</span>):</code><code>            <span class="cm-keyword">return</span> <span class="cm-variable">nums</span></code><code>        <span class="cm-variable">i</span> = <span class="cm-variable">next_prime</span>(<span class="cm-variable">i</span>)</code><code><span class="cm-variable">compound_list</span>(<span class="cm-number">10</span>)</code></pre>
+<div class="output stdout">[114, 115, 116, 117, 118, 119, 120, 121, 122, 123]</div>
+<div class="output stdout">
+</div>
+ 
+<pre class="input"><code></code><code></code><code><span class="cm-comment"># minden kettőnél nagyobb páros szám felírható két pírm szám összegeként + Hibakezelés</span></code><code><span class="cm-comment"># throw = raise</span></code><code><span class="cm-comment"># except = catch</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">even_Goldbach</span>(<span class="cm-variable">a</span>):</code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">a</span> <span class="cm-operator">%</span> <span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">1</span> <span class="cm-keyword">or</span> <span class="cm-variable">a</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">2</span>:</code><code>        <span class="cm-keyword">raise</span> <span class="cm-variable">ValueError</span>()</code><code>    <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-variable">prime_range</span>(<span class="cm-variable">a</span><span class="cm-operator">/</span><span class="cm-number">2</span><span class="cm-operator">+</span><span class="cm-number">1</span>):</code><code>        <span class="cm-keyword">if</span> (<span class="cm-variable">is_prime</span>(<span class="cm-variable">a</span><span class="cm-operator">-</span><span class="cm-variable">i</span>)):</code><code>            <span class="cm-keyword">return</span> [<span class="cm-variable">i</span>, <span class="cm-variable">a</span><span class="cm-operator">-</span><span class="cm-variable">i</span>]</code><code></code><code><span class="cm-keyword">try</span>:</code><code>    <span class="cm-variable">even_Goldbach</span>(<span class="cm-number">6</span>)</code><code>    <span class="cm-variable">even_Goldbach</span>(<span class="cm-number">1</span>)</code><code><span class="cm-keyword">except</span> <span class="cm-variable">ValueError</span>:</code><code>    <span class="cm-keyword">print</span>(<span class="cm-string">"Rossz arugmentum."</span>)</code><code><span class="cm-keyword">finally</span>:</code><code>    <span class="cm-variable">even_Goldbach</span>(<span class="cm-number">28</span>)</code></pre>
+<div class="output stdout">[3, 3]
+Rossz arugmentum.
+[5, 23]
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#írjunk függvényt mely eldönti két szám bartáságos-e (önmagán kívüli osztók összege a másik szám) https://en.wikipedia.org/wiki/Amicable_numbers</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">is_amicable</span>(<span class="cm-variable">a</span>,<span class="cm-variable">b</span>):</code><code>    <span class="cm-keyword">if</span> <span class="cm-variable">a</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">0</span> <span class="cm-keyword">or</span> <span class="cm-variable">b</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">0</span> <span class="cm-keyword">or</span> <span class="cm-variable">a</span> <span class="cm-operator">==</span> <span class="cm-variable">b</span>:</code><code>        <span class="cm-keyword">raise</span> <span class="cm-variable">ValueError</span></code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">sum</span>(<span class="cm-variable">divisors</span>(<span class="cm-variable">a</span>))<span class="cm-operator">-</span><span class="cm-variable">a</span> <span class="cm-operator">==</span> <span class="cm-variable">b</span> <span class="cm-keyword">and</span> <span class="cm-builtin">sum</span>(<span class="cm-variable">divisors</span>(<span class="cm-variable">b</span>))<span class="cm-operator">-</span><span class="cm-variable">b</span> <span class="cm-operator">==</span> <span class="cm-variable">a</span>  <span class="cm-comment"># divisors listában visszadja a szám osztóit</span></code><code></code><code><span class="cm-keyword">try</span>:</code><code>    <span class="cm-variable">is_amicable</span>(<span class="cm-operator">-</span><span class="cm-number">5</span>,<span class="cm-number">1</span>)</code><code>    <span class="cm-variable">is_amicable</span>(<span class="cm-number">1</span>,<span class="cm-number">1</span>)</code><code><span class="cm-keyword">except</span> <span class="cm-variable">ValueError</span>:</code><code>    <span class="cm-keyword">print</span>(<span class="cm-string">"Rossz argumentum."</span>)</code><code><span class="cm-keyword">finally</span>:</code><code>    <span class="cm-variable">is_amicable</span>(<span class="cm-number">220</span>,<span class="cm-number">284</span>)</code><code>    <span class="cm-variable">is_amicable</span>(<span class="cm-number">1184</span>, <span class="cm-number">1210</span>)</code><code>    <span class="cm-variable">is_amicable</span>(<span class="cm-number">5</span>,<span class="cm-number">10</span>)</code></pre>
+<div class="output stdout">Rossz argumentum.
+True
+True
+False
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">x</span> = <span class="cm-builtin">int</span>(<span class="cm-builtin">raw_input</span>(<span class="cm-string">'Enter an integer: '</span>))  <span class="cm-comment"># input bekérése (input() nem használható)</span></code><code><span class="cm-variable">y</span> = <span class="cm-builtin">int</span>(<span class="cm-builtin">raw_input</span>(<span class="cm-string">'Enter another integer: '</span>))</code><code><span class="cm-variable">is_amicable</span>(<span class="cm-variable">x</span>,<span class="cm-variable">y</span>)</code></pre>
+
+
+<div class="output stdout">True
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#tökéletes szám: önmagával barátságos</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">is_perfect</span>(<span class="cm-variable">x</span>):</code><code>    <span class="cm-keyword">return</span> <span class="cm-builtin">sum</span>(<span class="cm-variable">divisors</span>(<span class="cm-variable">x</span>))<span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-operator">==</span> <span class="cm-variable">x</span>;</code><code></code><code><span class="cm-variable">is_perfect</span>(<span class="cm-number">4</span>)</code><code><span class="cm-variable">is_perfect</span>(<span class="cm-number">6</span>)</code></pre>
+<div class="output stdout">False
+</div>
+<div class="output stdout">True
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-comment"># Eratoszthenészi szita algoritmus, megadja az [0..n] intervallumbeli prímeket https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</span></code><code><span class="cm-variable">eratosthenes</span>(<span class="cm-number">11</span>)</code></pre>
+<div class="output stdout">[2, 3, 5, 7, 11]
+</div>
+ 
+<footer>
+    <div>generated 2022-09-28T17:43:39 on
+    <a href="https://cocalc.com">CoCalc</a>
+    </div>
+</footer>
+</body>
+</html>

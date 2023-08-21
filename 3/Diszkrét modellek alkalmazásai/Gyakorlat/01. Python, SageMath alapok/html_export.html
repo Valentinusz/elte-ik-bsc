@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>2022-09-12-141557.sagews</title>
+    <meta name="description" content="automatically generated from 'edbeef1f-f8c4-4271-9ed8-459bb9365d97:2022-09-12-141557.sagews' on CoCalc">
+    <meta name="date" content="2022-09-12T21:28:24">
+    <meta data-name="smc-generated" content="version:2">
+
+    <style>
+        html {
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; padding: 0;
+        }
+        body {
+            width: 50rem;
+            counter-reset: line;
+            padding: .5rem;
+        }
+        @media print {
+          body { width: 100%; margin: 1rem 1rem 1rem 6rem; font-size: 10pt; }
+        }
+        pre { margin: 0; }
+        div.output + pre.input { margin-top: 1rem; }
+        div.output {
+            border-left: .2rem solid #33a;
+            padding: .3rem;
+            margin-left: -.5rem;
+            line-height: 1.5;
+        }
+        div.output img {
+            max-width: 70%;
+            width: auto;
+            height: auto;
+        }
+        div.output.stdout,
+        div.output.stderr,
+        div.output.javascript { font-family: monospace; white-space: pre-wrap; }
+        div.output.stderr { color: #F00; border-color: #F33; }
+
+        span.sagews-output-image > img,
+        span.sagews-output-html > img
+        { vertical-align: top; }
+
+        pre.input {
+            border-left: .2rem solid #3a3;
+            padding: .5rem;
+            margin-left: -.5rem;
+        }
+        pre.input > code {
+            display: block;
+            line-height: 1.1rem;
+        }
+        pre.input > code:before {
+            margin-left: -3rem;
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            padding: 0 .3rem 0 0;
+            margin-right: .5rem;
+            color: #888;
+            min-width: 2rem;
+            text-align: right;
+            user-select: none;
+        }
+        div.header { margin-bottom: 1rem; }
+        table.header td { border: 0; }
+        table.header tr>td:nth-child(2) {
+            font-weight: bold;
+            font-family: monospace;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            border-color: #888;
+        }
+        table td, table th {
+            padding: .5rem;
+        }
+        table tr>td {
+            vertical-align: top;
+            border-top: .05rem solid #888;
+        }
+        table tr>th {
+            vertical-align: bottom;
+            border-bottom: .1rem solid #888;
+        }
+        footer {
+            margin-top: 1rem;
+            border-top: .1rem solid #888;
+            font-size: 70%;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+
+
+    <!-- the styling of the highlighted code; should be printer friendly -->
+    <style>
+        .cm-keyword { font-weight: bold; color: #339; }
+        .cm-atom { color: #666; }
+        .cm-number { color: #333; }
+        .cm-def { color: #333; font-weight: bold; }
+        .cm-variable { color: black; }
+        .cm-variable-2 { color:black; }
+        .cm-variable-3 { color: black; }
+        .cm-property { color: black; }
+        .cm-operator { color: black; font-weight: bold; }
+        .cm-comment { color: #777; }
+        .cm-string { color: #333; }
+        .cm-meta { color: #039; }
+        .cm-qualifier { color: #666; }
+        .cm-builtin { color: #393; font-weight: bold; }
+        .cm-bracket { color: #666; }
+        .cm-tag { color: #444; font-weight: bold; }
+        .cm-attribute { color: #777; }
+        .cm-error { color: #000; }
+        .cm-header { font-weight: bold; }
+        .cm-header-1 { font-size: 1.2rem; }
+        .cm-header-2 { font-size: 1.15rem; }
+        .cm-header-3 { font-size: 1.12rem; }
+        .cm-header-4 { font-size: 1.1rem; }
+        .cm-header-5 { font-size: 1rem; }
+        .cm-em { font-style: italic; }
+        .cm-strong { font-weight: bold; }
+    </style>
+
+    <script type="text/javascript">window.MathJax = {"skipStartupTypeset":false,"extensions":["tex2jax.js","asciimath2jax.js","Safe.js"],"jax":["input/TeX","input/AsciiMath","output/SVG"],"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"ignoreClass":"tex2jax_ignore","skipTags":["script","noscript","style","textarea","pre","code"]},"TeX":{"MAXBUFFER":100000,"extensions":["autoload-all.js","noUndefined.js","noErrors.js"],"Macros":{"Bold":["\\mathbb{#1}",1],"ZZ":["\\Bold{Z}",0],"NN":["\\Bold{N}",0],"RR":["\\Bold{R}",0],"CC":["\\Bold{C}",0],"FF":["\\Bold{F}",0],"QQ":["\\Bold{Q}",0],"QQbar":["\\overline{\\QQ}",0],"CDF":["\\Bold{C}",0],"CIF":["\\Bold{C}",0],"CLF":["\\Bold{C}",0],"RDF":["\\Bold{R}",0],"RIF":["\\Bold{I} \\Bold{R}",0],"RLF":["\\Bold{R}",0],"CFF":["\\Bold{CFF}",0],"GF":["\\Bold{F}_{#1}",1],"Zp":["\\ZZ_{#1}",1],"Qp":["\\QQ_{#1}",1],"Zmod":["\\ZZ/#1\\ZZ",1]},"noErrors":{"inlineDelimiters":["$","$"],"multiLine":true,"style":{"font-size":"85%","text-align":"left","color":"red","padding":"1px 3px","background":"#FFEEEE","border":"none"}},"noUndefined":{"attributes":{"mathcolor":"red","mathbackground":"#FFEEEE","mathsize":"90%"}}},"HTML-CSS":{"linebreaks":{"automatic":true},"scale":80},"SVG":{"linebreaks":{"automatic":true}},"showProcessingMessages":true,"CommonHTML":{"scale":80}};</script>
+    <script type="text/javascript" async
+        src="https://cocalc.com/static/mathjax/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+<div class="header">
+    <h1>2022-09-12-141557.sagews</h1>
+    <table class="header">
+    <tr><td>Author</td><td> Valentinusz</td></tr>
+    <tr><td>Date</td><td>2022-09-12T21:28:24</td></tr>
+    <tr><td>Project</td><td>edbeef1f-f8c4-4271-9ed8-459bb9365d97</td></tr>
+    <tr><td>Location</td><td><a href="https:/cocalc.com/projects/edbeef1f-f8c4-4271-9ed8-459bb9365d97/files/2022-09-12-141557.sagews">2022-09-12-141557.sagews</a></td></tr>
+    <tr><td>Original file</td><td><a href="data:application/octet-stream;base64,77igNDdiZTY0NzQtMDI0Mi00MjQ5LWJmMWUtZTI0Yzk1Nzg0YTMx77igCiNQeXRob246CiNkaW5hbWlrdXNhbiB0w61wdXNvcyDDqXJ0ZWxtZXpldHQgbnllbHYKI2VyxZFzZW4gdMOtcHVzb3MgcHJvZ3JhbW96w6FzIG55ZWx2CiNhIG55ZWx2IG5lbSBoYXN6bsOhbCA7LXQgw6lzIHt9LXQgYSBibG9ra29rYXQgYmVow7p6w6FzIGplbMO2bGksIGEgc29yb2sgdsOpZ8OpdCBwZWRpZyBheiDDumogc29yIGthcmFrdGVyICg7IGhhc3puw6FsYXTDoXZhbCBhem9uYmFuIG1lZ3RlaGV0asO8ayBhenQsIGhvZ3kgdMO2YmIgdXRhc8OtdMOhc3QgMSBzb3JiYSDDrXJqdW5rKQp4ID0gMyA7IHByaW50KHgpCu+4oTdmM2Y1Njk1LTk1Y2ItNGNhZS1hY2ZiLTliMzA4NjhjMmZkYe+4oXsic3Rkb3V0IjoiM1xuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDhjNDA0NjBjLTExZDMtNDI0YS1iZDBkLTg2NjE1ODgwZWZjZXPvuKAKeCA9ICJhc2QiCnggI2F6IMOpcnRlbG1lesWRYmVuIG9wY2lvbsOhbGlzIGEgcHJpbnQgZsO8Z2d2w6lueWjDrXbDoXMK77ihYjc2MTIwNjItNDU4MS00ZmE4LTliMTgtMmMwNTI5YzA3NTRl77iheyJzdGRvdXQiOiInYXNkJ1xuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDkwYTI5YzI2LTgzZTctNGU4My1hOTVkLWFhZGY1MTAyNTJkYu+4oAoKI2EgUHl0aG9uIMO2bm1hZ8OhYmFuIGtpZmVqZXpldHRlbiBzb2sgbWF0ZW1hdGlrYWkgZnVua2Npw7N2YWwgcmVuZGVsa2V6aWsgcMOpbGTDoXVsOgppbnRlcnZhbDEgPSByYW5nZSgxLDEwKSAjaW50ZXJ2YWxsdW0gamVsw7Zsw6lzLCBracOtcmF0w6FzIGJ1Z29zCmludGVydmFsMQrvuKFmMWE0OTJkMC1hYTI5LTRlNTUtYWViNi0xMDg2ZmU1ZTQyNTPvuKF7InN0ZG91dCI6InJhbmdlKDEsIDEwKVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDY0NDM3MDM4LTgyMjMtNGI3MC05ZGMzLTk5NjMyM2E5YmYyNHPvuKAKI2EgaGFzem7DoWx0IHNhZ2VNYXRoIGvDtm55dnTDoXIgYml6dG9zw610IGVneSBhbHRlcm5hdMOtdiBqZWzDtmzDqXN0CmludGVydmFsMiA9IFsxLi4xMF0KaW50ZXJ2YWwyCu+4oTJiNDI1ZDY0LTJjMzAtNDMwYS1hMTRmLWFhZjlhZTk1NWJkZu+4oXsic3Rkb3V0IjoiWzEsIDIsIDMsIDQsIDUsIDYsIDcsIDgsIDksIDEwXVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oGU0MTI2Nzc0LTEzYzUtNDMzZS04ODhkLTkyY2VhMWU5OTg4Oe+4oAojbWluZGvDqXQgamVsw7Zsw6lzaSBmb3Jtw6Fuw6FsIG1lZ2FkaGF0w7MgbMOpcMOpc2ZvawppbnRlcnZhbDMgPSByYW5nZSgxLDEwLDIpCmludGVydmFsMwrvuKEzYzEyMGZlMS0yY2YwLTQ1ZWEtYTg5Zi1hMWU5NDYyNTkzMDLvuKF7InN0ZG91dCI6InJhbmdlKDEsIDEwLCAyKVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDNkYWFlMThhLWFmMGQtNDBmNS04OTJhLWUxNzY1ZjQ5NjUzNHPvuKAKaW50ZXJ2YWw0ID0gWzEsMy4uMTBdCmludGVydmFsNArvuKE2NjhjYzVlMy02ZTYyLTQxMmMtOWYxMy01YmUzMmQ0YmUzOTPvuKF7InN0ZG91dCI6IlsxLCAzLCA1LCA3LCA5XVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oGY0MzdlMjlmLWI5ZjMtNDZlYS1hNzBmLWJkNzgxNmJjZmY4MO+4oApzZXQxID0gezEsMiwzfSAjaGFsbWF6IHTDrXB1cwpzZXQyID0ge2kgZm9yIGkgaW4gWzIuLjEwXX0gI2hhbG1heiDDqXDDrXTFkSBqZWzDtmzDqXMKc2V0MQpzZXQyCnNldDEudW5pb24oc2V0MikKc2V0MS5pbnRlcnNlY3Rpb24oc2V0MikK77ihOWZmMDM0NTYtMzBmOS00YTgxLWFlYmQtNTA3ZGQ3NDk0MThh77iheyJzdGRvdXQiOiJ7MSwgMiwgM31cbiJ977iheyJzdGRvdXQiOiJ7MiwgMywgNCwgNSwgNiwgNywgOCwgOSwgMTB9XG4ife+4oXsic3Rkb3V0IjoiezEsIDIsIDMsIDQsIDUsIDYsIDcsIDgsIDksIDEwfVxuIn3vuKF7InN0ZG91dCI6InsyLCAzfVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oGI4OTNkZDBjLWE3NTYtNDgzZC05Y2YyLTc4YzBkY2YyNDEzNe+4oApzZXQzID0ge2kgZm9yIGkgaW4gWzIuLjEwXSBpZiBpICUgMiA9PSAwfSAjaGFsbWF6IMOpcMOtdMOzIGplbMO2bMOpc2JlbiBtZWdhZGhhdMOzIHByZWRpa8OhdHVtIGlzCnNldDMK77ihMDRjOWIzN2EtMWVjYi00YjA0LWFmYmMtMDk1NDU1ODEyNjFj77iheyJzdGRvdXQiOiJ7MiwgNCwgNiwgOCwgMTB9XG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igNTYyZDFlNmUtZmM3Zi00M2NkLTk4ZTItOThmZWEwN2I3OTgy77igCmxpc3QxID0gW2kqaSBmb3IgaSBpbiBbMi4uMTBdXSAjYXogZWxlbWVrZXQgbcOzZG9zw610aGF0anVrIGlzCmxpc3QxCu+4oTMxNDRlNGEyLTZlNDEtNGI3ZC1iMDJmLTRjNmEwNmNiZjUxYe+4oXsic3Rkb3V0IjoiWzQsIDksIDE2LCAyNSwgMzYsIDQ5LCA2NCwgODEsIDEwMF1cbiJ977iheyJkb25lIjp0cnVlfQrvuKA5ZjIyNTA0Ny1lMmE5LTQ0ZmUtYTJkZC01ZGUyYzExM2I4OThz77igCnN1bShsaXN0MSkK77ihNDUzNDQ5NTUtNzgwOS00MDhjLWI4ZmEtMGRkN2JmMmI5Y2Uw77iheyJzdGRvdXQiOiIzODRcbiJ977iheyJkb25lIjp0cnVlfQrvuKBjMzljNjEwMy0wN2NhLTQyM2QtOWVkYS04YjU4NzlmMTE2NzBz77igCiNsb2dpa2EKdHJ1ZSBhbmQgdHJ1ZQp0cnVlIG9yIGZhbHNlCnRydWUgYW5kIGZhbHNlCu+4oTA4ZWY5ODYwLWZlZjUtNDA4Mi04YjgwLThlODI1M2VmZDhkOO+4oXsic3Rkb3V0IjoiVHJ1ZVxuIn3vuKF7InN0ZG91dCI6IlRydWVcbiJ977iheyJzdGRvdXQiOiJGYWxzZVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDg1ZWEzOWZlLTdmYzMtNDlmYS05ZGYzLThhOTg4ZWE1ZDA4NXPvuKAKMTEgJiAxMCAjYml0ZW5rw6ludGkgw6lzCjExIHwgMTAgI2JpdGVua8OpbnRpIHZhZ3kK77ihMWNkMmNlYjMtMWNhYS00MTIxLTliOTgtNzhjYTk2OGI2OTdi77iheyJzdGRvdXQiOiIxMFxuIn3vuKF7InN0ZG91dCI6IjExXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igYmE2MDM2YTYtY2IyNi00NWE2LWFjZWYtOTA0YjdjMmE1M2I077igCiNmw7xnZ3bDqW55ZWsKZGVmIGZ1bjEoeCk6CiAgICBwcmludCh4KQpmdW4xKDUpCu+4oWQ0MDJhYTRlLWMzMDktNGQ3Ny1hMWNjLTM3YjBhN2I3MTJmY++4oXsic3Rkb3V0IjoiNVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDM5MjRmOTVjLWRlNGEtNGVkNi05OGIwLTU0YTA2MWMxNjBkZO+4oAojYWxhcMOpcnRlbG1lemV0dCBwYXJhbcOpdGVyLCBtaW5kaWcgY3NhayBhIGpvYmJyw7NsIGJhbHJhIGhhZ3loYXRqdWsgZWwgYSBwYXJhbcOpdGVyZWtldApkZWYgZnVuMih4PTEpOgogICAgcHJpbnQoeCkKZnVuMigpCu+4oWQxZWYwZDIzLTNiNzQtNDE1Ny04ZTNlLThlN2UyNDBkYzVlN++4oXsic3Rkb3V0IjoiMVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDlmZjk2NDRhLTQwNzktNGM2NC1iOTJhLTc0ZDU1NDIwMDgzMnPvuKAKZGVmIGZ1bjMoeD0xLHk9MCk6CiAgICBwcmludCh4K3kreCkKZnVuMygpCu+4oTdhNTAzNTVmLWQ3YjYtNGRiMy05M2M3LTY4OWE0OTA2YzczZu+4oXsic3Rkb3V0IjoiMlxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDk5MGEzOTY2LTgyYmQtNGVlMy1hNGVhLWQ2MGQxNDBlODBiYnPvuKAKI2EgcGFyYW3DqXRlcmVrcmUgZsO8Z2d2w6lueWjDrXbDoXNrb3IgbmV2w7xra2VsIGlzIGhpdmF0a296aGF0dW5rCmZ1bjMoeT01LHg9MikK77ihY2ZjYzI2NWYtYTBhMC00MDZjLTkzMjUtY2FkMzFiY2MwMmEw77iheyJzdGRvdXQiOiI5XG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igZjcxY2YzZTEtNDFmNi00OTBkLTkyODAtODg0MDBkNGQ3MzVic++4oAoKI1NhZ2VNYXRoCiNtYXRlbWF0aWthaSBQeXRob24ga8O2bnl2dMOhciwgbWVseSBhIG1hdGVtYXRpa2Egc3rDoW1vcyB0ZXLDvGxldMOpdCB0w6Ftb2dhdGphCiNzesOhbW9zIGbDvGdndsOpbnl0IGJpenRvc8OtdApmYWN0b3JpYWwoMTAwKQppc19wcmltZSgxMDApCm51bWVyYXRvcigyLzMpICNzesOhbWzDoWzDswpkZW5vbWluYXRvcigyLzMpICNuZXZlesWRCnBpCmNvcyhwaSkKcHJvZChsaXN0MSkgI3Byb2R1a3R1bQpuZXh0X3ByaW1lKDJeMTAwKSAjcGFyYW3DqXRlcmvDqW50IG1lZ2Fkb3R0IHN6w6FtIHV0w6FuaSBlbHPFkSBwcsOtbWV0IGFkamEgdmlzc3phCm50aF9wcmltZSgyMCkgI3BhcmFtw6l0ZXJrw6ludCBtZWdhZG90dCBzesOhbWFkaWsgcHLDrW1ldArvuKE3MmJhNjM0MS0yYzRmLTRjZGEtYTA4YS05ZmNhMzNiYjkyZTHvuKF7InN0ZG91dCI6IjkzMzI2MjE1NDQzOTQ0MTUyNjgxNjk5MjM4ODU2MjY2NzAwNDkwNzE1OTY4MjY0MzgxNjIxNDY4NTkyOTYzODk1MjE3NTk5OTkzMjI5OTE1NjA4OTQxNDYzOTc2MTU2NTE4Mjg2MjUzNjk3OTIwODI3MjIzNzU4MjUxMTg1MjEwOTE2ODY0MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwXG4ife+4oXsic3Rkb3V0IjoiRmFsc2VcbiJ977iheyJzdGRvdXQiOiIyXG4ife+4oXsic3Rkb3V0IjoiM1xuIn3vuKF7InN0ZG91dCI6InBpXG4ife+4oXsic3Rkb3V0IjoiLTFcbiJ977iheyJzdGRvdXQiOiIxMzE2ODE4OTQ0MDAwMFxuIn3vuKF7InN0ZG91dCI6IjEyNjc2NTA2MDAyMjgyMjk0MDE0OTY3MDMyMDU2NTNcbiJ977iheyJzdGRvdXQiOiI3MVxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDU5Zjg3YTFiLWQ2MGQtNDA4Yy05ZDAxLWQ3NTE1ZGE5YzM4Y3PvuKAKI2Ega8O2bnl2dMOhciBzesOhbW9zIGvDqW55ZWxtaSBmdW5rY2nDs3QgYml6dG9zw610CjJeOCAjbWVnc3pva290dCBoYXR2w6FueW96w6FzIG9wZXLDoXRvcgpfICNsZWd1dG9sc8OzIG3FsXZlbGV0IGVyZWRtw6lueWUK77ihMjEwYTQ3NWMtOWMxNi00NWNmLWJiZWItNTEwN2YzNjQ1ZGMx77iheyJzdGRvdXQiOiIyNTZcbiJ977iheyJzdGRvdXQiOiIyNTZcbiJ977iheyJkb25lIjp0cnVlfQrvuKA3ZTQ4Mzc3Zi00YjlmLTRiZDQtYWRhNi00OWQyYjZlY2FlMzNz77igCiNhIGvDvGzDtm5iw7Z6xZEgU2FnZU1hdGgtb3MgZsO8Z2d2w6lueWVrIGluZm9ybcOhY2nDs2l0IGEgPyBvcGVyw6F0b3JyYWwga8OpcmhldGrDvGsgbGUKbj8K77ihOTkxM2FiNTUtYTAyOC00M2M2LWJjODEtYWRiNDE4YjE2ZmUx77iheyJjb2RlIjp7ImZpbGVuYW1lIjpudWxsLCJsaW5lbm8iOi0xLCJtb2RlIjoidGV4dC94LXJzdCIsInNvdXJjZSI6IkZpbGU6IC9leHQvc2FnZS85LjYvbG9jYWwvdmFyL2xpYi9zYWdlL3ZlbnYtcHl0aG9uMy4xMC4zL2xpYi9weXRob24zLjEwL3NpdGUtcGFja2FnZXMvc2FnZS9taXNjL2Z1bmN0aW9uYWwucHlcblNpZ25hdHVyZSA6IG4oeCwgcHJlYz1Ob25lLCBkaWdpdHM9Tm9uZSwgYWxnb3JpdGhtPU5vbmUpXG5Eb2NzdHJpbmcgOlxuUmV0dXJuIGEgbnVtZXJpY2FsIGFwcHJveGltYXRpb24gb2YgXCJzZWxmXCIgd2l0aCBcInByZWNcIiBiaXRzIChvclxuZGVjaW1hbCBcImRpZ2l0c1wiKSBvZiBwcmVjaXNpb24uXG5cbk5vIGd1YXJhbnRlZSBpcyBtYWRlIGFib3V0IHRoZSBhY2N1cmFjeSBvZiB0aGUgcmVzdWx0LlxuXG5Ob3RlOlxuXG4gIExvd2VyIGNhc2UgXCJuKClcIiBpcyBhbiBhbGlhcyBmb3IgXCJudW1lcmljYWxfYXBwcm94KClcIiBhbmQgbWF5IGJlXG4gIHVzZWQgYXMgYSBtZXRob2QuXG5cbklOUFVUOlxuXG4qIFwicHJlY1wiIC0tIHByZWNpc2lvbiBpbiBiaXRzXG5cbiogXCJkaWdpdHNcIiAtLSBwcmVjaXNpb24gaW4gZGVjaW1hbCBkaWdpdHMgKG9ubHkgdXNlZCBpZiBcInByZWNcIiBpc1xuICBub3QgZ2l2ZW4pXG5cbiogXCJhbGdvcml0aG1cIiAtLSB3aGljaCBhbGdvcml0aG0gdG8gdXNlIHRvIGNvbXB1dGUgdGhpc1xuICBhcHByb3hpbWF0aW9uICh0aGUgYWNjZXB0ZWQgYWxnb3JpdGhtcyBkZXBlbmQgb24gdGhlIG9iamVjdClcblxuSWYgbmVpdGhlciBcInByZWNcIiBub3IgXCJkaWdpdHNcIiBpcyBnaXZlbiwgdGhlIGRlZmF1bHQgcHJlY2lzaW9uIGlzXG41MyBiaXRzIChyb3VnaGx5IDE2IGRpZ2l0cykuXG5cbkVYQU1QTEVTOlxuXG4gICBzYWdlOiBudW1lcmljYWxfYXBwcm94KHBpLCAxMClcbiAgIDMuMVxuICAgc2FnZTogbnVtZXJpY2FsX2FwcHJveChwaSwgZGlnaXRzPTEwKVxuICAgMy4xNDE1OTI2NTRcbiAgIHNhZ2U6IG51bWVyaWNhbF9hcHByb3gocGleMiArIGUsIGRpZ2l0cz0yMClcbiAgIDEyLjU4Nzg4NjIyOTU0ODQwMzg1NFxuICAgc2FnZTogbihwaV4yICsgZSlcbiAgIDEyLjU4Nzg4NjIyOTU0ODRcbiAgIHNhZ2U6IE4ocGleMiArIGUpXG4gICAxMi41ODc4ODYyMjk1NDg0XG4gICBzYWdlOiBuKHBpXjIgKyBlLCBkaWdpdHM9NTApXG4gICAxMi41ODc4ODYyMjk1NDg0MDM4NTQxOTQ3Nzg0NzEyMjg4MTM2MzMwNzA5NDY1MDA5NDFcbiAgIHNhZ2U6IGEgPSBDQygtNSkubihwcmVjPTQwKVxuICAgc2FnZTogYiA9IENvbXBsZXhGaWVsZCg0MCkoLTUpXG4gICBzYWdlOiBhID09IGJcbiAgIFRydWVcbiAgIHNhZ2U6IHBhcmVudChhKSBpcyBwYXJlbnQoYilcbiAgIFRydWVcbiAgIHNhZ2U6IG51bWVyaWNhbF9hcHByb3goOSlcbiAgIDkuMDAwMDAwMDAwMDAwMDBcblxuWW91IGNhbiBhbHNvIHVzdWFsbHkgdXNlIG1ldGhvZCBub3RhdGlvbjpcblxuICAgc2FnZTogKHBpXjIgKyBlKS5uKClcbiAgIDEyLjU4Nzg4NjIyOTU0ODRcbiAgIHNhZ2U6IChwaV4yICsgZSkubnVtZXJpY2FsX2FwcHJveCgpXG4gICAxMi41ODc4ODYyMjk1NDg0XG5cblZlY3RvcnMgYW5kIG1hdHJpY2VzIG1heSBhbHNvIGhhdmUgdGhlaXIgZW50cmllcyBhcHByb3hpbWF0ZWQ6XG5cbiAgIHNhZ2U6IHYgPSB2ZWN0b3IoUkRGLCBbMSwyLDNdKVxuICAgc2FnZTogdi5uKClcbiAgICgxLjAwMDAwMDAwMDAwMDAwLCAyLjAwMDAwMDAwMDAwMDAwLCAzLjAwMDAwMDAwMDAwMDAwKVxuXG4gICBzYWdlOiB2ID0gdmVjdG9yKENERiwgWzEsMiwzXSlcbiAgIHNhZ2U6IHYubigpXG4gICAoMS4wMDAwMDAwMDAwMDAwMCwgMi4wMDAwMDAwMDAwMDAwMCwgMy4wMDAwMDAwMDAwMDAwMClcbiAgIHNhZ2U6IF8ucGFyZW50KClcbiAgIFZlY3RvciBzcGFjZSBvZiBkaW1lbnNpb24gMyBvdmVyIENvbXBsZXggRmllbGQgd2l0aCA1MyBiaXRzIG9mIHByZWNpc2lvblxuICAgc2FnZTogdi5uKHByZWM9MjApXG4gICAoMS4wMDAwLCAyLjAwMDAsIDMuMDAwMClcblxuICAgc2FnZTogdSA9IHZlY3RvcihRUSwgWzEvMiwgMS8zLCAxLzRdKVxuICAgc2FnZTogbih1LCBwcmVjPTE1KVxuICAgKDAuNTAwMCwgMC4zMzMzLCAwLjI1MDApXG4gICBzYWdlOiBuKHUsIGRpZ2l0cz01KVxuICAgKDAuNTAwMDAsIDAuMzMzMzMsIDAuMjUwMDApXG5cbiAgIHNhZ2U6IHYgPSB2ZWN0b3IoUVEsIFsxLzIsIDAsIDAsIDEvMywgMCwgMCwgMCwgMS80XSwgc3BhcnNlPVRydWUpXG4gICBzYWdlOiB1ID0gdi5udW1lcmljYWxfYXBwcm94KGRpZ2l0cz00KVxuICAgc2FnZTogdS5pc19zcGFyc2UoKVxuICAgVHJ1ZVxuICAgc2FnZTogdVxuICAgKDAuNTAwMCwgMC4wMDAwLCAwLjAwMDAsIDAuMzMzMywgMC4wMDAwLCAwLjAwMDAsIDAuMDAwMCwgMC4yNTAwKVxuXG4gICBzYWdlOiBBID0gbWF0cml4KFFRLCAyLCAzLCByYW5nZSg2KSlcbiAgIHNhZ2U6IEEubigpXG4gICBbMC4wMDAwMDAwMDAwMDAwMDAgIDEuMDAwMDAwMDAwMDAwMDAgIDIuMDAwMDAwMDAwMDAwMDBdXG4gICBbIDMuMDAwMDAwMDAwMDAwMDAgIDQuMDAwMDAwMDAwMDAwMDAgIDUuMDAwMDAwMDAwMDAwMDBdXG5cbiAgIHNhZ2U6IEIgPSBtYXRyaXgoSW50ZWdlcnMoMTIpLCAzLCA4LCBzcmFuZ2UoMjQpKVxuICAgc2FnZTogTihCLCBkaWdpdHM9MilcbiAgIFswLjAwICAxLjAgIDIuMCAgMy4wICA0LjAgIDUuMCAgNi4wICA3LjBdXG4gICBbIDguMCAgOS4wICAxMC4gIDExLiAwLjAwICAxLjAgIDIuMCAgMy4wXVxuICAgWyA0LjAgIDUuMCAgNi4wICA3LjAgIDguMCAgOS4wICAxMC4gIDExLl1cblxuSW50ZXJuYWxseSwgbnVtZXJpY2FsIGFwcHJveGltYXRpb25zIG9mIHJlYWwgbnVtYmVycyBhcmUgc3RvcmVkIGluXG5iYXNlLTIuIFRoZXJlZm9yZSwgbnVtYmVycyB3aGljaCBsb29rIHRoZSBzYW1lIGluIHRoZWlyIGRlY2ltYWxcbmV4cGFuc2lvbiBtaWdodCBiZSBkaWZmZXJlbnQ6XG5cbiAgIHNhZ2U6IHg9TihwaSwgZGlnaXRzPTMpOyB4XG4gICAzLjE0XG4gICBzYWdlOiB5PU4oMy4xNCwgZGlnaXRzPTMpOyB5XG4gICAzLjE0XG4gICBzYWdlOiB4PT15XG4gICBGYWxzZVxuICAgc2FnZTogeC5zdHIoYmFzZT0yKVxuICAgJzExLjAwMTAwMTAwMDEwMCdcbiAgIHNhZ2U6IHkuc3RyKGJhc2U9MilcbiAgICcxMS4wMDEwMDAxMTExMDEnXG5cbkluY3JlYXNpbmcgdGhlIHByZWNpc2lvbiBvZiBhIGZsb2F0aW5nIHBvaW50IG51bWJlciBpcyBub3QgYWxsb3dlZDpcblxuICAgc2FnZTogQ0MoLTUpLm4ocHJlYz0xMDApXG4gICBUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6XG4gICAuLi5cbiAgIFR5cGVFcnJvcjogY2Fubm90IGFwcHJveGltYXRlIHRvIGEgcHJlY2lzaW9uIG9mIDEwMCBiaXRzLCB1c2UgYXQgbW9zdCA1MyBiaXRzXG4gICBzYWdlOiBuKDEuM3IsIGRpZ2l0cz0yMClcbiAgIFRyYWNlYmFjayAobW9zdCByZWNlbnQgY2FsbCBsYXN0KTpcbiAgIC4uLlxuICAgVHlwZUVycm9yOiBjYW5ub3QgYXBwcm94aW1hdGUgdG8gYSBwcmVjaXNpb24gb2YgNzAgYml0cywgdXNlIGF0IG1vc3QgNTMgYml0c1xuICAgc2FnZTogUmVhbEZpZWxkKDI0KS5waSgpLm4oKVxuICAgVHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOlxuICAgLi4uXG4gICBUeXBlRXJyb3I6IGNhbm5vdCBhcHByb3hpbWF0ZSB0byBhIHByZWNpc2lvbiBvZiA1MyBiaXRzLCB1c2UgYXQgbW9zdCAyNCBiaXRzXG5cbkFzIGFuIGV4Y2VwdGlvbmFsIGNhc2UsIFwiZGlnaXRzPTFcIiB1c3VhbGx5IGxlYWRzIHRvIDIgZGlnaXRzIChvbmVcbnNpZ25pZmljYW50KSBpbiB0aGUgZGVjaW1hbCBvdXRwdXQgKHNlZVxuaHR0cHM6Ly90cmFjLnNhZ2VtYXRoLm9yZy8xMTY0Nyk6XG5cbiAgIHNhZ2U6IE4ocGksIGRpZ2l0cz0xKVxuICAgMy4yXG4gICBzYWdlOiBOKHBpLCBkaWdpdHM9MilcbiAgIDMuMVxuICAgc2FnZTogTigxMDAqcGksIGRpZ2l0cz0xKVxuICAgMzIwLlxuICAgc2FnZTogTigxMDAqcGksIGRpZ2l0cz0yKVxuICAgMzEwLlxuXG5JbiB0aGUgZm9sbG93aW5nIGV4YW1wbGUsIFwicGlcIiBhbmQgXCIzXCIgYXJlIGJvdGggYXBwcm94aW1hdGVkIHRvIHR3b1xuYml0cyBvZiBwcmVjaXNpb24gYW5kIHRoZW4gc3VidHJhY3RlZCwgd2hpY2gga2lsbHMgdHdvIGJpdHMgb2ZcbnByZWNpc2lvbjpcblxuICAgc2FnZTogTihwaSwgcHJlYz0yKVxuICAgMy4wXG4gICBzYWdlOiBOKDMsIHByZWM9MilcbiAgIDMuMFxuICAgc2FnZTogTihwaSAtIDMsIHByZWM9MilcbiAgIDAuMDAifX3vuKF7ImRvbmUiOnRydWV9Cu+4oGMwMzZmZDVmLTMyMTYtNDMxNi1hYWM2LTQ0ODljYjFjYjNiMO+4oAojYXogbigpIGbDvGdndsOpbnkgZWd5IGFsaWFzIGEgbnVtZXJpY2FsX2FwcHJveCgpIGbDvGdndsOpbnlyZSwgbWVseSBlZ3kgbGViZWfFkXBvbnRvcyBrw7Z6bGXDrXTDqXPDqXQgYWRqYSBtZWcgZWd5IGFkb3R0IGtpZmVqZXrDqXNuZWsKbigxLyg5OV4yKSwyMDApICNhbGFwasOhcmF0b24gYml0ZWtiZW4gbcOpcmkgYSBwb250b3Nzw6Fnb3QK77ihZGZhMjNlZWUtZjEwYi00ZjBhLWI0ZDQtNDhlMTc4YWU5NWJk77iheyJzdGRvdXQiOiIwLjAwMDEwMjAzMDQwNTA2MDcwODA5MTAxMTEyMTMxNDE1MTYxNzE4MTkyMDIxMjIyMzI0MjUyNjI3MjgyOTMwXG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igYTczY2I3ZTItYzQ0Ni00OWVmLThhYmMtNmQ4ZDcwYWFkYzEzc++4oApudW1lcmljYWxfYXBwcm94KHBpLGRpZ2l0cz0yMDApCu+4oTNkZDRhMWM0LWNlY2UtNGE2MS05MGRkLTQzN2U2NjhmMTc5Zu+4oXsic3Rkb3V0IjoiMy4xNDE1OTI2NTM1ODk3OTMyMzg0NjI2NDMzODMyNzk1MDI4ODQxOTcxNjkzOTkzNzUxMDU4MjA5NzQ5NDQ1OTIzMDc4MTY0MDYyODYyMDg5OTg2MjgwMzQ4MjUzNDIxMTcwNjc5ODIxNDgwODY1MTMyODIzMDY2NDcwOTM4NDQ2MDk1NTA1ODIyMzE3MjUzNTk0MDgxMjg0ODExMTc0NTAyODQxMDI3MDE5Mzg1MjExMDU1NTk2NDQ2MjI5NDg5NTQ5MzAzODIwIn3vuKF7InN0ZG91dCI6IlxuIn3vuKF7ImRvbmUiOnRydWV9Cu+4oDQzNWEwOWI0LWJjMzUtNDc0Ni1iOGY4LWRmMjMzNjdlNzkwNu+4oAoKIyBhIHZhcigpIGbDvGdndsOpbm55ZWwgbGV2w6lkaGV0w7xuayBuZXZla2V0LCBtZWx5ZWtrZWwgc3ppbWJvbGlrdXMgdsOhbHRvesOza2F0IGplbMO2bMO8bmsKdmFyKCd4JykK77ihZmFmNzA0MmYtNjRlOC00ZTQyLWI2YmItOWYxZWM5ZWNlYjc477iheyJzdGRvdXQiOiJ4XG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igZTRjM2QxZTUtNTY0Zi00ZWI2LWEzYjItZjlmYjdiYWY3ZGUzc++4oApkZXJpdmF0aXZlKDIqeCszKQrvuKE5MWE2NWQ4Ni04ZWYyLTQyNjYtOWFmOS04NjQ1MzU5OTQxZTDvuKF7InN0ZG91dCI6IjJcbiJ977iheyJkb25lIjp0cnVlfQrvuKAzMjBhYzc2Yy0zYjVkLTRjMzQtYmQ0My04NTI0MzUzYTU2YTdz77igCiMgZGlmZiBhbGlhc2EKZGlmZig1KnheMysyKnheMikK77ihYTRhYzEzMTgtM2NjMi00MjkxLThhNjctNjJjYWY1NGE5Y2I177iheyJzdGRvdXQiOiIxNSp4XjIgKyA0KnhcbiJ977iheyJkb25lIjp0cnVlfQrvuKA0NTFjZmJmMi04YWVkLTRhM2YtOTI4ZS0yMmQ0YjI1ZGU2MTNz77igCiNsZWhldMWRc8OpZyB2YW4gYSBtYWdhc2FiYiBzemludMWxIGRlcml2w6FsdCBraXN6w6Ftb2zDoXPDoXJhIGlzCmRpZmYoNSp4XjMrMip4XjIseCx4KQpkaWZmKDUqeF4zKzIqeF4yLHgsMikK77ihMGMxMmM2NDctMGRiZS00YzgxLTgwZDYtNGQwMWU5ZjA4MDY077iheyJzdGRvdXQiOiIzMCp4ICsgNFxuIn3vuKF7InN0ZG91dCI6IjMwKnggKyA0XG4ife+4oXsiZG9uZSI6dHJ1ZX0K77igMTVkZmQxN2UtOGFhMC00NGU5LTgxZGYtYTE3OTZiNDY4NTcz77igCgojIGEga8O2bnl2dMOhciB0w6Ftb2dhdGphIGF6IHJlbMOhY2nDs2sgbMOhbmNvbMOhc8OhdCBpcwoxIDwgNSA8IDEwCjEgPT0gMi8yID09IDkvOQrvuKFiNmUzOTZmMC1mY2FiLTQyZjgtOWE1ZS01YTI0N2M1YTdmNWHvuKF7InN0ZG91dCI6IlRydWVcbiJ977iheyJzdGRvdXQiOiJUcnVlXG4ife+4oXsiZG9uZSI6dHJ1ZX0KCgoKCgoKCgoK" download="2022-09-12-141557.sagews">2022-09-12-141557.sagews</td></tr>
+    <script type="text/javascript">
+    var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+    var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+    if (is_safari && !is_chrome) {
+        document.write("<tr><td colspan='2'>(when downloading, rename file to 2022-09-12-141557.sagews)</td></tr>");
+    }
+    </script>
+    </table>
+</div>
+<pre class="input"><code><span class="cm-comment">#Python:</span></code><code><span class="cm-comment">#dinamikusan típusos értelmezett nyelv</span></code><code><span class="cm-comment">#erősen típusos programozás nyelv</span></code><code><span class="cm-comment">#a nyelv nem használ ;-t és {}-t a blokkokat behúzás jelöli, a sorok végét pedig az új sor karakter (; használatával azonban megtehetjük azt, hogy több utasítást 1 sorba írjunk)</span></code><code><span class="cm-variable">x</span> = <span class="cm-number">3</span> ; <span class="cm-keyword">print</span>(<span class="cm-variable">x</span>)</code></pre>
+<div class="output stdout">3
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">x</span> = <span class="cm-string">"asd"</span></code><code><span class="cm-variable">x</span> <span class="cm-comment">#az értelmezőben opcionális a print függvényhívás</span></code></pre>
+<div class="output stdout">'asd'
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-comment">#a Python önmagában kifejezetten sok matematikai funkcióval rendelkezik például:</span></code><code><span class="cm-variable">interval1</span> = <span class="cm-builtin">range</span>(<span class="cm-number">1</span>,<span class="cm-number">10</span>) <span class="cm-comment">#intervallum jelölés, kiíratás bugos</span></code><code><span class="cm-variable">interval1</span></code></pre>
+<div class="output stdout">range(1, 10)
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#a használt sageMath könyvtár biztosít egy alternatív jelölést</span></code><code><span class="cm-variable">interval2</span> = [<span class="cm-number">1..10</span>]</code><code><span class="cm-variable">interval2</span></code></pre>
+<div class="output stdout">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#mindkét jelölési formánál megadható lépésfok</span></code><code><span class="cm-variable">interval3</span> = <span class="cm-builtin">range</span>(<span class="cm-number">1</span>,<span class="cm-number">10</span>,<span class="cm-number">2</span>)</code><code><span class="cm-variable">interval3</span></code></pre>
+<div class="output stdout">range(1, 10, 2)
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">interval4</span> = [<span class="cm-number">1</span>,<span class="cm-number">3..10</span>]</code><code><span class="cm-variable">interval4</span></code></pre>
+<div class="output stdout">[1, 3, 5, 7, 9]
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">set1</span> = {<span class="cm-number">1</span>,<span class="cm-number">2</span>,<span class="cm-number">3</span>} <span class="cm-comment">#halmaz típus</span></code><code><span class="cm-variable">set2</span> = {<span class="cm-variable">i</span> <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> [<span class="cm-number">2..10</span>]} <span class="cm-comment">#halmaz építő jelölés</span></code><code><span class="cm-variable">set1</span></code><code><span class="cm-variable">set2</span></code><code><span class="cm-variable">set1</span>.<span class="cm-variable">union</span>(<span class="cm-variable">set2</span>)</code><code><span class="cm-variable">set1</span>.<span class="cm-variable">intersection</span>(<span class="cm-variable">set2</span>)</code></pre>
+<div class="output stdout">{1, 2, 3}
+</div>
+<div class="output stdout">{2, 3, 4, 5, 6, 7, 8, 9, 10}
+</div>
+<div class="output stdout">{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+</div>
+<div class="output stdout">{2, 3}
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">set3</span> = {<span class="cm-variable">i</span> <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> [<span class="cm-number">2..10</span>] <span class="cm-keyword">if</span> <span class="cm-variable">i</span> <span class="cm-operator">%</span> <span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">0</span>} <span class="cm-comment">#halmaz épító jelölésben megadható predikátum is</span></code><code><span class="cm-variable">set3</span></code></pre>
+<div class="output stdout">{2, 4, 6, 8, 10}
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">list1</span> = [<span class="cm-variable">i</span><span class="cm-operator">*</span><span class="cm-variable">i</span> <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> [<span class="cm-number">2..10</span>]] <span class="cm-comment">#az elemeket módosíthatjuk is</span></code><code><span class="cm-variable">list1</span></code></pre>
+<div class="output stdout">[4, 9, 16, 25, 36, 49, 64, 81, 100]
+</div>
+ 
+<pre class="input"><code><span class="cm-builtin">sum</span>(<span class="cm-variable">list1</span>)</code></pre>
+<div class="output stdout">384
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#logika</span></code><code><span class="cm-variable">true</span> <span class="cm-keyword">and</span> <span class="cm-variable">true</span></code><code><span class="cm-variable">true</span> <span class="cm-keyword">or</span> <span class="cm-variable">false</span></code><code><span class="cm-variable">true</span> <span class="cm-keyword">and</span> <span class="cm-variable">false</span></code></pre>
+<div class="output stdout">True
+</div>
+<div class="output stdout">True
+</div>
+<div class="output stdout">False
+</div>
+ 
+<pre class="input"><code><span class="cm-number">11</span> <span class="cm-operator">&amp;</span> <span class="cm-number">10</span> <span class="cm-comment">#bitenkénti és</span></code><code><span class="cm-number">11</span> <span class="cm-operator">|</span> <span class="cm-number">10</span> <span class="cm-comment">#bitenkénti vagy</span></code></pre>
+<div class="output stdout">10
+</div>
+<div class="output stdout">11
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#függvények</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">fun1</span>(<span class="cm-variable">x</span>):</code><code>    <span class="cm-keyword">print</span>(<span class="cm-variable">x</span>)</code><code><span class="cm-variable">fun1</span>(<span class="cm-number">5</span>)</code></pre>
+<div class="output stdout">5
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#alapértelmezett paraméter, mindig csak a jobbról balra hagyhatjuk el a paramétereket</span></code><code><span class="cm-keyword">def</span> <span class="cm-def">fun2</span>(<span class="cm-variable">x</span>=<span class="cm-number">1</span>):</code><code>    <span class="cm-keyword">print</span>(<span class="cm-variable">x</span>)</code><code><span class="cm-variable">fun2</span>()</code></pre>
+<div class="output stdout">1
+</div>
+ 
+<pre class="input"><code><span class="cm-keyword">def</span> <span class="cm-def">fun3</span>(<span class="cm-variable">x</span>=<span class="cm-number">1</span>,<span class="cm-variable">y</span>=<span class="cm-number">0</span>):</code><code>    <span class="cm-keyword">print</span>(<span class="cm-variable">x</span><span class="cm-operator">+</span><span class="cm-variable">y</span><span class="cm-operator">+</span><span class="cm-variable">x</span>)</code><code><span class="cm-variable">fun3</span>()</code></pre>
+<div class="output stdout">2
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#a paraméterekre függvényhíváskor nevükkel is hivatkozhatunk</span></code><code><span class="cm-variable">fun3</span>(<span class="cm-variable">y</span>=<span class="cm-number">5</span>,<span class="cm-variable">x</span>=<span class="cm-number">2</span>)</code></pre>
+<div class="output stdout">9
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-comment">#SageMath</span></code><code><span class="cm-comment">#matematikai Python könyvtár, mely a matematika számos területét támogatja</span></code><code><span class="cm-comment">#számos függvényt biztosít</span></code><code><span class="cm-variable">factorial</span>(<span class="cm-number">100</span>)</code><code><span class="cm-variable">is_prime</span>(<span class="cm-number">100</span>)</code><code><span class="cm-variable">numerator</span>(<span class="cm-number">2</span><span class="cm-operator">/</span><span class="cm-number">3</span>) <span class="cm-comment">#számláló</span></code><code><span class="cm-variable">denominator</span>(<span class="cm-number">2</span><span class="cm-operator">/</span><span class="cm-number">3</span>) <span class="cm-comment">#nevező</span></code><code><span class="cm-variable">pi</span></code><code><span class="cm-variable">cos</span>(<span class="cm-variable">pi</span>)</code><code><span class="cm-variable">prod</span>(<span class="cm-variable">list1</span>) <span class="cm-comment">#produktum</span></code><code><span class="cm-variable">next_prime</span>(<span class="cm-number">2</span><span class="cm-operator">^</span><span class="cm-number">100</span>) <span class="cm-comment">#paraméterként megadott szám utáni első prímet adja vissza</span></code><code><span class="cm-variable">nth_prime</span>(<span class="cm-number">20</span>) <span class="cm-comment">#paraméterként megadott számadik prímet</span></code></pre>
+<div class="output stdout">93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+</div>
+<div class="output stdout">False
+</div>
+<div class="output stdout">2
+</div>
+<div class="output stdout">3
+</div>
+<div class="output stdout">pi
+</div>
+<div class="output stdout">-1
+</div>
+<div class="output stdout">13168189440000
+</div>
+<div class="output stdout">1267650600228229401496703205653
+</div>
+<div class="output stdout">71
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#a könyvtár számos kényelmi funkciót biztosít</span></code><code><span class="cm-number">2</span><span class="cm-operator">^</span><span class="cm-number">8</span> <span class="cm-comment">#megszokott hatványozás operátor</span></code><code><span class="cm-variable">_</span> <span class="cm-comment">#legutolsó művelet eredménye</span></code></pre>
+<div class="output stdout">256
+</div>
+<div class="output stdout">256
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#a különböző SageMath-os függvények információit a ? operátorral kérhetjük le</span></code><code><span class="cm-variable">n</span><span class="cm-error">?</span></code></pre>
+<pre><code>File: /ext/sage/9.6/local/var/lib/sage/venv-python3.10.3/lib/python3.10/site-packages/sage/misc/functional.py
+Signature : n(x, prec=None, digits=None, algorithm=None)
+Docstring :
+Return a numerical approximation of "self" with "prec" bits (or
+decimal "digits") of precision.
+
+No guarantee is made about the accuracy of the result.
+
+Note:
+
+  Lower case "n()" is an alias for "numerical_approx()" and may be
+  used as a method.
+
+INPUT:
+
+* "prec" -- precision in bits
+
+* "digits" -- precision in decimal digits (only used if "prec" is
+  not given)
+
+* "algorithm" -- which algorithm to use to compute this
+  approximation (the accepted algorithms depend on the object)
+
+If neither "prec" nor "digits" is given, the default precision is
+53 bits (roughly 16 digits).
+
+EXAMPLES:
+
+   sage: numerical_approx(pi, 10)
+   3.1
+   sage: numerical_approx(pi, digits=10)
+   3.141592654
+   sage: numerical_approx(pi^2 + e, digits=20)
+   12.587886229548403854
+   sage: n(pi^2 + e)
+   12.5878862295484
+   sage: N(pi^2 + e)
+   12.5878862295484
+   sage: n(pi^2 + e, digits=50)
+   12.587886229548403854194778471228813633070946500941
+   sage: a = CC(-5).n(prec=40)
+   sage: b = ComplexField(40)(-5)
+   sage: a == b
+   True
+   sage: parent(a) is parent(b)
+   True
+   sage: numerical_approx(9)
+   9.00000000000000
+
+You can also usually use method notation:
+
+   sage: (pi^2 + e).n()
+   12.5878862295484
+   sage: (pi^2 + e).numerical_approx()
+   12.5878862295484
+
+Vectors and matrices may also have their entries approximated:
+
+   sage: v = vector(RDF, [1,2,3])
+   sage: v.n()
+   (1.00000000000000, 2.00000000000000, 3.00000000000000)
+
+   sage: v = vector(CDF, [1,2,3])
+   sage: v.n()
+   (1.00000000000000, 2.00000000000000, 3.00000000000000)
+   sage: _.parent()
+   Vector space of dimension 3 over Complex Field with 53 bits of precision
+   sage: v.n(prec=20)
+   (1.0000, 2.0000, 3.0000)
+
+   sage: u = vector(QQ, [1/2, 1/3, 1/4])
+   sage: n(u, prec=15)
+   (0.5000, 0.3333, 0.2500)
+   sage: n(u, digits=5)
+   (0.50000, 0.33333, 0.25000)
+
+   sage: v = vector(QQ, [1/2, 0, 0, 1/3, 0, 0, 0, 1/4], sparse=True)
+   sage: u = v.numerical_approx(digits=4)
+   sage: u.is_sparse()
+   True
+   sage: u
+   (0.5000, 0.0000, 0.0000, 0.3333, 0.0000, 0.0000, 0.0000, 0.2500)
+
+   sage: A = matrix(QQ, 2, 3, range(6))
+   sage: A.n()
+   [0.000000000000000  1.00000000000000  2.00000000000000]
+   [ 3.00000000000000  4.00000000000000  5.00000000000000]
+
+   sage: B = matrix(Integers(12), 3, 8, srange(24))
+   sage: N(B, digits=2)
+   [0.00  1.0  2.0  3.0  4.0  5.0  6.0  7.0]
+   [ 8.0  9.0  10.  11. 0.00  1.0  2.0  3.0]
+   [ 4.0  5.0  6.0  7.0  8.0  9.0  10.  11.]
+
+Internally, numerical approximations of real numbers are stored in
+base-2. Therefore, numbers which look the same in their decimal
+expansion might be different:
+
+   sage: x=N(pi, digits=3); x
+   3.14
+   sage: y=N(3.14, digits=3); y
+   3.14
+   sage: x==y
+   False
+   sage: x.str(base=2)
+   '11.001001000100'
+   sage: y.str(base=2)
+   '11.001000111101'
+
+Increasing the precision of a floating point number is not allowed:
+
+   sage: CC(-5).n(prec=100)
+   Traceback (most recent call last):
+   ...
+   TypeError: cannot approximate to a precision of 100 bits, use at most 53 bits
+   sage: n(1.3r, digits=20)
+   Traceback (most recent call last):
+   ...
+   TypeError: cannot approximate to a precision of 70 bits, use at most 53 bits
+   sage: RealField(24).pi().n()
+   Traceback (most recent call last):
+   ...
+   TypeError: cannot approximate to a precision of 53 bits, use at most 24 bits
+
+As an exceptional case, "digits=1" usually leads to 2 digits (one
+significant) in the decimal output (see
+https://trac.sagemath.org/11647):
+
+   sage: N(pi, digits=1)
+   3.2
+   sage: N(pi, digits=2)
+   3.1
+   sage: N(100*pi, digits=1)
+   320.
+   sage: N(100*pi, digits=2)
+   310.
+
+In the following example, "pi" and "3" are both approximated to two
+bits of precision and then subtracted, which kills two bits of
+precision:
+
+   sage: N(pi, prec=2)
+   3.0
+   sage: N(3, prec=2)
+   3.0
+   sage: N(pi - 3, prec=2)
+   0.00</code></pre>
+ 
+<pre class="input"><code><span class="cm-comment">#az n() függvény egy alias a numerical_approx() függvényre, mely egy lebegőpontos közleítését adja meg egy adott kifejezésnek</span></code><code><span class="cm-variable">n</span>(<span class="cm-number">1</span><span class="cm-operator">/</span>(<span class="cm-number">99</span><span class="cm-operator">^</span><span class="cm-number">2</span>),<span class="cm-number">200</span>) <span class="cm-comment">#alapjáraton bitekben méri a pontosságot</span></code></pre>
+<div class="output stdout">0.00010203040506070809101112131415161718192021222324252627282930
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">numerical_approx</span>(<span class="cm-variable">pi</span>,<span class="cm-variable">digits</span>=<span class="cm-number">200</span>)</code></pre>
+<div class="output stdout">3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303820</div>
+<div class="output stdout">
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-comment"># a var() függvénnyel levédhetünk neveket, melyekkel szimbolikus változókat jelölünk</span></code><code><span class="cm-variable">var</span>(<span class="cm-string">'x'</span>)</code></pre>
+<div class="output stdout">x
+</div>
+ 
+<pre class="input"><code><span class="cm-variable">derivative</span>(<span class="cm-number">2</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">+</span><span class="cm-number">3</span>)</code></pre>
+<div class="output stdout">2
+</div>
+ 
+<pre class="input"><code><span class="cm-comment"># diff aliasa</span></code><code><span class="cm-variable">diff</span>(<span class="cm-number">5</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">3</span><span class="cm-operator">+</span><span class="cm-number">2</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">2</span>)</code></pre>
+<div class="output stdout">15*x^2 + 4*x
+</div>
+ 
+<pre class="input"><code><span class="cm-comment">#lehetőség van a magasabb szintű derivált kiszámolására is</span></code><code><span class="cm-variable">diff</span>(<span class="cm-number">5</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">3</span><span class="cm-operator">+</span><span class="cm-number">2</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">2</span>,<span class="cm-variable">x</span>,<span class="cm-variable">x</span>)</code><code><span class="cm-variable">diff</span>(<span class="cm-number">5</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">3</span><span class="cm-operator">+</span><span class="cm-number">2</span><span class="cm-operator">*</span><span class="cm-variable">x</span><span class="cm-operator">^</span><span class="cm-number">2</span>,<span class="cm-variable">x</span>,<span class="cm-number">2</span>)</code></pre>
+<div class="output stdout">30*x + 4
+</div>
+<div class="output stdout">30*x + 4
+</div>
+ 
+<pre class="input"><code></code><code><span class="cm-comment"># a könyvtár támogatja az relációk láncolását is</span></code><code><span class="cm-number">1</span> <span class="cm-operator">&lt;</span> <span class="cm-number">5</span> <span class="cm-operator">&lt;</span> <span class="cm-number">10</span></code><code><span class="cm-number">1</span> <span class="cm-operator">==</span> <span class="cm-number">2</span><span class="cm-operator">/</span><span class="cm-number">2</span> <span class="cm-operator">==</span> <span class="cm-number">9</span><span class="cm-operator">/</span><span class="cm-number">9</span></code></pre>
+<div class="output stdout">True
+</div>
+<div class="output stdout">True
+</div>
+ 
+<footer>
+    <div>generated 2022-09-12T21:28:24 on
+    <a href="https://cocalc.com">CoCalc</a>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>912</x>
+      <y>456</y>
+      <w>240</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>/Shape/
+--
+#center: Point 
+--
+/+boundingArea(): double/
++toString(): String {override}
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>888</x>
+      <y>612</y>
+      <w>288</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Circle
+--
+#radius: double {radius &gt; 0}
+--
++boundingArea(): double {override}
++toString(): String {override}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>708</y>
+      <w>288</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>EquilateralTriangle
+--
+--
++boundingArea(): double {override}
++toString(): String {override}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>900</y>
+      <w>288</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>RegularHexagon
+--
+--
++boundingArea(): double {override}
++toString(): String {override}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>804</y>
+      <w>288</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Square
+--
+--
++boundingArea(): double {override}
++toString(): String {override}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>456</y>
+      <w>240</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Point
+--
+#x: double
+#y: double 
+--
++toString(): String {override}
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>492</y>
+      <w>96</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=1</panel_attributes>
+    <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>612</y>
+      <w>288</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>/AbstractRegularPolygon/
+--
+#sideLength: double {sideLength &gt; 0}
+--
++toString(): String {override}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>552</y>
+      <w>36</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>552</y>
+      <w>336</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>260.0;10.0;260.0;30.0;10.0;30.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>636</y>
+      <w>60</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0;10.0;100.0;30.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>636</y>
+      <w>60</w>
+      <h>336</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0;10.0;260.0;30.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>636</y>
+      <w>60</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0;10.0;180.0;30.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>912</x>
+      <y>276</y>
+      <w>240</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Shapes
+--
+-shapes: Shape[0..*]
+--
++readShapes(fileName: String)
++getShapeWithBABR(): Shape</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>372</y>
+      <w>36</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r2=*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>276</y>
+      <w>204</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>InvalidFormatException</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>348</y>
+      <w>240</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>UnknownShapeTypeException</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>276</y>
+      <w>144</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;throws&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;80.0;20.0;80.0;50.0;100.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>828</x>
+      <y>324</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;50.0;30.0;50.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+</diagram>

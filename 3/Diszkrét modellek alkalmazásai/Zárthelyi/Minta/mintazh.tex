@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+	attach = {
+		main[l,vc]title[l,vc](0pt,0pt) ;
+		main[r,vc]points[l,vc](\marginparsep,0pt)
+	}
+}
+
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+	counter-format=qu.,
+	solution/print=true ,
+	question/name=Feladat,
+	solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{minted}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt    
+
+\title{\huge{Diszkrét modellek alkalmazásai} \\ \large  I. zh - minta}
+\author{kidolgozta: Boda Bálint}
+\date{2022. őszi félév}
+
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\lnko}{lnko}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel} 
+\newtheorem*{example}{Példa}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+	\maketitle
+	\begin{question}
+		Bizonyítsuk be, hogy az $$ R = \{(a,b) | a \equiv b \pmod{10}\} \subseteq \mathbb{Z} \times \mathbb{Z} $$ reláció ekvivalenciareláció.
+	\end{question}
+	\begin{solution}
+		Egy reláció ekvivalenciareláció, ha reflexív, szimmetrikus és tranzitív.
+		\begin{enumerate}
+			\item Reflexív: $\forall a \in \mathbb{Z}: a \equiv a \pmod{10} \iff a \pmod{10} = a \pmod{10} $ ami nyilván igaz 
+			\item Szimmetrikus: $\forall a,b \in \mathbb{Z}: a \equiv b \pmod{10} \implies b \equiv a \pmod{10} \\ \iff a \pmod{10} = b \pmod{10} \implies b \pmod{10} = a \pmod{10} $, mivel az egyenlőség szimmetrikus reláció ezért a kongruencia is.
+			\item Tranzitív: $$\forall a,b,c \in \mathbb{Z}: a \equiv b \pmod{10} \land b \equiv c \pmod {10} \implies a \equiv c \pmod{10} $$
+			$$
+			\iff a \pmod{10} = b \pmod{10} \land b \pmod{10} = c \pmod{10} $$ $$ \implies a \pmod{10} = c \pmod{10}, $$ mivel az egyenlőség tranzitív reláció ezért a kongruencia is.
+		\end{enumerate}
+	Az reláció 10 ekvivalenciaosztályra osztja $\mathbb{Z}$-t az alapján hogy az adott $a,b \in \mathbb{Z}$ osztályok 10-el vett osztási maradéka mennyi, melyek a 0,1,2,3,4,5,6,7,8,9 maradékosztályok.
+	\end{solution}
+	\newpage
+	\begin{question}
+		Oldja meg a $60x +16y = 60$ egyenletet az egész számok halmazán.
+	\end{question}
+	\begin{solution}
+		$ 60x + 16y = 60 \iff 15x + 4y = 15 $
+		\begin{alignat*}{2}
+			\lnko{(15,4)} = 1 \quad 15 &= 3 \cdot 4 + 3 \implies 3 = 1 \cdot 15 - 3 \cdot 4 \\
+			4 &= 1 \cdot 3 + 1 \implies 1 = 1 \cdot 4 - 1 \cdot 3 \implies 4 \cdot 4 - 1 \cdot 15 \\
+			3 &= 3 \cdot 1 + 0
+		\end{alignat*}
+		$ a = -1,\; b = 4,\; c = 15, \; d=4 $ 
+		\begin{alignat*}{2}
+			15x + 4y &= 15 \\
+			15a + 4b &= 1 \\
+			15 \cdot -1 + 4 \cdot 4 &= 1 \quad \backslash \cdot 15 \\
+			15 \cdot -15 + 4 \cdot 60 &= 15
+		\end{alignat*}
+		$ x_0 = -15, \; y_0=60 $
+		\begin{alignat*}{2}
+			x &= -15 + \frac{4}{1} \cdot t &= -15 + 4t &\qquad (t \in \mathbb{Z}) \\
+			y &= 60 - \frac{15}{1} \cdot t &= 60 - 15t &\qquad (t \in \mathbb{Z}) 
+		\end{alignat*}
+	\end{solution}
+	\begin{question}
+		Határozza meg az Euklideszi algoritmussal a következő értékeket:
+		\begin{tasks}
+			\task $\lnko{(504, 150)}$
+			\task $\lnko{(30, 22)}$
+		\end{tasks}
+	\end{question}
+	\begin{solution}
+		\begin{tasks}(2)
+			\task{$\lnko{(504, 150)} = 6$ \begin{alignat*}{2}
+				504 &= 3 \cdot 150 + 54 \\
+				150 &= 2 \cdot 54 + 42 \\
+				54 &= 1 \cdot 42 + 12 \\
+				42 &= 3 \cdot 12 + 6 \\
+				12 &= 2 \cdot 6 + 0
+			\end{alignat*}}
+			\task{ $\lnko{(30, 22)} = 2$ \begin{alignat*}{2}
+				30 &= 1 \cdot 22 + 8 \\
+				22 &= 2 \cdot 8 + 6 \\
+				8 &= 1 \cdot 6 + 2 \\
+				6 &= 3 \cdot 2 + 0
+			\end{alignat*}}
+		\end{tasks}
+	\end{solution}
+	\newpage
+	\begin{question}
+		Oldja meg a következő lineáris kongruenciákat:
+		\begin{tasks}
+			\task $ 16x \equiv 36 \pmod{28}$
+			\task $ 15x \equiv 8 \pmod{20}$
+		\end{tasks}
+	\end{question}
+	\begin{solution}
+		\begin{tasks}
+			\task { $ 16x \equiv 36 \pmod{28} $ 
+				\begin{alignat*}
+					116x \equiv 36 \pmod{28}
+					&\iff 16x \equiv 64 \pmod{28} \\
+					&\iff x \equiv 4 \pmod{7} \\
+					&\implies x = 4 + 7t \quad (t \in \mathbb{Z})
+				\end{alignat*}}
+			\task { $ 15x \equiv 8 \pmod{20} \quad \lnko{(15,20)}=5 \qquad 5 \nmid 8 \implies \text{Nincs megoldás.} $ }
+		\end{tasks}
+	\end{solution}
+	\begin{question}
+		\begin{tasks}
+			\task {Írjon függvényt, amely természetes számokat tartalmazó halmazt fogad paraméterként (üres halmaz esetén dobjon \mintinline{python3}|ValueError| kivételt). A függvény a számok valódi (nem triviális) osztóit állítsa elő úgy, hogy egy halmazzal tér vissza, amiben rendezett párok vannak: a pár első komponense az egyik természetes szám, a második komponense az első komponens valódi osztóinak halmaza. Hívja meg a függvényt példákkal (kapja el a dobott kivételt).}
+			\task{Készítse el azt a listát, amelyben 112-nél nagyobb, 1000-nél kisebb prímszámok vannak, amelyek kongruensek 7-tel modulo 235.}
+		\end{tasks}
+	\end{question}
+	\begin{question}
+		Olvasson be a billentyűzetről egy m pozitív egész számot. Ábrázolja a következő irányított gráfot: csúcsai az $\{1; 2; ....;m\}$ összes 3-elemű részhalmazai; egy $\{a; b; c\}$ csúcsból akkor mutat irányított él egy $\{d; e; f\}$ csúcsba, ha $a + b + c < d * e * f$. Példaként rajzolja ki $m = 6$ esetben a gráfot. 		
+	\end{question}
+\end{document}

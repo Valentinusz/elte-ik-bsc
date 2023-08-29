@@ -1,0 +1,166 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+\usepackage{centernot}
+\usepackage{listings}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{lstmisc}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+
+\title{\huge{Analízis II} \\ \large 7. Házi feladat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\ps}{p(S)}
+\DeclareMathOperator{\prim}{pr\acute \jmath m}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+	\maketitle
+	\begin{question}
+		Számítsuk ki a következő határozatlan integrálokat!
+		\begin{tasks}
+			\task{
+				\begin{align*}
+					\int{\frac{(x+1)^2}{\sqrt{x}}  \mathop{dx}} &= \int{\frac{x^2+2x+1}{\sqrt{x}}  \mathop{dx}} = \int{\frac{x^2}{\sqrt{x}} \mathop{dx}} + \int{\frac{2x}{\sqrt{x}} \mathop{dx}} + \int{\frac{1}{\sqrt{x}} \mathop{dx}} \\
+					&= \int{x^{2-\frac{1}{2}} \mathop{dx}} + 2 \cdot \int{x^{1-\frac{1}{2}}  \mathop{dx}} + \int{x^{-\frac{1}{2}} \mathop{dx}} \\
+					&= \int{x^{\frac{3}{2}} \mathop{dx}} + 2 \cdot \int{x^{\frac{1}{2}}  \mathop{dx}} + \int{x^{-\frac{1}{2}} \mathop{dx}} \\
+					&= \frac{2}{5} \cdot x^{\frac{5}{2}} + 2 \cdot \frac{2}{3} \cdot x^{\frac{3}{2}} + 2 \cdot x^{\frac{1}{2}} + c = \frac{2}{5} \cdot x^{\frac{5}{2}} + \frac{4}{3} \cdot x^{\frac{3}{2}} + 2 \cdot x^{\frac{1}{2}}
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\sqrt{1-\cos{2x}}  \mathop{dx}} &= \int{ \sqrt{\sin^2{x}+\cos^2{x} - (\cos^2{x}-\sin^2{x})}  \mathop{dx}} = \int{ \sqrt{2\sin^2{x}}  \mathop{dx}} \\
+					&= \sqrt{2} \int{ \sin{x}}  \mathop{dx} = \sqrt{2} \cdot -\cos{x} + c = -\sqrt{2} \cos{x} + c
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\frac{1}{1+e^{-x}} \mathop{dx}} &= \int{\frac{-e^{-x}}{1+e^{-x}} + 1 \mathop{dx}} \\ 
+					&= \int{\underbrace{\frac{-e^{-x}}{1+e^{-x}}}_{\frac{f'}{f}} \mathop{dx}} + \int{1 \mathop{dx}} \quad (\text{Első helyettesítési szabály}) \\
+					&= \ln{\left( 1 + e^{-x} \right)} + x + c
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\frac{x}{x^2+4} \mathop{dx}} &= \frac{1}{2} \cdot \int{\underbrace{\frac{2x}{x^2+4}}_{\frac{f'}{f}}  \mathop{dx}} \quad (\text{Első helyettesítési szabály}) \\ &= \frac{1}{2} \cdot \ln{(x^2+4)} + c
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\frac{x}{\sqrt[3]{x^2+4}} \mathop{dx}} &= \frac{1}{2} \cdot \int{\frac{2x}{(x^2+4)^\frac{1}{3}} \mathop{dx}} \\
+					&= \frac{1}{2} \int{2x \cdot (x^2+4)^{-\frac{1}{3}} \mathop{dx}} \quad (\text{Első helyettesítési szabály}) \\
+					&= \frac{1}{2} \cdot \frac{3}{2} \cdot (x^2+4)^{\frac{2}{3}} + c = \frac{3}{4} \cdot (x^2+4)^{\frac{2}{3}} + c
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{x^2 \cdot \sqrt[3]{6x^3+4} \mathop{dx}} &= \int{x^2 \cdot (6x^3+4)^\frac{1}{3} \mathop{dx}} \\
+					&= \frac{1}{18} \cdot \int{18x^2 \cdot (6x^3+4)^\frac{1}{3} \mathop{dx}} \quad (\text{Első helyettesítési szabály}) \\
+					&= \frac{1}{18} \cdot \frac{3}{4} \cdot (6x^3+4)^\frac{4}{3} + c = \frac{1}{24} \cdot (6x^3+4)^{\frac{4}{3}} + c
+				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\frac{5x+3}{2x-3} \mathop{dx}} &= \int{\frac{4x-6}{2x-3} + \frac{x+9}{2x-3} \mathop{dx}} = \int{2\mathop{dx}} + \int{\frac{x+9}{2x-3} \mathop{dx}} \\
+						&= 2x + \int{\frac{x}{2x-3} \mathop{dx}} + \int{\frac{9}{2x-3} \mathop{dx}} \\
+						&= 2x + \int{\frac{x}{2x-3} \mathop{dx}} + \frac{9}{2} \ln(2x-3) \\[10pt]
+					\int{\frac{x}{2x-3} \mathop{dx}} &= \frac{1}{2} \int{\frac{2x}{2x-3} \mathop{dx}} \\
+					 	&= \frac{1}{2} \int{\frac{2x-3+3}{2x-3} \mathop{dx}} 
+						= \frac{1}{2} \left( \int{1 \mathop{dx}} + \int{\frac{3}{2x-3} \mathop{dx}} \right) \\
+						&= \frac{1}{2} \left( x + \frac{3}{2} \int{\frac{2}{2x-3}  \mathop{dx}} \right)
+						= \frac{1}{2}x + \frac{3}{4}\ln(2x-3) \\[10pt]
+					\int{\frac{5x+3}{2x-3} \mathop{dx}} &= 2x + \frac{9}{2} \ln(2x-3) + \frac{1}{2}x + \frac{3}{4}\ln(2x-3)  \\
+						&= 2x + \frac{1}{2}x + \frac{3}{4}\ln(2x-3) + \frac{9}{2} \ln(2x-3) + c \\
+						&= 2,5x + \frac{21}{4} \ln(2x-3) + c
+ 				\end{align*}
+			}
+			\task{
+				\begin{align*}
+					\int{\frac{x}{1+x^4} \mathop{dx}}
+				\end{align*}
+			}
+			\task{ A parciális integrálás szabálya alapján:
+				\begin{align*}
+					\int{x^2 \ln^2 x \mathop{dx}} &= \int{\left( \frac{x^3}{3} \right)' \ln^2 x \mathop{dx}} \\
+						&= \frac{x^3}{3} \cdot \ln^2 x - \int{\frac{x^3}{3} \cdot \frac{2 \ln x}{x} \mathop{dx}} = \frac{x^3 \cdot ln^2x}{3} - \frac{2}{3} \cdot \int{x^2 \cdot \ln x \mathop{dx}} \\[10pt]
+					\int{x^2 \cdot \ln x \mathop{dx}} &= \int{\left( \frac{x^3}{3} \right)' \ln x \mathop{dx}} \\
+						&= \frac{x^3}{3} \cdot \ln x - \int{\frac{x^3}{3} \cdot \frac{1}{x} \mathop{dx}} = \frac{x^3 \cdot \ln x}{3} - \frac{1}{3} \cdot \int{x^2 \mathop{dx}} \\
+						&= \frac{x^3 \cdot \ln x}{3} - \frac{1}{3} \cdot \frac{x^3}{3} = \frac{x^3 \cdot \ln x}{3} - \frac{x^3}{9} \\[10pt]
+					\int{x^2 \ln^2 x \mathop{dx}} &= \frac{x^3 \cdot \ln^2x}{3} -  \frac{2}{3} \cdot \left( \frac{x^3 \cdot \ln x}{3} - \frac{x^3}{9} \right) \\
+					&= \frac{x^3 \cdot \ln^2x}{3} - \frac{2x^3 \ln x}{9} + \frac{2x^3}{27} \\
+					&= \frac{1}{3} x^3 \cdot \ln^2x -\frac{2}{9} x^3 \cdot \ln x + \frac{2}{27} x^3 + c
+				\end{align*}
+			}
+			\task{ A parciális integrálás szabálya alapján:
+				\begin{align*}
+					\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} &= \int{(e^x)' \cdot \sin{(3x+1)} \mathop{dx}} \\
+						&= e^x \cdot \sin{(3x+1)} - \int{e^x \cdot \cos{(3x+1)} \cdot 3 \mathop{dx}} \\
+						&= e^x \cdot \sin{(3x+1)} - 3\int{e^x \cdot \cos{(3x+1)} \mathop{dx}} \\[10pt]
+					\int{e^x \cdot \cos{(3x+1)} \mathop{dx}} &= \int{(e^x)' \cdot \cos{(3x+1)} \mathop{dx}} \\
+						&= e^x \cdot \cos{(3x+1)} - \int{e^x \cdot -\sin{(3x+1)} \cdot 3 \mathop{dx}} \\[10pt]
+					\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} &= e^x \cdot \sin{(3x+1)} - 3\int{e^x \cdot \cos{(3x+1)} \mathop{dx}} \\
+					&= e^x \cdot \sin{(3x+1)} - 3 \left( e^x \cdot \cos{(3x+1)} - 3\int{e^x \cdot -\sin{(3x+1)} \mathop{dx}}  \right) \\
+				\end{align*}
+				Rendezést követően a következő egyenletet kapjuk:
+				\begin{align*}
+					\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} &= e^x \cdot \sin{(3x+1)} - 3e^x \cdot \cos{(3x+1)} - 9\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} \\
+					10\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} &= e^x \cdot \sin{(3x+1)} - 3e^x \cdot \cos{(3x+1)} 
+				\end{align*}
+				Melyből az következik, hogy:
+				\[
+					\int{e^x \cdot \sin{(3x+1)} \mathop{dx}} =  \frac{1}{10}e^x \cdot \sin{(3x+1)} -\frac{3}{10}e^x \cdot \cos{(3x+1)} + c
+				\]
+			}
+		\end{tasks}
+	\end{question}
+\end{document}

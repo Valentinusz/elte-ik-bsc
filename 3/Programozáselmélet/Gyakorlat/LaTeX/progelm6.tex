@@ -1,0 +1,144 @@
+%! Author = Val
+%! Date = 2022. 10. 20.
+
+%! Author = Valentinusz
+%! Date = 2022. 10. 19.
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+\usepackage{centernot}
+\usepackage{listings}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{lstmisc}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+
+\title{\huge{Programozáselmélet} \\ \large 6. gyakorlat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\ps}{p(S)}
+\DeclareMathOperator{\prim}{prím}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+    \maketitle
+    \begin{question}
+        Döntsük el egy adott pozitív egész számról, hogy prím-e.
+    \end{question}
+    \begin{solution}
+        A paraméterteret úgy érdemes megválasztani, hogy az állapottér egy olyan altere legyen, melyben csak olyan változók vannak, melyek befogylásolják a végeredményt.
+        \begin{align*}
+            A &= (x: \mathbb{N}^+, l: \mathbb{L}) \\
+            B &= (x': \mathbb{N}^+) \\
+            Q &= (x * 2 = x') \\
+            R &= (Q \; \land \; l = \prim(x))
+        \end{align*}
+        \[ \prim{}: \mathbb{N} \rightarrow \mathbb{L} \]
+        \[ \prim(x) \coloneqq
+        \begin{cases}
+            hamis, & x = 1 \\
+            \forall k \in \left[2..x-1\right]: k \centernot | x, & x \ne 1
+        \end{cases} \]
+        Az előfeltételben pedig érdemes kikötni azt, hogy azok a változók melyek megváltozása nem szükséges a feladathoz ne változhassanak meg.
+        \begin{align*}
+            A &= (x: \mathbb{N}^+, l: \mathbb{L}) \\
+            B &= (x': \mathbb{N}^+) \\
+            Q &= (x = x') \\
+            R &= (Q \; \land \; l = \prim(x))
+        \end{align*}
+    \end{solution}
+
+    \begin{question}
+        Adott egy egészeket tartalmazó tömb.
+        Határozzuk meg a legnagyobb elemét!
+    \end{question}
+    \begin{solution}
+        \begin{align*}
+            A &= (t: \mathbb{Z}^n, max: \mathbb{Z}) \\
+            B &= (t': \mathbb{Z}^n) \\
+            Q &= (t = t' \land n \ne 0) \\
+            R &= (Q \; \land \; \forall i \in \left[ 1..n \right]: max \ge t\left[ i \right] \; \land \; \exists j \in \left[ 1..n \right]: max = t\left[ j \right])
+        \end{align*}
+    \end{solution}
+
+    \begin{question}
+        Adott egy egészeket tartalmazó tömb.
+        Ha tartalmaz pozitív elemeket, akkor keressük meg a legnagyobb elemét, különben a legkisebbet.
+    \end{question}
+    \begin{solution}
+        \begin{align*}
+            A &= (x: \mathbb{Z}^n, ext:\mathbb{Z}) \\
+            B &= (x': \mathbb{Z}^n) \\
+            Q &= (t = t' \land n \ne 0) \\
+            R &= \left(Q \; \land \; l =
+                \begin{cases}
+                    \forall i \in \left[ 1..n \right]: ext \ge t\left[ i \right] \; \land \; \exists j \in \left[ 1..n \right]: ext = t\left[ j \right], & \exists k \in \left[ 1..n \right]: t\left[ k \right ] > 0 \\
+                    \forall i \in \left[ 1..n \right]: ext \le t\left[ i \right] \; \land \; \exists j \in \left[ 1..n \right]: ext = t\left[ j \right], & \exists k \in \left[ 1..n \right]: t\left[ k \right ] \le 0
+                \end{cases} \right)
+        \end{align*}
+    \end{solution}
+
+    \begin{question}
+        Adott egy egészeket tartalmazó tömb.
+        A tömb elemei egyediek.
+        Rendezzük növekvően a tömböt!
+    \end{question}
+    \begin{solution}
+        \begin{align*}
+            A &= (t: \mathbb{Z}^n) \\
+            B &= (t': \mathbb{Z}^n) \\
+            Q &= (t' = t \; \land \; \forall i,j \in [1..n]: i \ne j \implies t[i] \ne t[j]) \\
+            R &= \left(\forall i \in \left[ 1..n-1 \right]: t\left[ i \right]  \ge t\left[ i+1 \right] \; \land \; \left( \bigcup_{i=1}^n{\{t[i]\}} = \bigcup_{i=1}^n{\{t'[i]\}}  \right) \right)
+        \end{align*}
+    \end{solution}
+\end{document}

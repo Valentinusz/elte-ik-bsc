@@ -1,0 +1,324 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{stuki}
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+\title{\huge{Programozáselmélet} \\[-4pt] \large 9. gyakorlat \vspace{-15pt}}
+\author{Boda Bálint}
+\date{\vspace{-12pt}2022. őszi félév}
+
+\DeclareMathOperator{\lf}{lf}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+    \maketitle
+    \setcounter{question}{2}
+\begin{question}(10. feladatsor)
+	Lássa be, hogy az $S$ program megoldja a következő feladatot:
+	\\[-16pt]
+	\begin{minipage}{0.6\textwidth}
+		\vspace*{0pt}
+		\begin{align*}
+			A &= \left( x: \mathbb{Z}^n \right) \\
+			B &= \left( x': \mathbb{Z}^n \right) \\
+			Q &= (x = x') \\
+			R &= (\forall k \in [1..n]: x[k] = x'[k] +1)
+		\end{align*}
+	\end{minipage}
+	%
+	\begin{minipage}{0.39\textwidth}
+		Informálisan: adott egy egész számokat tartalmazó vektor. Növeljük meg az összes elemét eggyel.
+		\vspace*{0pt}
+	\end{minipage}
+	\\[8pt]
+	Az program állapottere $ \left( x: \mathbb{Z}^n, i: \mathbb{N}\right) $.
+
+	\begin{wrapfigure}[3]{l}{3.5cm}
+			\vspace{-2\baselineskip}
+		\begin{stuki*}[3.5cm]{S}
+			\stm{i \coloneq 1}
+			\begin{WHILE}{2}{\stm{i \ne n + 1}}
+				\stm{x[i] \coloneq  x[i] + 1}
+				\stm{i \coloneq i + 1}
+			\end{WHILE}
+		\end{stuki*}
+	\end{wrapfigure}\leavevmode
+	\noindent
+	\\[18pt]
+	$Q' = \left( Q \land i=1 \right) \text{ a szekvencia közbülső állítása}$
+	\\[22pt]
+	$Q'' \land n + 1 - i = t_0 $ a ciklusmag mint szekvencia közbülső állítása, ahol $Q'' = P^{i\leftarrow i+1} $
+	\\[16pt]
+	\noindent
+	Legyen továbbá:
+	\vspace{-10pt}
+	\begin{align*}
+		t &= n + 1 - i \text{ a termináló függvény és} \\
+		P &= \left( \forall k \in [1..i-1]: x[k] = x'[k] + 1 \land i \in [1..n+1] \land \forall k \in [i..n]: x[k] = x'[k] \right) \text{ a ciklusinvariáns.}
+	\end{align*}
+	\end{question}
+	\vspace{-5pt}
+	\begin{solution}
+		A szekvencia levezetési szabálya szerint azt kell belátni, hogy:
+		\begin{enumerate}
+			\item $ Q \implies \lf{(i \coloneq 1, Q')} $
+			\begin{align*}
+				Q &\implies (Q')^{i \leftarrow 1} \\
+				Q &\implies (Q \land 1 = 1) \checkmark
+			\end{align*}
+			\item $ Q' \implies \lf{(DO,R)} $, ahol $DO$ jelöli a struktogramban szereplő ciklust. \\
+			A ciklus levezetési szabálya alapján:
+			\begin{enumerate}
+				\item $Q' \implies P$. $Q'$ miatt $i=1$, így:
+				\begin{align*}
+					(Q \land i=1) &\implies ( \underbrace{ \forall k \in [1..0]: x[k] = x'[k] + 1 }_{\forall x \in \emptyset \text{ típusú állítás igaz}} \land \underbrace{1 \in [1..n+1]}_{\substack{n \text{ egy tömb hossza} \\ \text{ezért}: n \ge 0 \text{ tehát az} \\ \text{intervallum mindig} \\ \text{tartalmazza egyet} }} \land \underbrace{\forall k \in [1..n]: x[k] = x'[k]}_{\iff x=x'\text{, ami }Q} ) \\
+					(Q \land i = 1) &\implies Q \checkmark
+				\end{align*}
+				\item $(P \land \lnot \pi) \implies R $. Mivel $\lnot \pi \iff (i = n + 1)$:
+				\begin{align*}
+					( \underbrace{ \forall k \in [1..n]: x[k] = x'[k] + 1}_{R} \land \underbrace{n+1 \in [1..n+1]}_{igaz} \land \underbrace{\forall k \in [n+1..n]: x[k] = x'[k]}_{\forall x \in \emptyset: \dots \text{ igaz}} ) \implies R \checkmark
+				\end{align*}
+				\item $P \implies (\pi \lor \lnot \pi) $
+				\begin{align*}
+					P \implies \bigl( (i \ne n + 1) \lor (i = n + 1) \bigr)
+				\end{align*}
+				Ez nyilván teljesül, mert az egyenlőségvizsgálat eredménye csak igaz vagy hamis lehet. 
+				\item $(P \land \pi) \implies t > 0$. $\pi$ miatt $i \ne n + 1 $ így:
+				\begin{align*}
+					&( \forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \underline{ i \in [1..n] } \land \forall k \in [i..n]: x[k] = x'[k] ) \implies n + 1 - i > 0
+				\end{align*}
+				Mivel $i$ értéke maximum $n$ lehet ezért $ n + 1 - i > 0 $.
+				\item $(P \land \pi \land t = t_0) \implies \lf (S_0, P \land t<t_0) $, ahol $S_0$ a $DO$ ciklus ciklusmagja. \\ Így a szekvencia levezetési szabálya alapján:
+				\begin{enumerate}
+					\item $ (P \land \pi \land t = t_0) \implies \lf(x[i] \coloneq x[i] + 1, Q'' \land n + 1 - i = t_0) $
+					\begin{align*}
+						Q'' &= P^{i \leftarrow i + 1} \\
+						&= \left( \forall k \in [1..i]: x[k] = x'[k] + 1 \land i+1 \in [1..n+1] \land \forall k \in [i+1..n]: x[k] = x'[k] \right) \\
+						&= \left( \begin{array}{l}
+							\forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \\ x[i] = x'[i] + 1 \land \\ i+1 \in [1..n+1] \land \\ \forall k \in [i+1..n]: x[k] = x'[k]
+						\end{array} \right)
+					\end{align*}
+					Mivel értékadás tömbelemekkel dolgozik be kell vezetünk az $ i \in [1..n] $ feltételt, hogy elkerüljük a túlindexelést. Így:
+					\begin{align*}
+						(P \land \pi \land n + 1 - i = t_0) \implies (Q'' \land n + 1 - i = t_0 \land i \in [1..n])^{x[i] \leftarrow x[i] + 1}
+					\end{align*}
+					Elvégezve a behelyettesítést:
+					\begin{align*}
+						(P \land \pi \land \underline{ n + 1 - i = t_0 }) \implies \bigl( (Q'')^{x[i] \leftarrow x[i] + 1} \land \underline{n + 1 - i = t_0 } \land i \in [1..n] \bigr)
+					\end{align*}
+					Az aláhúzott rész mindkét oldalon teljesül ezért az kell még belátni, hogy:
+					\begin{align*}
+						\left( \begin{array}{l}
+							\forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \\
+							i \in [1..n+1] \land \\
+							\forall k \in [i..n]: x[k] = x'[k] \land \\
+							i \ne n+1
+						\end{array} \right) &\implies
+						\left( \begin{array}{l}
+							\forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \\
+							x[i] + 1 = x'[i] + 1 \land \\
+							i+1 \in [1..n+1] \land i \in [1..n] \land \\
+							\forall k \in [i+1..n]: x[k] = x'[k]
+						\end{array} \right)
+					\end{align*}
+					Összevonva a bal oldal $ i \in [1..n+1] $ és $ i \ne n + 1$ feltételét:
+					\begin{align*}
+						\left( \begin{array}{l}
+							\underline{\forall k \in [1..i-1]: x[k] = x'[k] + 1} \land \\
+							i \in [1..n] \land \\
+							\forall k \in [i..n]: x[k] = x'[k] \land \\
+						\end{array} \right) &\implies
+						\left( \begin{array}{l}
+							\underline{\forall k \in [1..i-1]: x[k] = x'[k] + 1} \land \\
+							x[i] + 1 = x'[i] + 1 \land \\
+							i+1 \in [1..n+1] \land i \in [1..n] \land \\
+							\forall k \in [i+1..n]: x[k] = x'[k]
+						\end{array} \right)
+					\end{align*}
+					Az első állítás mindkét oldalon szerepel, azzal több teendőnk nincs. Az $i \in [1..n]$ állítás szintén megtalálható mindkét oldalon. Nyilván emiatt a jobb oldal $i+1 \in [1..n+1]$ állítása igaz lesz. Vegyük észre, hogy, ha azt mondjuk, hogy $x[i] + 1 = x'[i] + 1$, az ugyan az mintha azt mondanánk, hogy $x[i] = x'[i]$, ezért ezt a feltételt összevonhatjuk a $ \forall k \in [i+1..n]: x[k] = x'[k] $ kifejezéssel. Így a két oldal megegyezik:
+					\begin{align*}
+						\left( \begin{array}{l}
+							\forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \\
+							i \in [1..n] \land \\
+							\forall k \in [i..n]: x[k] = x'[k] \land \\
+						\end{array} \right) &\implies
+						\left( \begin{array}{l}
+							\forall k \in [1..i-1]: x[k] = x'[k] + 1 \land \\
+							i+1 \in [1..n+1] \land i \in [1..n] \land \\
+							\forall k \in [i..n]: x[k] = x'[k]
+						\end{array} \right)
+					\end{align*}
+
+					\item $ Q'' \land n + 1 - i = t_0 \implies \lf(i \coloneq i + 1, P \land (t < t_0)) $
+					\begin{align*}
+						Q'' \land n + 1 - i = t_0 &\implies \lf(i \coloneq i + 1, P \land (n + 1 - i < t_0)) \\
+						Q'' \land n + 1 - i = t_0&\implies (P \land (n + 1 - i < t_0))^{i\leftarrow i+1} \\
+						P^{i \leftarrow i + 1} \land n + 1 - i = t_0 &\implies (P^{i \leftarrow i + 1} \land n + 1 - (i + 1) < t_0) \\
+						P^{i \leftarrow i + 1} \land n + 1 - i = t_0 &\implies (P^{i \leftarrow i + 1} \land n - i < t_0)
+					\end{align*}
+					Mivel $t_0 = n + 1 - i$, ezért $ n - i < n - i  + 1$ nyilván teljesül.
+				\end{enumerate}
+			\end{enumerate}
+		\end{enumerate}
+		Így $S$ megoldja a specifikált feladatot.
+	\end{solution}
+
+	\newpage
+	\setcounter{question}{1}
+	\begin{question}
+		Lássa be, hogy az $S$ program megoldja a következő feladatot: 
+		\\[-18pt]
+		
+		\begin{minipage}{0.3\textwidth}
+			\vspace*{0pt}
+			\begin{align*}
+				A &= ( n: \mathbb{N}, s: \mathbb{N} ) \\
+				B &= ( n': \mathbb{N} ) \\
+				Q &= ( n = n' \land n > 2) \\
+				R &= (Q \land s = \mathop{Fib}(n))
+			\end{align*}
+		\end{minipage}
+		%
+		\begin{minipage}{0.7\textwidth}
+			\vspace*{0pt}
+			\begin{equation*} \mathop{Fib(n)}=
+				\begin{cases}
+					0 &\text{ha }  n = 1 \\
+					1, &\text{ha } n = 2 \\
+					\mathop{Fib(n-1)} + \mathop{Fib(n-2)}, &\text{ha } n > 2
+				\end{cases}
+			\end{equation*}
+		\end{minipage}
+
+		\vspace{5pt}
+		\noindent
+		Informálisan: Adjuk meg az $n.$ Fibonacci számot. \\[4pt]
+		\noindent
+		Az program állapottere $ \left( n: \mathbb{N}, s: \mathbb{N}, z: \mathbb{N}, i: \mathbb{N} \right) $.
+		
+		\begin{wrapfigure}[2]{l}{5cm}
+			\vspace{-2\baselineskip}
+			\begin{stuki*}[5cm]{S}
+				\stm{i,s,z \coloneq 3,1,0}
+				\begin{WHILE}{1}{\stm{i \le n}}
+					\stm{i,s,z \coloneq  i+1,s+z,s}
+				\end{WHILE}
+			\end{stuki*}
+		\end{wrapfigure}\leavevmode
+		\noindent
+		\\[18pt]
+		$Q' = \left( Q \land i=3 \land s=1 \land z = 0 \right) \text{ a szekvencia közbülső állítása}$
+		\\[34pt]\noindent
+		Legyen továbbá: 
+		\vspace{-9pt}
+		\begin{align*}
+			t &= n + 1 - i \text{ a termináló függvény és} \\
+			P &= ( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n+1]  ) \text{ a ciklusinvariáns.}
+		\end{align*}
+	\end{question}
+	\begin{solution}
+		A szekvencia levezetési szabálya alapján a következőket kell belátni:
+		\begin{enumerate}
+			\item $Q \implies \lf(i,s,z \coloneq 3,1,0;Q') $
+			\begin{align*}
+				Q &\implies (Q \land i=3 \land s=1 \land z = 0)^{i \leftarrow 3, s \leftarrow 1,z \leftarrow 0} \\
+				Q &\implies (Q \land 3 = 3 \land 1 = 1 \land 0 = 0) \checkmark
+			\end{align*}
+			\vspace*{-6pt}
+			\item $Q' \implies \lf(S_2,R)$, ahol $S_2$ egy ciklus ezért a ciklus levezetési szabálya alapján:
+			\begin{enumerate}
+				\item $Q' \implies P$
+				\begin{align*}
+					( Q \land \underline{ i=3 \land s=1 \land z = 0 } ) &\implies ( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n+1] )  \\
+					( Q \land i=3 \land s=1 \land z = 0 ) &\implies ( Q \land \underbrace { 1 = \mathop{Fib}(2) }_{\checkmark} \land \underbrace{0 = \mathop{Fib}(1) }_{\checkmark} \land \underbrace{ 3 \in [3..n+1] }_{\checkmark} ) \checkmark
+				\end{align*}
+				\item $(P \land \lnot \pi) \implies R$ 
+				\begin{align*}
+					\bigl( ( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \underbrace{ \land i \in [3..n+1] ) \land i > n }_{i > n \text{ csak akkor lehet ha } i = n + 1} \bigr) &\implies (Q \land s = \mathop{Fib}(n)) \\
+					\bigl( ( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land \underline{ i = n + 1 } \bigr) &\implies (Q \land s = \mathop{Fib}(n)) \\
+					\bigl( ( Q \land s = \mathop{Fib}(n) \land z = \mathop{Fib}(n-1) \bigr) &\implies (Q \land s = \mathop{Fib}(n))
+				\end{align*}
+				A bal oldal a jobb oldal egy szigorúbb változata ezért a maga után vonás igaz. $\checkmark$
+				\item $ P \implies (\pi \lor \lnot \pi) $
+				\begin{align*}
+					\bigl( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n+1] \bigr) &\implies (i \le n \lor i > n ) \\
+					\bigl( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in \underbrace{[3..n+1]}_{\substack{Q \text{ miatt mindig} \\ \text{ tartalmazza 3-at}}} \bigr) &\implies (i \le n \lor i > n )
+				\end{align*}
+				A bal oldal igaz a jobb oldal pedig minden lehetséges esetet lefed ezért a feltétel teljesül. \checkmark
+				\item $ (P \land \pi) \implies t > 0 $
+				\begin{align*}
+					\bigl( ( Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land \underbrace{ i \in [3..n+1] ) \land i \le n }_{\substack {i \text{ maximum n lehet, ezért} \\ \text{a jobb oldal mindig pozitív}}} \bigr) & \implies n + 1 - i > 0 \checkmark
+				\end{align*}
+				\item $ (P \land \pi \land t = t_0) \implies \lf(i,s,z \coloneq  i+1,s+z,s; P \land  t < t_0) $
+				\begin{align*}
+					(P \land \pi \land t = t_0) &\implies (P \land t < t_0)^{i \leftarrow i+1, s \leftarrow s+z,z \leftarrow s} \\
+					(P \land \pi \land t = t_0) &\implies (Q \land s+z = \mathop{Fib}(i) \land s = \mathop{Fib}(i-1) \land i+1 \in [3..n+1] \land n + i < t_0  )
+				\end{align*}
+				A bal oldalból tudjuk, hogy: $ t_0 = n + 1 - i$, így a termináló függvény csökkenésére vonatkozó feltétel nyilván teljesül. Így már csak a következőt kell belátni:
+				\begin{align*}
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n+1] \land i \le n \\ \implies
+					&Q \land s+z = \mathop{Fib}(i) \land s = \mathop{Fib}(i-1) \land i+1 \in [3..n+1]
+				\end{align*}
+				Átalakítva a bal oldalt és $ i \le n$ miatt:
+				\begin{align*}
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n] \\ \implies
+					&Q \land s+z = \mathop{Fib}(i) \land s = \mathop{Fib}(i-1) \land i \in [2..n]
+				\end{align*}
+				További átalakítások után:
+				\begin{align*}
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n] \\ \implies
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i) - s \land  i \in [2..n]
+				\end{align*}
+				Q miatt tudjuk, hogy $n > 2$ ezért, mivel $ 2 < i \le n $ ezért $ s = \mathop{Fib}(i-1)$ így:
+				\begin{align*}
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n] \\ \implies
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i) - \mathop{Fib}(i-1) \land  i \in [2..n]
+				\end{align*}
+				Mivel $n > 2$, $ \mathop{Fib}(i) = \mathop{Fib}(i-1) + \mathop{Fib}(i-2) $, ezért ${ \mathop{Fib}(i-2) = \mathop{Fib}(i) - \mathop{Fib}(i-1) }$:
+				\begin{align*}
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land i \in [3..n] \\ \implies
+					&Q \land s = \mathop{Fib}(i-1) \land z = \mathop{Fib}(i-2) \land  i \in [2..n]
+				\end{align*}
+				A bal oldalon a jobb oldal egy szigorúbb változata van, ezért a maga után vonás igaz. \checkmark
+			\end{enumerate}
+		\end{enumerate}
+		Így az $S$ program megoldja a feladatot.
+	\end{solution}
+\end{document}

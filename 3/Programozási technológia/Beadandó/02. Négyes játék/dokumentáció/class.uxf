@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>14</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>364</x>
+      <y>112</y>
+      <w>238</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+
+--
++main(args: String[]): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>238</x>
+      <y>602</y>
+      <w>224</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+-score: int
+--
++getScore(): int {query}
++incrementScore()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>196</x>
+      <y>434</y>
+      <w>266</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Tile
+--
+-tipCount: byte
+--
++getTipCount(): byte {query}
++tipTile(p: Player): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>644</x>
+      <y>434</y>
+      <w>392</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes>GameModel
+--
+-board: Tile[][]
+-currentPlayer: byte
+-players: Player[]
+--
++GameModel(boardSize: int)
++getTile(x, y : int): Tile {query}
++tipTile(x, y: int): ArrayList&lt;int[]&gt;
++getCurrentPlayer(): Player {query}
++getCurrentPlayerIndex(): byte {query}
++isOver(): boolean {query}
++getWinner(): byte {query}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>0</y>
+      <w>308</w>
+      <h>322</h>
+    </coordinates>
+    <panel_attributes>GameGUI
+--
+-board: JButton[][]
+-frame: JFrame
+-game: GameModel
+-scoreLabels: JLabel[]
+-turnLabel: JLabel
+--
++GameGui()
+-setupGame(boardSize: int)
+-resetGame()
+--
+{innerclass
+ButtonListener
+--
+-row, column: int
+--
+actionPerformed(e: ActionEvent)
+innerclass}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>140</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>308</y>
+      <w>98</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-game</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>518</y>
+      <w>224</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-players
+r2=2</panel_attributes>
+    <additional_attributes>140.0;10.0;80.0;10.0;80.0;110.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>462</y>
+      <w>224</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r2=n*n
+-board</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>

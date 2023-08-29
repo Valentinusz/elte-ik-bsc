@@ -1,0 +1,143 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=0.75in,showframe]{geometry}
+\usepackage[hungarian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\usepackage{tasks}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{mathtools}
+
+\title{\huge{Analízis II} \\ \large 10. Házi feladat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Megjegyzés}
+
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+
+
+
+\begin{document}
+	\maketitle
+	\begin{question}
+		Bizonyítsa be, hogy:
+		\begin{tasks}
+			\task{ Az $f$ függvény folytonos a $(0,0)$ pontban!
+			\begin{equation*}
+				f(x,y) \coloneq \begin{cases}
+					\displaystyle \frac{x^3 y^2}{3x^2+2y^2}, &\text{ha } (x,y) \in \mathbb{R}^2 \setminus \{ (0,0) \} \\
+					0, &\text{ha } (x,y) = (0,0)
+				\end{cases}
+			\end{equation*}
+			A folytonosság definíciója alapján azt kell megmutatni, hogy:
+			\begin{equation}
+				\forall \varepsilon > 0: \exists \delta > 0: \forall x \in D_f, || (x,y) - (0,0) || < \delta: | f(x,y) - f(0,0) | < \varepsilon
+			\end{equation}
+			Rögzítsünk egy $\varepsilon > 0$ valós számot. Ha $(x,y) = (0,0)$, akkor ${|f(x,y)-f(0,0)| = 0 < \varepsilon}$
+			\\[4pt]
+			Ha $(x,y) \in \mathbb{R}^2 \setminus \{(0,0)\} $, akkor
+			\begin{align*}
+				\left| f(x,y) - f(0,0) \right| &= \left| \frac{x^3 y^2}{3x^2+2y^2} - 0 \right| = \frac{|x^3|y^2}{3x^2+2y^2} = \frac{y^2}{3x^2+2y^2} \cdot |x^3| \le \frac{3x^2+2y^2}{3x^2+2y^2} \cdot |x^3| \\
+				&\le (\text{tfh. } \underline{ || (x,y) || < 1 } \text{, ekkor } |y| < 1) \le |y^2| \le x^2 + y^2 = \underbrace{ \bigl|\bigl|(x,y)\bigr|\bigr|^2 < \varepsilon}_{||(x,y)|| < \sqrt{\varepsilon}}
+			\end{align*} 
+			Így, ha $ \delta \coloneq \min{\{\underline{1}, \sqrt{\varepsilon}\}} $, akkor $(1)$ teljesül, ami azt jelenti, hogy $f \in C \bigl \lbrace (0,0) \bigr \rbrace $.
+ 			}
+			\task A $g$ függvénynek nincs határértéke a $(0,0)$ pontban!
+				\[
+				g(x,y) \coloneq \frac{x^2 y^2}{x^2 y^2 + (x-y)^2} \quad \bigl( (x,y) \in \mathbb{R}^2 \setminus \{(0,0)\} \bigr)
+				\]
+			A határértékekre vonatkozó átviteli elv alapján két olyan $(0,0)$-hoz tartó sorozatot kell találni, melyekre a függvényértékek sorozatának határértéke különböző.
+			
+			Rögzített $m \in \mathbb{R}$ esetén tekintsük $g$ értékeit az $y = mx$ egyenletű egyenes pontjaiban:
+			\begin{align*}
+				g(x,y)=g(x,mx)&=\frac{x^2 \cdot m^2x^2}{x^2 \cdot m^2x^2 + (x - mx)^2} = \frac{m^2x^4}{m^2x^4 + (x-mx)^2} \\
+				&= \frac{m^2x^4}{m^2x^4+x^2(1-m)^2} = \frac{m^2}{m^2 + x^{-2}(1-m)^2}
+			\end{align*}
+			Ekkor
+			\begin{itemize}
+				\item ha $m=0$ és így $(x_n,y_n) \coloneq \left( \frac{1}{n},0 \right) \rightarrow (0,0) \implies g(x_n,y_n) = 0$
+				\item ha $m=1$ és így $(u_n,v_n) \coloneq \left( \frac{1}{n}, \frac{1}{n} \right) \rightarrow (0,0) \implies g(u_n,v_n) = \frac{1}{1} = 1$ 
+			\end{itemize}
+			Mivel
+			\[ \lim\limits_{n \leftarrow +\infty}{(x_n,y_n)}
+			= (0,0) =
+			\lim\limits_{n \leftarrow +\infty}{(u_n,v_n)} \]
+			de
+			\[ \lim\limits_{n \leftarrow +\infty}{g(x_n,y_n)}
+			= 0 \ne 1 =
+			\lim\limits_{n \leftarrow +\infty}{g(u_n,v_n)} \]
+			ezért a $g$ függvénynek nincs határértéke $(0,0)$ pontban.
+		\end{tasks}
+	\end{question}
+	\newpage
+	\begin{question}
+		Számolja ki az
+		\[
+		f(x,y) \coloneq xe^{yx}-xy \quad \bigl( (x,y) \in \mathbb{R}^2 \bigr)
+		\]
+		függvény iránymenti deriváltját az $(1,1)$ pontban a $v = (3,4)$ vektor által meghatározott irány mentén!
+		\\[4pt]
+		Mivel $v$ nem egységvektor ezért elő kell állítanunk a normáját.
+		\[
+		u = \frac{v}{||v||} = \begin{pmatrix} 3 \\ 4 \end{pmatrix} \cdot \frac{1}{5} = \begin{pmatrix} 0,6 \\ 0,8 \end{pmatrix}
+		\]
+		Az iránymenti deriválhatósághoz azt kell megmutatni, hogy a
+		\begin{align*}
+			F_u(t) &\coloneq f(a + tu) = f(a_1 + tu_1, a_2 + tu_2) = f(1 + 0,6t; 1 + 0,8t) \\
+			&= (1 + 0,6t)e^{(1+0,6t)(1+0,8t)} - (1+0,6t)(1+0,8t) \\
+			&= (1 + 0,6t)e^{1+1,4t+0,48t^2} - (1+1,4t+0,48t^2) \\
+			&= (1 + 0,6t)e^{1+1,4t+0,48t^2} - 1 - 1,4t - 0,48t^2 \quad (t \in \mathbb{R})
+		\end{align*}
+		függvény deriválható a 0 pontban.
+		Ez nyilván teljesül, így a derivált:
+		\begin{align*}
+			0,6 \cdot (e^{1+1,4t+0,48t^2}) + (1 + 0,6t)e^{1+1,4t+0,48t^2} \cdot (1,4 + 0.96t) - 1,4 -0,96t
+		\end{align*}
+		 és $F_u'(0) = 0,6e + 1,4e - 1,4 = 2e - 1,4 $. Ezért $f$-nek létezik $v$ irányú iránymenti deriváltja az (1,1) pontban és értéke $2e - 1,4$.
+		 Ellenőrizzük a megoldás helyességét a parciális deriváltak és az iránymenti deriváltak kapcsolatára vonatkozó tétel segítéségével:
+		\begin{align*}
+			\partial_1f(x,y) &= e^{yx} + xe^{yx}y - y \\
+			\partial_2f(x,y) &= x^2e^{yx} - x
+		\end{align*}
+		A tétel alapján:
+		\begin{align*}
+			\partial_uf(1,1) &= \partial_1f(1,1) \cdot u_1 + \partial_2f(1,1) \cdot u_2 =  ( e^{yx} + xe^{yx}y - y ) \cdot 0.6 + ( x^2e^{yx} - x ) \cdot 0.8 \\
+			&= 0.6 \cdot ( e^{1 \cdot 1} + 1 \cdot e^{1 \cdot 1} \cdot 1 - 1) + 0.4 \cdot (1^2e^{1 \cdot 1} - 1) = 0.6(2e-1)+0.8(e-1) \\
+			&=  \frac{12e-6}{10} + \frac{8e-8}{10} = 2e -1,4
+		\end{align*}
+	\end{question}
+\end{document}

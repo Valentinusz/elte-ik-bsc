@@ -1,0 +1,151 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{stuki}
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+\title{\huge{Programozáselmélet} \\[-4pt] \large 10. gyakorlat \vspace{-15pt}}
+\author{Boda Bálint}
+\date{\vspace{-12pt}2022. őszi félév}
+
+\DeclareMathOperator{\lf}{lf}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+    \maketitle
+    \vspace{-10pt}
+\begin{question}(9. feladatsor)
+	Lássa be, hogy az $S$ program megoldja a következő feladatot:
+	\begin{align*}
+		A &= \left( x: \mathbb{N}, n: \mathbb{N}, y: \mathbb{N} \right) \\
+		B &= \left( x': \mathbb{N}, n': \mathbb{N} \right) \\
+		Q &= (x = x' \land  n = n' \land x > 0) \\
+		R &= (Q \land y = x^n )
+	\end{align*}
+	Az program állapottere $ \left( x: \mathbb{N}, n: \mathbb{N}, y: \mathbb{N}, b: \mathbb{N}, i: \mathbb{N} \right) $.
+
+	\begin{wrapfigure}[3]{l}{7cm}
+			\vspace{-2\baselineskip}
+		\begin{stuki*}[7cm]{S}
+			\stm{y,b,i \coloneq 1,x,n}
+			\begin{WHILE}{2}{\stm{i > 0}}
+				\begin{CASE}{1}{2}
+					\WHEN[1]{\stm{2 \mid i}}
+						\stm{i,b \coloneq i / 2, b^2}
+					\WHEN{\stm{2 \nmid i}}
+						\stm{i,y \coloneq i-1, y \cdot b}
+				\end{CASE}
+			\end{WHILE}
+		\end{stuki*}
+	\end{wrapfigure}
+	\noindent
+	\\[19pt]
+	$Q' = ( Q \land y=1 \land b = x \land i = n ) $ a szekvencia közbülső állítása
+	\\[34pt]
+	\noindent
+	Legyen továbbá $ t = i $ a termináló függvény és $ P = ( Q \land y \cdot b^i = x^n ) $ a ciklusinvariáns.
+	\vspace{-40pt}
+	\begin{align*}
+	\end{align*}
+	\end{question}
+	\begin{solution}
+		A szekvencia levezetési szabálya alapján, azt kell belátni, hogy:
+		\begin{enumerate}
+			\item $ Q \implies \lf(y,b,i \coloneq 1,x,n; Q') \iff Q \implies (Q')^{y,b,i \leftarrow 1,x,n} $
+			\begin{align*}
+				Q \implies ( Q \land 1=1 \land x = x \land n = n ) \checkmark
+			\end{align*}
+			\item $ Q' \implies \lf(DO, R) $, ahol $DO$ jelöli a struktogramban szereplő ciklust. \\
+			A ciklus levezetési szabálya alapján:
+			\begin{enumerate}
+				\item $Q' \implies P$
+				\begin{align*}
+					( Q \land y=1 \land b = x \land i = n ) &\implies ( Q \land y \cdot b^i = x^n ) \\
+					( Q \land y=1 \land b = x \land i = n ) &\implies ( Q \land 1 \cdot x^n = x^n ) \checkmark
+				\end{align*}
+				\item $P \land \lnot \pi \implies R$
+				\begin{align*}
+					\bigr( ( Q \land y \cdot b^i = x^n ) \land \underbrace{ i \le 0 }_{i \in \mathbb{N}} \bigr) &\implies ( Q \land y = x^n ) \\
+					\bigr( ( Q \land y \cdot b^i = x^n ) \land i = 0 \bigr) &\implies ( Q \land y = x^n ) \\
+					( Q \land y \cdot 1 = x^n ) &\implies ( Q \land y = x^n ) \checkmark
+				\end{align*}
+				\item $ P \implies (\pi \lor \lnot \pi) $
+				\begin{align*}
+					( Q \land y \cdot b^i = x^n ) &\implies (i > 0 \lor  i \le 0) \\
+					( Q \land y \cdot b^i = x^n ) &\implies (i \ge 0)
+				\end{align*}
+				Mivel $i \in \mathbb{N} $ , az  $ i \ge 0 $ állítás mindig igaz, ezért a maga után vonás is teljesül.
+				\item $ (P \land \pi) \implies t > 0 $
+				\begin{align*}
+					\bigl( ( Q \land y \cdot b^i = x^n ) \land \underline{i > 0} \bigr) \implies \underbrace{t > 0}_{t=i} \checkmark
+				\end{align*}
+				\item $ (P \land \pi \land t = t_0) \implies \lf(S_0; P \land  t < t_0) $, ahol az $S_0$ elágazás a $DO$ ciklus ciklusmagja. Jelölje $Q''$ a $ (P \land \pi \land t = t_0) $ feltételt. Az elágazás levezetési szabálya alapján:
+				\begin{enumerate}
+					\item $ \left( Q'' \implies \displaystyle \bigvee_{i=1}^2{\pi_i} \right) \iff \bigl( Q'' \implies ( 2 \mid i \lor 2 \nmid i ) \bigl) $ Ez nyilván teljesül. \checkmark
+					\item $ \left( Q'' \implies \displaystyle \bigwedge_{i=1}^2{(\pi_i \lor \lnot \pi_i)} \right) \iff \Bigl( Q'' \implies \bigl( \underbrace{(2 \mid i \lor 2 \nmid i) \land (2 \nmid i \lor 2 \mid i)}_{\text{az és két oldala ugyan az}} \bigr) \Bigl) $ \\ Ez valójában ugyan az mint az (i.) állítás, így ez is teljesül. \checkmark
+					\item $ \forall i \in [1..2]: (Q'' \land \pi_i) \implies \lf(S_i, P \land t < t_0) $
+					\begin{enumerate}
+						\item $ Q'' \implies \lf(i,b \coloneq i / 2, b^2; P \land t < t_0) $
+						\begin{align*}
+							(P \land 2 \mid i \land t = t_0) &\implies (P \land t < t_0)^{(i \leftarrow i / 2, b \leftarrow b^2)}
+						\end{align*}
+						A $\pi$ feltétel miatt elvégezhető az $i/2$ osztás.
+						\begin{align*}
+							(P \land 2 \mid i \land t = t_0) &\implies (Q \land y \cdot (b^{i/2})^2 = x^n \land \frac{i}{2} < t_0) \\
+							(P \land 2 \mid i \land t = t_0) &\implies (\underbrace{ Q \land y \cdot b^i = x^n}_{P} \land \frac{i}{2} < t_0)
+						\end{align*}
+						A termináló függvény értékének csökkenésére vonatozó feltétel pedig nyilván teljesül. Így:
+						\begin{align*}
+							(P \land 2 \mid i) &\implies P
+						\end{align*}
+						Ami nyilván teljesül, mivel $ \lceil (P \land 2 \mid i) \rceil \subseteq \lceil P \rceil$. \checkmark
+						\item $Q'' \implies \lf(i,y \coloneq i-1, y \cdot b; P \land t < t_0) $
+						\begin{align*}
+							(P \land 2 \nmid i \land t = t_0) &\implies (P \land t < t_0)^{(i \leftarrow i - 1, b \leftarrow y \cdot b)} \\
+							(P \land 2 \nmid i \land t = t_0) &\implies (Q \land y \cdot (yb)^{i-1} = x^n \land i - 1< t_0) \\
+							\bigl( ( Q \land y \cdot b^i = x^n ) \land 2 \nmid i \land t = t_0\bigr) &\implies (Q \land y^i \cdot b^{i-1} = x^n \land i - 1< t_0)
+						\end{align*}
+						Q miatt tudjuk, hogy a program futása során $x$ és $n$, ezáltal $x^n$ értéke nem változik meg, így fennáll az $ y \cdot b^i =  y^i \cdot b^{i-1} $ egyenlőség. Emellett nyilván teljesül a termináló függvény értékének csökkenésére vonatozó feltétel, így a $ 2 \nmid i $ tag kivételével a két oldal megegyezik. Így az $(A)$ állításhoz hasonlóan teljesül a következik reláció. \checkmark
+					\end{enumerate}
+				\end{enumerate}
+			\end{enumerate}
+		\end{enumerate}
+		Ezzel beláttuk, hogy $S$ megoldja a specifikált feladatot.
+	\end{solution}
+\end{document}

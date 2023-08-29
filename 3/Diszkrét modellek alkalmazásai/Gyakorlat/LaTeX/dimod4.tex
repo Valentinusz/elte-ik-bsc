@@ -1,0 +1,242 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+	attach = {
+		main[l,vc]title[l,vc](0pt,0pt) ;
+		main[r,vc]points[l,vc](\marginparsep,0pt)
+	}
+}
+
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+	counter-format=qu.,
+	solution/print=true ,
+	question/name=Feladat,
+	solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{minted}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt    
+
+\title{\huge{Diszkrét modellek alkalmazásai} \\ \large 4. gyakorlat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\lnko}{lnko}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel} 
+\newtheorem*{example}{Példa}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+	\maketitle
+	\section{Euklideszi algoritmus}
+	Az Euklideszi algoritmus egy optimális mód az $a,b \in \mathbb{Z}$ számok legnagyobb közös osztójának meghatározására.
+	Ha $a < b$, akkor felcseréljük a két számot majd addig ismételjük a következő lépést amíg az $r_i$ osztási maradék $0$ nem lesz.
+	\begin{align*}
+		a&=q_{0} \cdot b+r_{0}\\
+		b&=q_{1} \cdot r_{0}+r_{1}\\
+		r_{0}&=q_{2} \cdot r_{1}+r_{2}\\
+		r_{1}&=q_{3} \cdot r_{2}+r_{3}\\
+		&\dotsb
+	\end{align*}
+	Ekkor $\lnko{(a,b)} = r_{i-1}$.
+	\begin{example} $ lnko(360,225) = 45 $
+		\begin{align*}
+		360&=1 \cdot 225+135\\
+		225&=1 \cdot 135+90\\
+		135&=1 \cdot 90+\mathbf{45}\\
+		90&=2 \cdot 45+0\\
+		\end{align*}
+	\newpage
+		\begin{question}
+Számítsuk ki a következő számok legnagyobb közös osztóját!
+			\begin{tasks}(3)
+				\task 30 és 70
+				\task 126 és 150
+				\task 105 és 231
+				\task 132 és 275
+				\task 33 és 21
+			\end{tasks}
+		\end{question}
+		\begin{solution}
+			\begin{tasks}(3)
+				\task $\lnko{(30,70)} = 10 $ \begin{align*}
+					70&=2 \cdot 30+\mathbf{10}\\
+					30&=3 \cdot 10+0
+				\end{align*}
+				\task $\lnko{(126,150)} = 6 $ \begin{align*}
+					150&=1 \cdot 126+24\\
+					126&=5 \cdot 24+\mathbf{6}\\
+					24&=4 \cdot 6 + 0
+				\end{align*}
+				\task $\lnko{(105,231)} = 21 $ \begin{align*}
+					231&=2 \cdot 105+\mathbf{21}\\
+					105&=5 \cdot 21+0
+				\end{align*}
+					\task $\lnko{(132,275)} = 11 $ \begin{align*}
+					275&=2 \cdot 132+\mathbf{11}\\
+					132&=12 \cdot 11+0
+				\end{align*}
+				\task $\lnko{(33,21)} = 3 $ \begin{align*}
+					33&=1 \cdot 21+12\\
+					21&=1 \cdot 12 + 9\\
+					12&=1 \cdot 9 + \mathbf{3}\\
+					9&=3 \cdot 3 + 0
+				\end{align*}
+			\end{tasks}
+		\end{solution}
+	\end{example}
+	\subsection{Python nyelven}
+	\begin{minted}[tabsize=4]{python3}
+def lnko(a,b):
+	if a == b:
+		return a
+	if a < b:
+		a, b = b, a
+	while (b > 0):
+		a, b = b, a % b
+	return a
+	\end{minted}
+\newpage
+\section{Kongruencia}
+\begin{definition*}[Kongruencia]
+	Kongruenciának nevezzük a $$ \{(a,b) \in \mathbb{Z} \times \mathbb{Z} \mid a \bmod m =\; b \bmod m \quad (m \in \mathbb{Z})\} $$ $ a \equiv b \pmod m$-el (ejtsd: $a$ kongruens $b$ modulo $m$) jelölt relációt.
+\end{definition*}
+\begin{theorem*}
+	A kongruencia ekvivalenciareláció, ekvivalenciaosztályait pedig \textbf{maradékosztályoknak} nevezzük.
+\end{theorem*}
+
+\begin{example} $ $ \\[-20pt]
+	\begin{itemize}
+		\item $ 5 \equiv 11 \pmod 6 $
+		\item $ 2 \not \equiv 6 \pmod 3 $
+		\item $ -8 \equiv 10 \pmod 6 = 0 $, mert $ -2 \cdot 6+4 = -8$ és $ 1 \cdot 6 + 4 = 10$
+	\end{itemize}
+\end{example}
+
+\begin{question}
+	Igazak-e a következő kongruenciák?
+	\begin{tasks}(3)
+		\task $ 7 \equiv 3 \pmod 3 $
+		\task $ 7 \equiv 3 \pmod 2 $
+		\task $ 7 \equiv 3 \pmod 1 $
+		\task $ 8 \equiv 10 \pmod 5 $
+		\task $ 2 \equiv -1 \pmod 3 $
+		\task $ 6 \equiv 6 \pmod{100} $
+		\task $ 11 \equiv 8 \pmod 3 $
+		\task $ 8 \equiv 5 \pmod 3 $
+		\task $ 11 \equiv 5 \pmod 3 $
+		\task $ 6 \equiv 2 \pmod 4 $
+		\task $ 3 \equiv -5 \pmod 4 $
+		\task $ 18 \equiv -10 \pmod 4 $
+		\task $ 160 \equiv 80 \pmod{16} $
+		\task $ 16 \equiv 8 \pmod 8 $
+	\end{tasks}
+\end{question}
+
+\begin{solution}
+	\begin{tasks}(3)
+		\task hamis ($ 1 \ne 0 $)
+		\task igaz ($ 1 = 1 $)
+		\task hamis ($ 0 = 0 $)
+		\task hamis ($ 3 \ne 0 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 6 = 6 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 3 = 3 $)
+		\task igaz ($ 2 = 2 $)
+		\task igaz ($ 0 = 0 $)
+		\task igaz ($ 0 = 0 $)
+	\end{tasks}
+\end{solution}
+
+\subsection{Lineáris kongruenciák}
+Lineáris kongruenciának nevezzük az $ ax \equiv b \pmod m $ alakú kongruenciákat.
+\begin{theorem*}
+	Egy $ ax \equiv b \pmod m$ kongruencia, akkor oldható meg, ha $$ \lnko{(a,m)} \mid b $$ 
+\end{theorem*}
+
+\begin{example}
+	$$ x \equiv 5 \pmod 7 $$
+	Mivel $ \lnko(1,7) = 1 $ osztója $5$-nek ezért a kongruenciaegyenlet megoldható és megoldásai az $5 + 7t \; (t \in \mathbb{Z})$ alakú egész számok.
+	\begin{remark}
+		A megoldások halmaza, az $ x \equiv 5 \pmod 7 $ reláció, azon ekvivalenciaosztálya, melynek eleminek $7$-el vett osztási maradéka $5$.
+	\end{remark}
+\end{example}
+\subsubsection{Kongruencia azonosságai}
+\begin{itemize}
+	\item A kongruenciához szabadon hozzáadhatunk és kivonhatunk. $$ x + 4 \equiv 5 \pmod 7 \iff x \equiv 1 \pmod 7 $$
+	\item A kongruencia egyik oldalához hozzáadhatjuk vagy kivonhatjuk $m$-et. $$ x \equiv 12 \pmod 7 \iff x \equiv 5 \pmod 7 $$
+	\item A kongruenciát megszorozhatunk egy tetszőleges $ k \in \mathbb{Z} $ számmal. $$ x \equiv 4 \pmod 7 \iff 2x \equiv 8 \pmod 7 $$
+	\item A kongruenciát leoszthatjuk egy tetszőleges $ k \in \mathbb{Z} $ számmal, de ekkor a modulust is osztani kell. $$ 4x \equiv 8 \pmod{14} \iff x \equiv 2 \pmod 7 $$ $$ ax \equiv b \pmod m \iff x \equiv \frac{b}{a} \left(\bmod{\frac{m}{\lnko{(a,m)}}}\right)  $$
+\end{itemize}
+\newpage
+\begin{question}
+	Oldja meg a következő kongruenciaegyenleteket!
+	\begin{tasks}(3)
+		\task $ 2x \equiv 3 \pmod{4} $
+		\task $ x \equiv 2 \pmod{3} $
+		\task $ x \equiv 7 \pmod{2} $
+		\task $ 12x \equiv 8 \pmod{20} $
+		\task $ 22x \equiv 8 \pmod{10} $
+		\task $ 15x \equiv -1 \pmod{7} $
+	\end{tasks}
+\end{question}
+\begin{solution}
+	\begin{tasks}
+		\task $ 2x \equiv 3 \pmod{4}$, mivel $\lnko(2,4) = 2 \nmid 3 $, ezért nincs megoldás.
+		\task $ x \equiv 2 \pmod{3}$, $\lnko{(1,3)} = 1 \mid 2 $, ezért a kongruencia megoldható és megoldásai a $ 2 + 3t \; (t \in \mathbb{Z}) $ alakú számok.
+		\task $ x \equiv 7 \pmod{2}$,	$\lnko{(1,2)} = 1 \mid 7$ \\ $ x = 7 + 2t \, (t \in \mathbb{Z}) $
+		\task{$ 12x \equiv 8 \pmod{20} \qquad\lnko{(12,20)} = 4 \mid 8 $
+			\begin{alignat*}{2}
+				12x \equiv 8 \pmod{20} &\iff 12x \equiv 48 \pmod{20} \\
+				&\iff x \equiv 4 \pmod{\frac{20}{lnko(12,20)}=\frac{20}{4}=5} 
+			\end{alignat*} $ x = 4 + 5t \; (t \in \mathbb{Z}) $}
+		\task{ $ 22x \equiv 8 \pmod{10} \qquad\lnko{(12,10)} = 2 \mid 8 $
+			\begin{alignat*}{2}
+				22x \equiv 8 \pmod{20} &\iff 22x \equiv 88 \pmod{10} \\
+				&\iff x \equiv 4 \pmod{\frac{10}{2}=5} 
+			\end{alignat*} $ x = 4 + 5t \; (t \in \mathbb{Z}) $}
+		\task{ $ 15x \equiv -1 \pmod{7} \qquad\lnko{(15,7)} = 1 \mid -1 $
+			\begin{alignat*}{2}
+				15x \equiv -1 \pmod{7} &\iff 15x \equiv 6 \pmod{7} \\
+				&\iff 15x \equiv 90 \pmod{7} \\
+				&\iff x \equiv 6 \pmod{7}  
+			\end{alignat*} $ x = 6 + 7t \; (t \in \mathbb{Z}) $}
+	\end{tasks}
+\end{solution}
+\end{document}

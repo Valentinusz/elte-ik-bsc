@@ -1,0 +1,205 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+\usepackage{t1enc}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+	attach = {
+		main[l,vc]title[l,vc](0pt,0pt) ;
+		main[r,vc]points[l,vc](\marginparsep,0pt)
+	}
+}
+
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+	counter-format=qu.,
+	solution/print=true ,
+	question/name=Feladat,
+	solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{minted}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt    
+
+\title{\huge{Diszkrét modellek alkalmazásai} \\ \large 5. gyakorlat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\lnko}{lnko}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel} 
+\newtheorem*{example}{Példa}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+	\maketitle
+	\section{Diofantoszi egyenlet}
+	Diofantoszi egyenletnek nevezzük az olyan többismeretlenes algebrai egyenleteket, melyek megoldása és együtthatói egész számok. A legegyszerűbb kétváltozós elsőfokú diofantikus egyenlet: $ ax + by = c $. Ennek ez egyenletnek pontosan akkor van megoldása ha $ \lnko(a, b) \mid c $.
+	\begin{question}
+		Oldja meg a következő egyenleteket!
+		\begin{tasks}
+			\task $15x + 33y = 40$
+			\task $3x + 10y = 9 $
+			\task $12x + 10y = 62$
+		\end{tasks}
+	\end{question}
+	\begin{solution}
+	\begin{tasks}
+			\task{$15x + 33y = 40$ \qquad $ \lnko{(15,33)} = 3$ \begin{align*}
+				33 &= 2 \cdot 15 + \mathbf{3} \\
+				15 &= 5 \cdot 3 + 0
+			\end{align*}
+			$ 3 \nmid 40 \implies $ az egyenlet nem megoldható}
+		
+		\task{$ \lnko{(3,10)} = 1$ \begin{align*}
+				10 &= 3 \cdot 3 + \mathbf{1} \implies 1 = \mathbf{1} \cdot 10 \mathbf{-3} \cdot 3 \\
+				3 &= 3 \cdot 1 + 0 \qquad a = -3, \; b = 1, \; c = 3, \; d = 10
+				\end{align*}
+			$ 1 \mid 9 \implies $ az egyenlet megoldható
+		\begin{align*}
+			3x + 10y &= 9 \\
+			3a + 10b &= \lnko{(3,10) = 1} \\
+			3 \cdot -3 + 10 \cdot 1 &= 1 \quad \backslash \cdot 9 \\
+			3 \cdot -27 + 10 \cdot 9 &= 9 \implies x_0 = -27, \, y_0 = 9 \\[4pt]
+			x = x_0 + \frac{d}{\lnko{(c,d)}} \cdot t &= -27 + \frac{10}{1} \cdot t = -27 + 10t &(t \in \mathbb{Z}) \\
+			y = y_0 - \frac{c}{\lnko{(c,d)}} \cdot t &= 9 - \frac{3}{1} \cdot t = 9 - 3t &(t \in \mathbb{Z})
+		\end{align*}}
+		
+		\task{$ 12x + 10y = 62 \iff 6x + 5y = 31 \quad \lnko{(6,5)} = 1$ \begin{align*}
+				6 &= 1 \cdot 5 + \mathbf{1} \implies 1 = \mathbf{1} \cdot 6 \mathbf{-1} \cdot 5 \\
+				1 &= 1 \cdot 1 + 0 \qquad a = 1, \; b = -1, \; c = 6, \; d = 5
+			\end{align*}
+			$ 1 \mid 31 \implies $ az egyenlet megoldható
+			\begin{align*}
+				6x + 5y &= 31 \\
+				6a + 5b &= \lnko{(6,5) = 1} \\
+				6 \cdot -1 + 5 \cdot 1 &= 1 \quad \backslash \cdot 31 \\
+				6 \cdot 31 + 5 \cdot -31 &= 31 \implies x_0 = 31, \, y_0 = -31 \\
+				x = x_0 + \frac{d}{\lnko{(c,d)}} \cdot t &= 31 + 5t \quad (t \in \mathbb{Z}) \\
+				y = y_0 - \frac{c}{\lnko{(c,d)}} \cdot t &= -31 - 6t \quad (t \in \mathbb{Z})
+		\end{align*}}
+	\end{tasks}
+	\end{solution}
+	\newpage
+	\begin{question}
+		Bontsuk fel 812-t két egész szám összegére úgy hogy az egyik szám osztható legyen 12-vel, a másik pedig 32-vel.
+	\end{question}
+	\begin{solution}
+		$12x + 32y = 812 \iff 3x + 8y = 203 $
+		\begin{align*}
+			\lnko{(3,8)} \quad  8 &= 2 \cdot 3 + 2 \implies 2 = 1 \cdot 8 - 2 \cdot 3 \\
+			3 &= 1 \cdot 2 + \mathbf{1} \implies 1 = 1 \cdot 3 - 1 \cdot 2 \implies 1 = 3 \cdot 3 - 1 \cdot 8 \\
+			2 &= 2 * 1 + 0
+		\end{align*}
+		$ a = 3, \; b = -1, \; c = 3, \; d = 8 $
+		\begin{align*}
+			3x + 8y &= 203 \\
+			3a + 8b &= \lnko(3,8) = 1 \\
+			3 \cdot 3 + 8 \cdot (-1) &= 1 \quad \backslash \cdot 203 \\
+			3 \cdot 609 - 8 \cdot 203 &= 203
+		\end{align*}
+		$ x_0 = 609, \; y_0 = -203 $
+		\begin{align*}
+			x = x_0 + \frac{d}{\lnko{(c,d)}} \cdot t &= 609 + 8t \quad (t \in \mathbb{Z}) \\
+			y = y_0 - \frac{c}{\lnko{(c,d)}} \cdot t &= -203 - 3t \quad (t \in \mathbb{Z})
+		\end{align*}
+	\end{solution}
+	\newpage
+	\section{Kongruencia rendszer}
+	\begin{question}
+		Oldja meg a következő kongruencia rendszereket!
+		\begin{tasks}
+			\task $ x \equiv 1 \pmod 4,\; x \equiv 3 \pmod 4$
+			\task $ x \equiv 10 \pmod 3,\; x \equiv 4 \pmod 7$
+			\task $ x \equiv -2 \pmod 4,\; x \equiv 1 \pmod 3,\; x \equiv 3 \pmod 7$
+			\task $ 9x \equiv 3 \pmod 6,\; 5x \equiv -1 \pmod 3,\; -x \equiv 4 \pmod 5$
+			\task $ x \equiv -10 \pmod 3,\; x \equiv 6 \pmod 5,\; x \equiv 3 \pmod 8$
+			\task $ 2x \equiv 6 \pmod 8,\; -x \equiv 2 \pmod 7,\; x \equiv -10 \pmod{11}$
+		\end{tasks}
+	\end{question}
+	\begin{solution}
+		\begin{tasks}
+			\task{  $ x \equiv 1 \pmod 4,\; x \equiv 3 \pmod 4$
+					\begin{alignat*}{2}
+						x \equiv 1 \pmod 4      &\implies x = 1 + 4t \; (t \in \mathbb{Z})  \\
+						1 + 4t \equiv 3 \pmod 4 &\iff 4t \equiv 2 \pmod 4
+					\end{alignat*}
+				$$ \lnko(4,4)=4, \; 4 \nmid 2  , \text{nincs megoldás} $$}
+			
+			\task{ $ x \equiv 10 \pmod 3,\; x \equiv 4 \pmod 7$ \begin{alignat*}{2}
+					x \equiv 10 \pmod 3 &\iff x \equiv 1 \pmod 3 \implies x = 1 + 3t \; (t \in \mathbb{Z}) \\
+					1 + 3t \equiv 4 \pmod 7 &\iff 3t \equiv 3 \pmod 7 \iff t \equiv 1 \pmod 7 \\
+					&\implies t = 1 + 7z (z \in \mathbb{Z})   \end{alignat*}
+				$$ x = 1 + 3(1 + 7z) = 4 + 21z $$}
+			\task{ $ x \equiv -2 \pmod 4,\; x \equiv 1 \pmod 3,\; x \equiv 3 \pmod 7$ \begin{alignat*}{5}
+					x \equiv -2 \pmod 4 &\iff x \equiv 2  \pmod 4 \implies x = 2 + 4t \;(t \in \mathbb{Z}) \\
+					2 + 4t \equiv 1 \pmod 3 &\iff 2 + 4t \equiv 10 \pmod 3 \iff 4t \equiv 8 \pmod 3 \\
+					&\iff t \equiv 2 \pmod 3 \implies t = 2 + 3z \;(z \in \mathbb{Z}) \\
+					&\implies x = 2 + 8 + 12z = 10 + 12z \\
+					10 + 12z \equiv 3 \pmod 7 &\iff12z \equiv -7 \pmod 7 \iff 12z \equiv 0 \pmod 7 \\
+					&\iff z \equiv 0 \pmod 7 \implies z =  7w \; (w \in \mathbb{Z})
+				\end{alignat*}
+			$$ x = 10 + 12z = 10 + 84w $$
+			}
+			\task{ $ 9x \equiv 3 \pmod 6,\; 5x \equiv -1 \pmod 3,\; -x \equiv 4 \pmod 5$  \begin{alignat*}{3}
+					9x \equiv 3 \pmod 6 &\iff 9x \equiv 9  \pmod 6 \iff x \equiv 1 \pmod 2 \\
+					&\implies x = 1 + 2t \;(t \in \mathbb{Z}) \\
+					5 + 10t \equiv -1 \pmod 3 &\iff 10t \equiv -6 \pmod 3 \iff 10t \equiv 0 \pmod 3 \\
+					&\implies t = 3z \;(z \in \mathbb{Z}) \\
+					&\implies x = 1 + 6z\\
+					-1 - 6z \equiv 4 \pmod 5 &\iff -6z \equiv 5 \pmod 5 \iff z \equiv 0 \pmod 5 \\
+					&\implies z = 5w \; (w \in \mathbb{Z})
+			\end{alignat*} $$ x = 1 + 6z = 1 + 30w $$
+			}
+			\task{ $ x \equiv -10 \pmod 3,\; x \equiv 6 \pmod 5,\; x \equiv 3 \pmod 8$ \begin{alignat*}{3}
+				x \equiv -10 \pmod 3 &\iff x \equiv 2 \pmod 3  \implies x = 2 + 3t \;(t \in \mathbb{Z}) \\
+				2 + 3t \equiv 6 \pmod 5 &\iff 3t \equiv 4 \pmod 5 \iff t \equiv 3 \pmod 5 \\
+				&\implies t = 3 + 5z \;(z \in \mathbb{Z}) \\
+				&\implies x = 2 + 3(3+5z) = 11 + 15z\\
+				11 + 15z \equiv 3 \pmod 8 &\iff 15z \equiv -8 \pmod 8 \iff 15z \equiv 0 \pmod 8 \\
+				&\iff z \equiv 0 \pmod 8 \implies z =  8w \; (w \in \mathbb{Z})
+			\end{alignat*}
+			$$ x = 11 + 15z = 11 + 120w $$
+			}
+			\task{ $ 2x \equiv 6 \pmod 8,\; -x \equiv 2 \pmod 7,\; x \equiv -10 \pmod{11}$ \begin{alignat*}{3}
+				2x \equiv 6 \pmod 8 &\iff x \equiv 3 \pmod 4  \implies x = 3 + 4t \;(t \in \mathbb{Z}) \\
+				-3 -4t \equiv 2 \pmod 7 &\iff 4t \equiv -5 \pmod 7 \iff 4t \equiv 16 \pmod 7 \\
+				&\iff t \equiv 4 \pmod 7 \implies t = 4 + 7z \;(z \in \mathbb{Z}) \\
+				&\implies x = 3 + 4(4+7z) = 19 + 28z\\
+				19 + 28z \equiv -10 \pmod{11} &\iff 28z \equiv -29 \pmod{11} \\
+				&\iff 28z \equiv 224 \pmod{11} \\
+				&\iff z \equiv 8 \pmod{11} \implies z =  8 + 11w \; (w \in \mathbb{Z})
+			\end{alignat*}
+			$$ x = 19 + 28z = 19 + 28(8 + 11w) = 243 + 308w$$
+			}
+		\end{tasks}
+	\end{solution}
+\end{document}

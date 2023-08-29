@@ -1,0 +1,299 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{t1enc}
+\usepackage{lmodern}
+
+\usepackage{xsim}
+
+\DeclareExerciseTranslation{magyar}{exercise}{feladat}
+\DeclareExerciseEnvironmentTemplate{feladat}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\GetExerciseProperty{counter}.~ \XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+
+\DeclareExerciseEnvironmentTemplate{megoldas}{
+	{%
+		\par\vspace{\baselineskip}
+		\noindent
+		\textbf{\XSIMmixedcase{\GetExerciseName}}%
+		\IfInsideSolutionF
+		{
+			\GetExercisePropertyT{subtitle}%
+			{ {\normalfont\itshape\PropertyValue}}%
+		}
+	}
+}
+{}
+\xsimsetup{
+	exercise/name=\XSIMtranslate{exercise},
+	exercise/within=section,
+	exercise/template=feladat,
+	exercise/the-counter=\arabic{exercise},
+	solution/name=megoldás,
+	solution/print,
+	solution/template=megoldas,
+}
+
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+\newtheorem{notation}{Jelölés}
+\newtheorem*{notation*}{Jelölés}
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+\title{\huge{Diszkrét modellek alkalmazásai} \\[-4pt] \large beadandó \vspace{-15pt}}
+\author{Boda Bálint — KDHPNI}
+\date{\vspace{-12pt}2022. őszi félév}
+
+\begin{document}
+    \maketitle
+    \vspace{-10pt}
+\begin{question}
+	Határozd meg az $a,b,c$ valós paraméterek értékeit, úgy, hogy a 3 legalább háromszoros gyöke legyen a $p(x) \coloneq ax^5 + x^4 + bx^2 + c \in \mathbb{R}[x] $ polinomnak.
+\end{question}
+\begin{solution}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			$ $ & $ a $ & $ 1 $  & $ 0 $  & $ b $  & $ 0 $ & $ c $  \\
+			\hline
+			$ 3 $ & $a$ & $3a + 1$ & $ 9a+ 3 $ & $27a + 9 + b$ & $81a + 27 + 3b $ & $243a + 81 + 9b + c $ \\
+			\hline
+			$ 3 $ & $a$ & $6a + 1$ & $ 27a+ 6 $ & $108a + 27 + b$ & $405a + 108 + 6b $ &  \\
+			\hline
+			$ 3 $ & $a$ & $9a + 1$ & $ 54a+ 9 $ & $270a + 54 + b$ &  &  \\
+			\hline
+			$ 3 $ & $a$ & $12a + 1$ & $ 90a+ 12 $ & &  &  \\
+			\hline
+			$ 3 $ & $a$ & $15a + 1$ & & &  &  \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	Számunkra három kedvező eset van: 3 háromszoros, 3 négyszeres és 3 ötszörös gyöke a $p(x)$ polinomnak.
+	\begin{itemize}
+		\item Ha 3 háromszoros gyök a következő egyenletrendszer adódik:
+		\begin{align*}
+			243a + 9b + c + 81 &= 0 \\
+			405a + 6b + 108    &= 0 \iff 135a + 2b + 36 = 0 \\
+			270a + b + 54      &= 0 \iff b = -270a - 54
+		\end{align*}
+		Behelyettesítve a második egyenletbe:
+		\begin{align*}
+			 135a + 2(-270a - 54) + 36 &= 0 \\
+			-405a                - 72  &= 0 \\
+			    a                      &= - \frac{8}{45}
+		\end{align*}
+		Így, $b = -270a - 54 \iff b = 48 - 54 = -6 $.
+		\begin{align*}
+			243a + 9b + c + 81 &= 0 \\
+			c &= -243a - 9b - 81 \\
+			c &= 43,2 + 54 - 81 = 16,2
+		\end{align*}
+		Így $ a = - \frac{8}{45} $, $ b = -6 $, $ c = 16,2 $ paraméterek esetén 3 háromszoros gyöke a $p(x)$ polinomnak.
+		\item Ha 3 négyszeres gyök a következő egyenletrendszer adódik:
+		\begin{align*}
+			243a + 9b + c + 81 &= 0 \\
+			405a + 6b + 108    &= 0 \\
+			270a + b + 54      &= 0 \\
+			90a + 12           &= 0 \iff a = -\frac{2}{15}
+		\end{align*}
+		Ekkor a harmadik egyenlet miatt: $ b = 36 - 54 = - 18 $, így viszont a második egyenlet nem teljesül, mivel $ -\frac{910}{15} + 108 - 108 \ne 0 $. Ezért az egyenletrendszernek nincs megoldása.
+		\item Ha 3 ötszörös gyök a következő egyenletrendszer adódik:
+		\begin{align*}
+			243a + 9b + c + 81 &= 0 \\
+			405a + 6b + 108    &= 0 \\
+			270a + b + 54      &= 0 \\
+			90a + 12           &= 0 \iff a = -\frac{2}{15} \\
+			15a + 1            &= 0 
+		\end{align*}
+		Ekkor viszont az 5. egyenlet nem teljesül, azaz az egyenletrendszernek nincs megoldása.
+	\end{itemize}
+	Így a keresett paraméterek csak a következők lehetnek: $ a = - \frac{8}{45} $, $ b = -6 $, $ c = 16,2 $.
+\end{solution}
+\begin{question}
+	Oszd el maradékosan az $x^{10} + 5x^7 + 15x^6 + 25x^5 - x^3 - 2x + 3 \in \mathbb{Z}[x]$ polinomot az ${x^2 + 2x -3 \in \mathbb{Z}[x]}$ polinommal majd az eredményt oszd le újra az osztó polinommal.
+\end{question}
+\begin{solution}
+	
+	\begin{figure}[H]
+		\centering
+			\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+		
+		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+			%uncomment if require: \path (0,591); %set diagram left start at 0, and has height of 591
+			
+			%Straight Lines [id:da388123287326119] 
+			\draw    (84,24) -- (84,48) ;
+			%Straight Lines [id:da11441349368289255] 
+			\draw    (84,24) -- (528,24) ;
+			%Straight Lines [id:da3725686372453213] 
+			\draw    (84,72) -- (528,72) ;
+			%Straight Lines [id:da867879319003484] 
+			\draw    (108,120) -- (528,120) ;
+			%Straight Lines [id:da5233711304633039] 
+			\draw    (132,168) -- (528,168) ;
+			%Straight Lines [id:da3926633686079275] 
+			\draw    (156,216) -- (213.13,216) -- (528,216) ;
+			%Straight Lines [id:da10819486381528476] 
+			\draw    (180,264) -- (201.13,264) -- (528,264) ;
+			%Straight Lines [id:da4021765577536407] 
+			\draw    (204,312) -- (225.13,312) -- (528,312) ;
+			%Straight Lines [id:da8688557210811229] 
+			\draw    (228,360) -- (528,360) ;
+			%Straight Lines [id:da8696863950390631] 
+			\draw    (252,408) -- (528,408) ;
+			%Straight Lines [id:da16998271614161276] 
+			\draw    (276,456) -- (528,456) ;
+			
+			% Text Node
+			\draw (1,26.4) node [anchor=north west][inner sep=0.75pt]    {$x^{2} +2x-3$};
+			% Text Node
+			\draw (85,2.4) node [anchor=north west][inner sep=0.75pt]    {$x^{8} -2x^{7} +7x^{6} -15x^{5} +66x^{4} -152x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (85,26.4) node [anchor=north west][inner sep=0.75pt]    {$x^{10} +0x^{9} +0x^{8} +5x^{7} +15x^{6} +25x^{5} +0x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (85,50.4) node [anchor=north west][inner sep=0.75pt]    {$x^{10} +2x^{9} -3x^{8}$};
+			% Text Node
+			\draw (109,75.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 2x^{9} +3x^{8} +5x^{7} +15x^{6} +25x^{5} +0x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (109,98.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 2x^{9} -4x^{8} +6x^{7}$};
+			% Text Node
+			\draw (133,122.4) node [anchor=north west][inner sep=0.75pt]    {$7x^{8} -1x^{7} +15x^{6} +25x^{5} +0x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (133,146.4) node [anchor=north west][inner sep=0.75pt]    {$7x^{8} +14x^{7} -21x^{6}$};
+			% Text Node
+			\draw (157,170.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 15x^{7} +36x^{6} +25x^{5} +0x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (157,194.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 15x^{7} -30x^{6} +45x^{5}$};
+			% Text Node
+			\draw (181.56,218.4) node [anchor=north west][inner sep=0.75pt]    {$+66x^{6} -20x^{5} +0x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (181,242.4) node [anchor=north west][inner sep=0.75pt]    {$+66x^{6} +132x^{5} -198x^{4}$};
+			% Text Node
+			\draw (205,266.4) node [anchor=north west][inner sep=0.75pt]    {$-152x^{5} +198x^{4} -x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (205,290.4) node [anchor=north west][inner sep=0.75pt]    {$-152x^{5} -304x^{4} +456x^{3}$};
+			% Text Node
+			\draw (229,314.4) node [anchor=north west][inner sep=0.75pt]    {$+\ 502x^{4} -457x^{3} +0x^{2} -2x+3$};
+			% Text Node
+			\draw (229,338.4) node [anchor=north west][inner sep=0.75pt]    {$+\ 502x^{4} +1004x^{3} -1506x^{2}$};
+			% Text Node
+			\draw (253,362.4) node [anchor=north west][inner sep=0.75pt]    {$-1461x^{3} +1506x^{2} -2x+3$};
+			% Text Node
+			\draw (253,386.4) node [anchor=north west][inner sep=0.75pt]    {$-1461x^{3} -2922x^{2} +4383x$};
+			% Text Node
+			\draw (277,410.4) node [anchor=north west][inner sep=0.75pt]    {$+\ 4428x^{2} -4385x+3$};
+			% Text Node
+			\draw (277,434.4) node [anchor=north west][inner sep=0.75pt]    {$+\ 4428x^{2} +8856x-\ 13284\ $};
+			% Text Node
+			\draw (349,458.4) node [anchor=north west][inner sep=0.75pt]    {$-13241x+13287$};
+		\end{tikzpicture} 
+	\end{figure}
+
+	Az első osztás eredménye:
+	\[
+	x^8-2x^7+7x^6-15x^5+66x^4-152x^3+502x^2-1461x+4428+\frac{-13241x+13287}{x^2+2x-3}
+	\]
+	
+	\begin{figure}[H]
+		\centering
+		
+		
+		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+		
+		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+			%uncomment if require: \path (0,591); %set diagram left start at 0, and has height of 591
+			
+			%Straight Lines [id:da388123287326119] 
+			\draw    (84,24) -- (84,48) ;
+			%Straight Lines [id:da11441349368289255] 
+			\draw    (84,24) -- (552,24) ;
+			%Straight Lines [id:da3725686372453213] 
+			\draw    (84,72) -- (552,72) ;
+			%Straight Lines [id:da867879319003484] 
+			\draw    (108,120) -- (552,120) ;
+			%Straight Lines [id:da5233711304633039] 
+			\draw    (156,168) -- (552,168) ;
+			%Straight Lines [id:da3926633686079275] 
+			\draw    (192,216) -- (213.13,216) -- (552,216) ;
+			%Straight Lines [id:da10819486381528476] 
+			\draw    (240,264) -- (524.62,264) -- (552,264) ;
+			%Straight Lines [id:da4021765577536407] 
+			\draw    (300,312) -- (552,312) ;
+			%Straight Lines [id:da7336512336850948] 
+			\draw    (360,360) -- (372,360) -- (552,360) ;
+			
+			% Text Node
+			\draw (1,26.4) node [anchor=north west][inner sep=0.75pt]    {$x^{2} +2x-3$};
+			% Text Node
+			\draw (85,2.4) node [anchor=north west][inner sep=0.75pt]    {$x^{6} -4x^{5} +18x^{4} -63x^{3} +246x^{2} -833x+2906$};
+			% Text Node
+			\draw (85,26.4) node [anchor=north west][inner sep=0.75pt]    {$x^{8} -2x^{7} +7x^{6} -15x^{5} +66x^{4} -152x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (85,50.4) node [anchor=north west][inner sep=0.75pt]    {$x^{8} +2x^{7} -3x^{6}$};
+			% Text Node
+			\draw (105,75.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 4x^{7} +10x^{6} -15x^{5} +66x^{4} -152x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (105,98.4) node [anchor=north west][inner sep=0.75pt]    {$-\ 4x^{7} -8x^{6} +12x^{5}$};
+			% Text Node
+			\draw (154,122.4) node [anchor=north west][inner sep=0.75pt]    {$18x^{6} -27x^{5} +66x^{4} -152x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (154,146.4) node [anchor=north west][inner sep=0.75pt]    {$18x^{6} +36x^{5} -54x^{4}$};
+			% Text Node
+			\draw (193,170.4) node [anchor=north west][inner sep=0.75pt]    {$-63x^{5} +120x^{4} -152x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (193,194.4) node [anchor=north west][inner sep=0.75pt]    {$-63x^{5} -126x^{4} +189x^{3}$};
+			% Text Node
+			\draw (241,221.4) node [anchor=north west][inner sep=0.75pt]    {$+246x^{4} -341x^{3} +502x^{2} -1461x+4428$};
+			% Text Node
+			\draw (242,242.4) node [anchor=north west][inner sep=0.75pt]    {$+246x^{4} +492x^{3} -738x^{2}$};
+			% Text Node
+			\draw (301,266.4) node [anchor=north west][inner sep=0.75pt]    {$-833x^{3} +1240x^{2} -1461x+4428$};
+			% Text Node
+			\draw (301,290.4) node [anchor=north west][inner sep=0.75pt]    {$-833x^{3} -1666x^{2} +2499x$};
+			% Text Node
+			\draw (361,314.4) node [anchor=north west][inner sep=0.75pt]    {$+2906x^{2} -3960x+4428$};
+			% Text Node
+			\draw (361,338.4) node [anchor=north west][inner sep=0.75pt]    {$+2906x^{2} +5812x-8718$};
+			% Text Node
+			\draw (430,363.4) node [anchor=north west][inner sep=0.75pt]    {$-9772x+13146$};
+		\end{tikzpicture}		
+	\end{figure}
+	A második osztás eredménye:
+	\[
+	x^6-4x^5+18x^4-63x^3+246x^2-833x+2906+\frac{-9772x+13146}{x^2+2x-3}+\frac{-13241x+13287}{x^2+2x-3}
+	\]
+	
+\end{solution}
+\end{document}

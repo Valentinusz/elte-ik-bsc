@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.32-11" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" namespace="" author="Val" created="2022-10-16" changedby="Val" changed="2022-10-16" origin="Structorizer 3.32-11" text="&#34;graphSquare(A/1, A2/1: Edge*[n])&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<while text="&#34;i:= 1 to n&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+			<qWhile>
+				<instruction text="&#34;A2[i] := 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qWhile>
+		</while>
+		<while text="&#34;i:= 1 to n&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+			<qWhile>
+				<instruction text="&#34;p:=A[i]&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+				<while text="&#34;p != 0&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+					<qWhile>
+						<instruction text="&#34;q:=A[p-&#62;v]&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+						<while text="&#34;q != 0&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+							<qWhile>
+								<instruction text="&#34;e = new Edge&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;e-&#62;v = p-&#62;v&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;A2[i].insert(e)&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+							</qWhile>
+						</while>
+					</qWhile>
+				</while>
+			</qWhile>
+		</while>
+	</children>
+</root>

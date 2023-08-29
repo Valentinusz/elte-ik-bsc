@@ -1,0 +1,107 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{stuki}
+\usepackage{stukicommands}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{animate}
+
+\title{\huge{Algoritmusok és adatszerkezetek II} \\ \large Sakk}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\begin{document}
+    \maketitle
+    \noindent
+    A sakkban a huszár kétféleképpen tud mozogni: \begin{itemize}
+    	\item függőlegesen két mezőt és vízszintesen egyet
+    	\item függőlegesen egy mezőt és vízszintesen kettőt
+    \end{itemize}
+	Ha elkezdjük beszínezni a huszár által $n \; \left( n \in 0,1,2\dots\right)$ lépésből elérhető mezőket (melyet a következő animáció szemléltet),  
+	
+	\begin{center}
+		\animategraphics[controls]{1}{h}{0}{4}
+	\end{center}
+
+	\noindent
+	megfigyelhetjük, hogy a beszínezés eljárása sok tekintetben hasonlít a szélességi bejárás algoritmusára, gyakorlatilag annak egy olyan módosítása mely az algoritmussal egyidőben építi fel a gráfot.
+
+	Könnyű meggondolni, hogy bizonyos táblaméreteknél a huszár nem tudja az összes mezőt elérni, illetve kellően kicsi tábla esetén még mozogni sem tud, azaz előfordulhat olyan eset, hogy nem találunk utat a keresett mezőbe.
+	
+	
+	\newpage
+	\noindent
+	A csúcsok reprezentálására vezessük be a következő típust:
+	\begin{center}
+		\struct{Vertex}
+		+ int $i$ \\
+		+ int $j$ \\
+		\hline
+		+ Vertex(r,c) \{$i$ = $r$; $j$ = $c$\} \\
+		\eoStruct
+	\end{center}
+
+	
+	Készítsünk egy segédeljárást, mely megadja egy csúcsból a huszár által 1 lépéssel elérhető mezők halmazát.
+	\begin{stuki*}[10cm]{getNeighbours($n,m:\mathbb{N}^{+},i,j:\mathbb{N}): Vertex \left\lbrace \right\rbrace $}
+		\stm{V: Vertex \left\lbrace \right\rbrace \linecomment{\text{set of vertices}}}
+		\stm{V \coloneq V \cup \left\lbrace Vertex(i-2,j-1), Vertex(i-2,j+1) \right\rbrace }
+		\stm{V \coloneq V \cup \left\lbrace Vertex(i-1,j-2), Vertex(i-1,j+2) \right\rbrace }
+		\stm{V \coloneq V \cup \left\lbrace Vertex(i+1,j-2), Vertex(i+1,j+2) \right\rbrace }
+		\stm{V \coloneq V \cup \left\lbrace Vertex(i+2,j-1), Vertex(i+2,j+1) \right\rbrace }
+		\begin{WHILE}{2}{\stm{\forall v \in V}}
+			\begin{IF}{1}{\stm{v.i < 1 \; \lor \; v.i > n \; \lor \; v.j < 1 \; \lor \; v.j > m}}
+				\stm{V \coloneq V \setminus \left\lbrace v \right\rbrace }
+				\ELSE
+					\stm*{SKIP}
+			\end{IF}
+		\end{WHILE}
+		\stm*{\textbf{return} $V$}
+	\end{stuki*}
+
+
+    \begin{stuki*}[14cm]{shortestKnightPathLength($n,m:\mathbb{N}^{+},i_1,j_1,i_2,j_2:\mathbb{N}) : \mathbb{N}$}
+    	 \begin{IF}{1}{\stm{i_1 = i_2 \; \land \; j_1 = j_2}}
+    		\stm*{\textbf{return} 0}
+    		\ELSE
+    		\stm*{SKIP}
+    	\end{IF}
+    	\stm{d: \mathbb{N}[n][m] \linecomment{\text{distance of a given vertex from source}}}
+    	\begin{WHILE}{2}{\stm{i \coloneq 1 .. n}}
+    		\begin{WHILE}{1}{\stm{j \coloneq 1 .. m}}
+    			\stm{d[i][j] \coloneq \infty}
+    		\end{WHILE}
+    	\end{WHILE}
+        \stm{s \coloneq Vertex(i_1,j_1); \; d[s.i,s.j] = 0}
+
+        \stm{Q: Queue; \; Q \mathop{.add}(s)}
+        \begin{WHILE}{8}{\stm{\lnot Q\mathop{.isEmpty()}}}
+        	\stm{u \coloneq Q\mathop{.rem()}}
+        	\stm{neighbours \coloneq getNeighbours(n,m,u.i,u.j)}
+        	\begin{WHILE}{5}{\stm{\forall v \in neighbours}}
+        		\begin{IF}{4}{\stm{d(v.i,v.j) = \infty}}
+        				\stm{d[v.i][v.j] = d[u.i][u.j] + 1}
+        				\begin{IF}{1}{\stm{v.i = i_2 \; \land \; v.j = j_2}}
+        					\stm*{\textbf{return} $d[v.i][v.j]$}
+        				\ELSE
+        					\stm*{SKIP}
+        				\end{IF}
+        				\stm{Q.add(v)}
+        			\ELSE
+        				\stm*{SKIP}
+        		\end{IF}
+        	\end{WHILE}
+        \end{WHILE}
+    	\stm*{\textbf{return} $\infty$}
+    \end{stuki*}
+\end{document}

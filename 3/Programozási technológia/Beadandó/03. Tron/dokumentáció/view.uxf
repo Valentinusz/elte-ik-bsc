@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>4</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>852</x>
+      <y>620</y>
+      <w>144</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>GameView
+--
+_+FRAME_DIMENSION = new Dimension(500,400)_
+-mainMenu: MainMenu
+-gameMenu: GameMenu
+-highScoreMenu: HighScoreMenu
+--
++GameView()
++returnToMenu()
++newGame(p1N, p2N, hSr, vSr: String; p1C, p2C: Color)
++requestScores()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>852</x>
+      <y>708</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>MainMenu
+--
+-p1Panel: PCustomizationPanel
+-p2Panel: PCustomizationPanel
+-hSizeInput: JTextField
+-verticalSizeInput: JTextField
+-parent: GameView
+--
++MainMenu(parent: GameView)
++returnToMenu()
++newGame(p1N, p2N, hSr, vSr: String; p1C, p2C: Color)
++requestScores()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>796</y>
+      <w>120</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>PCustomizationPanel
+--
+-playerNameInput: JTextField
+-playerColorLabel: JLabel
+_-playerNumber = 1: short_
+--
++PCustomizationPanel(c: Color, p: ImageIcon)
++getPlayerName(): String
++getPlayerColor(): Color</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1056</x>
+      <y>620</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>HighScoreMenu
+--
+-tableModel: DefaultTableModel
+-parent: GameView
+--
++HighScoreMenu(parent: GameView)
++updateTable()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1004</x>
+      <y>708</y>
+      <w>152</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>GameMenu
+--
+-TILE_SIZE = 40: int
+-timer: Timer
+-time: int
+-timeLabel: JLabel
+-gameArea: JLabel[][]
+-p2Panel: PCustomizationPanel
+-hSizeInput: JTextField
+-verticalSizeInput: JTextField
+-game: GameModel
+-motorSprite: ImageIcon
+-deathSprite: ImageIcon
+-parent: GameView
+--
++GameMenu(parent: GameView)
++newGame(p1N, p2N: String; p1C, p2C: Color; hS, vS: int)
+-exitGame()
+-drawMap()
+-paintPlayerLocation()
+-clearPlayerIcon()
+-paintDeadIcon(player: int)
+-updateLabel()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>896</x>
+      <y>684</y>
+      <w>40</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-mainMenu
+m2=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>992</x>
+      <y>620</y>
+      <w>72</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-highScoreMenu
+m2=1</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>984</x>
+      <y>684</y>
+      <w>104</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-gameMenu
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;230.0;40.0;230.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>776</y>
+      <w>76</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=2
+-p1Panel, p2Panel</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;160.0;40.0;160.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1116</x>
+      <y>668</y>
+      <w>40</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>GameModel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1132</x>
+      <y>680</y>
+      <w>28</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1
+-game</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,310 @@
+%! Author = Valentinusz
+%! Date = 2022. 10. 29.
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage{exsheets}
+\usepackage{centernot}
+\usepackage{listings}
+\usepackage{stuki}
+
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+    attach = {
+        main[l,vc]title[l,vc](0pt,0pt) ;
+        main[r,vc]points[l,vc](\marginparsep,0pt)
+    }
+}
+
+\RenewQuSolPair
+{question}[headings=runin]
+{solution}[headings=block-no-nr]
+
+\SetupExSheets{
+    counter-format=qu.,
+    solution/print=true ,
+    question/name=Feladat,
+    solution/name=Megoldás.
+}
+
+\usepackage{tasks}
+\usepackage[hungarian]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{lstmisc}
+\usetikzlibrary{positioning,shapes,fit,arrows}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+
+\title{\huge{Programozáselmélet} \\ \large 7. gyakorlat}
+\author{Boda Bálint}
+\date{2022. őszi félév}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definíció}
+\newtheorem*{definition*}{Definíció}
+\newtheorem{notation}{Jelölés}
+\newtheorem*{notation*}{Jelölés}
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{example}{Példa}
+
+\DeclareMathOperator{\lf}{lf}
+\DeclareMathOperator{\ps}{p(S)}
+\DeclareMathOperator{\prim}{prim}
+
+\SetupExSheets{solution/print=true}
+\SetupExSheets{question/name=}
+\SetupExSheets{headings=runin}
+
+\begin{document}
+    \maketitle
+    \begin{notation*}[$\tau(\alpha)$] Legyen $\alpha$ egy véges hosszú sorozat, ekkor $\tau(\alpha) = \alpha_{|\alpha|}$. \end{notation*}
+    \begin{definition*}[$\otimes$] Legyen $\alpha \in \bar{A}$ és $\beta \in \left(\bar{A} \cup \left\{ fail \right\} \right)^{**} $, nemüres sorozatok úgy, hogy ${\tau(\alpha) = \beta_1}$. Ekkor $ \alpha \otimes \beta $ jelöli a sorozatok összefűzéséből $ \beta $ első elemének elhagyásával kapott sorozatot.
+    \end{definition*}
+   	\begin{notation*}[$\otimes_n$] $\otimes_n(\alpha, \beta, ...)$-el jelöljük $n \in \mathbb{N}^+ \cup \left\{\infty\right\} $ sorozat az előző definíció szerinti egymás utáni összefésülését.
+    \end{notation*}
+	\section{Szekvencia}
+    \begin{definition*}[Szekvencia]
+    	Legyen $A$ egy tetszőleges állapottér és legyenek $ S_1, S_2, \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**}$ tetszőleges programok. Ekkor $(S_1;S_2)$ szekvenciának nevezzük azt a programot ami $S_1$ és $S_2$ egymást követő végrehajtásából jön létre.
+    	\begin{align*}
+    		(S_1;S_2)(a) =& \left\lbrace \alpha \in \bar{A}^{\infty} \; | \; \alpha \in S_1(a) \right\rbrace \; \cup \\
+    		& \left\lbrace \alpha \in \left(\bar{A} \cup \left\{ fail \right\} \right)^{*} \; | \; \alpha \in S_1(a) \; \land \; \tau(\alpha) = fail \right\rbrace \; \cup \\
+    		& \left\lbrace \alpha \otimes \beta \in \left(\bar{A} \cup \left\{ fail \right\} \right)^{**} \; | \; \alpha \in S_1(a) \, \land \, |\alpha| < \infty \, \land \, \tau(\alpha) \ne fail \, \land \, \beta \in S_2(\tau(\alpha)) \right\rbrace
+    	\end{align*}
+    A szekvencia struktogramja:
+    \begin{stuki*}[3cm]{$ S_1;S_2 $}
+    	\stm*{$S_1$}
+    	\stm*{$S_2$}
+    \end{stuki*}
+    \end{definition*}
+	\begin{example}
+		Legyen $A = (x:\mathbb{Z}),\; a = \left\lbrace x:5 \right\rbrace $ és legyenek $S_1 \coloneq (x \coloneq x + 1), S_2 \coloneq (x \coloneq x + 2) $ programok. Ekkor $ (S_1;S_2)(\left\lbrace x:5 \right\rbrace) = \left\lbrace \left\langle  \left\lbrace x:5 \right\rbrace , \left\lbrace x:6 \right\rbrace, \left\lbrace x:8 \right\rbrace \right\rangle \right\rbrace $.
+	\end{example}
+
+	\newpage
+	\section{Elágazás}
+	
+	\begin{definition*}[Elágazás]
+		Legyen $A$ egy közös alap-állapottere az $S_1,...,S_n$ programoknak. Legyenek $\pi_1,...\pi_n \in A \rightarrow \mathbb{L}$ logikai függvények. Ekkor az $IF \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**}$ programot az $S_i$ programokból képzett $\pi_i$ feltételek által meghatározott elágazásnak nevezzük és $ \left( \pi_1:S_1,...\pi_n:S_n \right) $-nel jelöljük, ha
+		\[ \forall a \in A: IF(a) = \omega_0(a) \cup \left( \bigcup_{i=1}^{n}{\omega_i(a)} \right)  \]
+		ahol $ \forall i \in [1..n]: $
+		\[
+		\omega_i(a) = \begin{cases}
+			S_i(a),& a \in D_{\pi_i} \, \land \ \pi_i(a) \\
+			\emptyset,& a \in D_{\pi_i} \, \land \, \lnot \pi_i(a) \\
+			\left\lbrace \left\langle a, fail \right\rangle  \right\rbrace,&  a \notin D_{\pi_i}
+		\end{cases}
+		\]
+		és
+		\[
+		\omega_0(a) = \begin{cases}
+			\left\lbrace \left\langle a, fail \right\rangle  \right\rbrace,&  \forall i \in [1..n]: (a \in D_{\pi_i} \, \land \lnot \pi_i(a)) \\
+			\emptyset,& \text{különben}
+		\end{cases}
+		\]
+		\begin{remark}
+			A definíció a következőket fejezi ki:
+			\begin{itemize}
+				\item $\omega_0(a)$: Ha az adott állapot egyik logikai függvényt sem elégíti ki a végrehajtás legyen hibás.
+				\item $\omega_i(a)$: Ha az adott állapot esetén a $\pi_i$ logikai függvény  \begin{itemize}
+					\item nem kiértékelhető: a végrehajtás legyen hibás.
+					\item nem teljesül: a végrehajtás érjen véget $S_i$ végrehajtása nélkül.
+					\item teljesül: hajtsuk végre az $S_i$ programot.
+				\end{itemize}
+				\item $\bigcup_{i=1}^{n}{\omega_i(a)}$: az összes logikai függvényt vizsgáljuk meg
+			\end{itemize}
+		\end{remark}
+	Az elágazás struktogramja:
+	\begin{stuki*}[5cm]{$IF$}
+		\begin{CASE}{3}{3}
+			\WHEN{\stm{\pi_1}}
+			\stm[1]{S_1}
+			\WHEN*{\stm{...}}
+			\stm[1]{...}
+			\WHEN{\stm{\pi_n}}
+			\stm[1]{S_n}
+		\end{CASE}
+	\end{stuki*}
+	\end{definition*}
+	\newpage
+	\begin{question} Legyen $A = [1..6]$ és legyenek $ S_1, S_2 \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**} $ a következő programok:
+		\begin{align*}
+			S_1 &=\left\{
+			\begin{array}{lll}
+				1 \rightarrow \left< 1,4,3 \right>, & 1 \rightarrow \left< 1,2,4 \right>,& 2 \rightarrow \left< 2,2,\dots \right>, \\
+				2 \rightarrow \left< 2,1,4,6 \right>,     & 3 \rightarrow \left< 3,5,1 \right>, & 4 \rightarrow \left< 4,5,3 \right>, \\
+				5 \rightarrow \left< 5,1,fail \right>,     & 6 \rightarrow \left< 6,3,1,5 \right> &
+			\end{array}
+			\right\}
+			\\[12pt]
+			S_2 &=\left\{
+			\begin{array}{lll}
+				1 \rightarrow \left< 1,3,2 \right>, & 1 \rightarrow \left< 1,2,4 \right>,& 2 \rightarrow \left< 2,6 \right>, \\
+				3 \rightarrow \left< 3,4 \right>,     & 4 \rightarrow \left< 4,fail \right>, & 4 \rightarrow \left< 4,5,1 \right>, \\
+				5 \rightarrow \left< 5 \right>,     & 6 \rightarrow \left< 6,4,3,2 \right> &
+			\end{array}
+			\right\}
+		\end{align*}
+	\begin{tasks}
+		\task Határozza meg az $(S_1;S_2)$ szekvenciát!
+		\task Legyenek $\pi_1, \pi_2 \in A \rightarrow \mathbb{L}$ logikai függvények, úgy hogy:
+		\begin{align*}
+			\pi_1&=\left\lbrace (1,igaz),(2,igaz),(4,igaz),(5,hamis),(6,hamis) \right\rbrace \\
+			\pi_2&=\left\lbrace (1,igaz),(2,hamis),(3,igaz),(4,igaz),(5,hamis) \right\rbrace.
+		\end{align*}
+		Határozza meg a $(\pi_1:S_1, \pi_2:S_2)$ elágazást!
+	\end{tasks}
+	\end{question}
+	\begin{solution}
+		\begin{tasks}
+			\task{\[ (S_1;S_2) = \left\lbrace 
+				\begin{array}{lll}
+				1 \rightarrow \left< 1,4,\mathbf{3},4 \right>, & 1 \rightarrow \left< 1,2,\mathbf{4},fail \right>, & 1 \rightarrow \left< 1,2,\mathbf{4},5,1 \right>, \\
+				2 \rightarrow \left< 2,2,\dots \right>, & 2 \rightarrow \left< 2,1,4,\mathbf{6},4,3,2 \right>, & \\
+				3 \rightarrow \left< 3,5,\mathbf{1},3,2 \right>, & 3 \rightarrow \left< 3,5,\mathbf{1},2,4 \right>, & \\
+				4 \rightarrow \left< 4,5,\mathbf{3},4 \right>, & & \\ 
+				5 \rightarrow \left< 5,1,fail \right>, & & \\
+				6 \rightarrow \left< 6,3,1,\mathbf{5} \right> 
+				\end{array} \right\rbrace 
+			\]}
+			\task{\[ (\pi_1\!:\!S_1, \pi_2\!:\! S_2) = \left\lbrace 
+				\begin{array}{lll}
+					1 \rightarrow \left< 1,4,3 \right>, & 1 \rightarrow \left< 1,2,4 \right>,& 1 \rightarrow \left< 1,3,2 \right>, \\
+					2 \rightarrow \left< 2,2,\dots \right>, & 2 \rightarrow \left< 2,1,4,6 \right>,     & \\
+					3 \rightarrow \left< 3,\mathbf{fail} \right>, & 3 \rightarrow \left< 3,4 \right>, & \\
+					4 \rightarrow \left< 4,5,3 \right>, & 4 \rightarrow \left< 4,fail \right>, & 4 \rightarrow \left< 4,5,1 \right>, \\
+					5 \rightarrow \left< 5,\underline{fail} \right>, & & \\
+					6 \rightarrow \left< 6, \underline{\mathbf{fail}} \right> & & 
+				\end{array} \right\rbrace 
+			\]}
+		 	\noindent
+			A félkövérrel kiemelt $fail$ állapotok azért következnek be mert az adott $\pi_i$ logikai függvény nincs értelmezve az adott állapotban, az aláhúzottak pedig azért, mert semelyik logikai függvény nem teljesül az adott állapotban.
+		\end{tasks}
+	\end{solution}
+	\newpage
+	\section{Ciklus}
+		\begin{definition*}[Ciklus]
+		Legyen $\pi \in A \rightarrow \mathbb{L}$ feltétel és $S_0 \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**} $ program. A $DO \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**} $ programot az $S_0$ programból $\pi$ feltétellel képzett ciklusnak nevezzük és $(\pi, S_0)$-val jelöljük, ha
+		\[ \forall a \in A: DO(a) = \begin{cases}
+			(S_0;DO)(a), & a \in D_{\pi} \, \land \, \pi(a) \\
+			\left\lbrace \left\langle a \right\rangle  \right\rbrace , & a \in D_{\pi} \, \land \, \lnot \pi(a) \\
+			\left\lbrace \left\langle a, fail \right\rangle  \right\rbrace,&  a \notin D_{\pi}
+		\end{cases}\]
+		A ciklus struktogramja:
+		\begin{stuki*}[3cm]{DO}
+			\begin{WHILE}{1}{\stm{\pi}}
+				\stm{S_0}
+			\end{WHILE}
+		\end{stuki*}
+	\end{definition*}
+	\setcounter{question}{3}
+	\begin{question}
+		Legyen $A = [1..5], S_0 \subseteq A \times \left(\bar{A} \cup \left\{ fail \right\} \right)^{**}$ program, továbbá $ \pi: A \rightarrow \mathbb{L} $ feltétel úgy, hogy $ \lceil \pi \rceil \left\lbrace 1,2,3,4 \right\rbrace $ és
+		\[ S_0 = \left\{ \begin{array}{lll}
+			1 \rightarrow \left< 1,2,4 \right>, & 2 \rightarrow \left< 2 \right>,& 3 \rightarrow \left< 3,4,2 \right>, \\
+			3 \rightarrow \left< 3,5 \right>,     & 3 \rightarrow \left< 3,3,3,\dots \right>, & 4 \rightarrow \left< 4,5,3,4 \right>, \\
+			4 \rightarrow \left< 4,1,3 \right>,     & 5 \rightarrow \left< 5,5,\dots \right> &
+		\end{array} \right\} \]
+		Határozza meg a $(\pi, S_0)$ ciklust!
+	\end{question}
+	\begin{solution}
+		A ciklus egy $ \alpha $ sorozata csak akkor lesz véges ha $ \tau(\alpha)=5 $.
+		\[ (\pi, S_0) = \left\{ \begin{array}{ll}
+			1 \rightarrow \left< 1,2,\mathbf{4},(5,3,\mathbf{4}) \cdot \infty \right>, &
+			1 \rightarrow \left< 1,2, \mathbf{4}, (5, 3, \mathbf{4}) \cdot a, 1, \mathbf{3}, 3, \dots \right>, \\
+			1 \rightarrow \left< 1,2, \mathbf{4}, (5, 3, \mathbf{4}) \cdot b, 1, \mathbf{3}, 4, \textbf{2}, 2, \dots \right>, &
+			1 \rightarrow \left< 1,2, \textbf{4}, (5, 3, \mathbf{4}) \cdot c, 1, \mathbf{3}, 5 \right>, \\
+			1 \rightarrow \left< 1,2, \mathbf{4}, 1, \mathbf{3}, 4, \mathbf{2}, 2, \dots\right>, &
+			1 \rightarrow \left< 1,2, \mathbf{4}, 1, \mathbf{3}, 3, \dots \right> \\
+			1 \rightarrow \left< 1,2, \mathbf{4}, 1, \mathbf{3}, 5 \right>, &
+			2 \rightarrow \left< 2,2,\dots \right>, \\
+			3 \rightarrow \left< 3,4,\mathbf{2},2,\dots \right>, &
+			3 \rightarrow \left< 3,5 \right>, \\
+			3 \rightarrow \left< 3,3,\dots \right>, &
+			4 \rightarrow \left< 4,5,3,\mathbf{4}\cdot \infty \right> \\
+			4 \rightarrow \left< 4,(5,3,\mathbf{4}) \cdot d, 1,\mathbf{3},4,\mathbf{2},2\dots \right> &
+			4 \rightarrow \left< 4,(5,3,\mathbf{4}) \cdot e, 1,\mathbf{3},5 \right> \\
+			4 \rightarrow \left< 4,(5,3,\mathbf{4}) \cdot f, 1,\mathbf{3},3,\dots \right> &
+			5 \rightarrow \left< 5 \right>
+		\end{array} \right\} \]
+		\[ a,b,c,d,e,f \in \mathbb{N} \]   
+	\end{solution}
+	\setcounter{question}{5}
+	\newpage
+	\begin{question}
+		Rajzolja fel a következő program struktogramját és határozza meg mit rendel az $ \left\lbrace i:2, n:12 \right\rbrace $ és $ \left\lbrace i:1, n:13 \right\rbrace $ állapotokhoz!
+		\begin{align*}
+			A &= (i: \mathbb{N}, n: \mathbb{N}) \\
+			S &= (i \coloneq 1;\; DO(i \ne n, IF(2 | i \, \land \; i \le 12: i \coloneq i+1, \quad 2 \centernot | i \, \lor \, (2 | i \, \land \, 12 \le i < 20): i \coloneq i + 3)))
+		\end{align*}
+	\end{question}
+	\begin{solution}
+		\begin{stuki}[12cm]
+			\stm{i \coloneq 1}
+			\begin{WHILE}{2}{\stm{i \ne n}}
+				\begin{CASE}{1}{2}
+					\WHEN{\stm{2 | i \, \land \, i \le 12}}
+					\stm[0.5]{i \coloneq i + 1}
+					\WHEN{\stm{2 \centernot | i \, \lor \, (2 | i \, \land 12 \le i < 20)}}
+					\stm[0.5]{i \coloneq i + 3}
+				\end{CASE}
+			\end{WHILE}
+		\end{stuki}
+	\[
+	(2,12) \rightarrow \left\langle (2,12), (1,12), (4,12), (5,12), (8,12), (9,12), (12,12) \right\rangle
+	\]
+	\[
+	(2,13) \rightarrow \left\langle (1,13), (1,13), (1,13), (4,13), (5,13), (8,13), (9,13), \underline{(12, 13)},\text{elágazás} \right\rangle
+	\]
+	Mivel mindkét logikai függvény teljesül a program az aláhúzással jelölt állapot esetén a program kétféleképpen folytatódhat.
+	Bal oldali ág:
+	\[
+	(2,13) \rightarrow \left\langle \dots, \underline{(12, 13)}, (13,13)\right\rangle
+	\]
+	Jobb oldali ág:
+	\[
+	(2,13) \rightarrow \left\langle \dots, \underline{(12, 13)}, (15,13), (18, 13), (21, 13), (24,13), fail \right\rangle
+	\]
+	\end{solution}
+	\setcounter{question}{-1}
+	\begin{question} Készítsen programot az alapvető programkonstrukciók felhasználásával, mely ekvivalens
+		\begin{tasks}(2)
+			\task a $SKIP$-el!
+			\task az $ABORT$-al!
+		\end{tasks}
+	\end{question}
+	\begin{solution}
+		\begin{tasks}(2)
+			\task{
+				\begin{stuki}[3cm]
+				\begin{WHILE}{2}{\stm{HAMIS}}
+					\stm{S}
+				\end{WHILE}
+			\end{stuki}
+			}
+			\task{
+			\begin{stuki}[3cm]
+				\begin{CASE}{1}{1}
+					\WHEN{\stm{HAMIS}}
+					\stm[1]{S}
+				\end{CASE}
+			\end{stuki}
+			}
+		\end{tasks}
+	(Ahol $S$ tetszőleges program.)
+	\end{solution}
+\end{document}

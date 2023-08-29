@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>441</x>
+      <y>371</y>
+      <w>140</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+HighScores
+--
+_-instance: HighScores_
++connection: Connection
+--
+-HighScores()
+_+instance(): HighScores_
++insertScore(pName: String)
++getTopScores() : HighScore[] </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>266</y>
+      <w>126</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>HighScore
+--
++name: String
++score: int
+--
++HighScore(n: String, s: int)
++getName(): String
++getScore(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>371</y>
+      <w>84</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Direction
+--
+UP
+RIGHT
+DOWN
+LEFT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>931</x>
+      <y>266</y>
+      <w>77</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+GameState
+--
+IN_PROGRESS
+PLAYER1WON
+PLAYER2WON
+DRAW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>623</x>
+      <y>266</y>
+      <w>273</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>GameModel
+--
+-map: Tile[n][m]
+-players: Player[2]
+--
+-getRandomNumber(min: int, max: int) : int
+-generateObstacleCluster(int cX, int cY)
++GameModel(p1N, p2N: String; p1C, p2C: Color; hS, vS: int)
++doRound(): GameState
++getPlayerName(index: int): String
++getPlayerColor(index: int): Color
++getHorizontalPlayerLocation(index: int): int
++getVerticalPlayerLocation(index: int): int
++setPlayerDirection(index: int, direction: Direction)
++getHorizontalSize(): int
++getVerticalSize(): int
++getColor(row, col: int): Color</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>574</x>
+      <y>490</y>
+      <w>182</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>Tile
+--
+_+ SAFE_COLOR = new Color(41,53,66)_
+- Color: Color
+--
++Tile()
++Tile(c: Color)
++getColor() : Color
++setColor(c: Color)
++isSafe(): bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>490</y>
+      <w>238</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+-name: String
+-color: Color
+-horizontalLocation: int
+-verticalLocation: int
+-direction: Direction
+--
++Player(n: String, c: Color, hL: int, vL: int, d: Direction)
++getName(): String
++getColor(): Color
++getHorizontalLocation(): int
++getVerticalLocation(): int
++setDirection(d: Direction)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>651</x>
+      <y>441</y>
+      <w>126</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+-map
+m2=n * m</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;40.0;10.0;40.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>441</y>
+      <w>154</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=2
+-players</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;190.0;40.0;190.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>889</x>
+      <y>315</y>
+      <w>56</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>60.0;10.0;30.0;10.0;30.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>959</x>
+      <y>441</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1
+-direction</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>889</x>
+      <y>399</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>343</y>
+      <w>56</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;create&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>420</y>
+      <w>63</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;create&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+</diagram>

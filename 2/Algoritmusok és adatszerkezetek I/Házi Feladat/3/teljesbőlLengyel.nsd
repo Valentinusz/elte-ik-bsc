@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.32-06" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" namespace="" author="Val" created="2022-02-28" changedby="Val" changed="2022-02-28" origin="Structorizer 3.32-06" text="&#34;teljesbőlLengyel(S)&#34;" comment="&#34;&#34;" color="ffffff" type="sub" style="nice">
+	<children>
+		<instruction text="&#34;v : Stack&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;x := read(S)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<while text="&#34;while x != ε&#34;" comment="" color="ffffff" disabled="0">
+			<qWhile>
+				<case text="&#34;x&#34;,&#34;Operandus(x)&#34;,&#34;Operator(x)&#34;,&#34;x = ')'&#34;,&#34;%&#34;" comment="" color="ffffff" disabled="0">
+					<qCase>
+						<instruction text="&#34;Write(x)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<instruction text="&#34;v.push(x)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<instruction text="&#34;Write(v.pop())&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase color="ffffff">
+					</qCase>
+				</case>
+				<instruction text="&#34;x := read(S)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qWhile>
+		</while>
+	</children>
+</root>

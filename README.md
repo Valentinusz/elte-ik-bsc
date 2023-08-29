@@ -2,6 +2,8 @@
 
 Ebben a GitHub repo-ban a programtervező informatikus BSc alatt általam készített és összegyűjtött tananyagok találhatók.
 
+A tárgyakat felvételi félévük szerint vannak csoportosítva. Ha egy tárgyat nem találsz meg az adott félévben érdemes a többi félév könyvtárát is megnézni.
+
 <details>
   <summary>
     <h2>Miért kerültek át ide a tananyagok?</h2>

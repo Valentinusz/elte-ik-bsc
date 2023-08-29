@@ -3,6 +3,6 @@ ELTE IK tananyagok
 
 <details>
   <summary>
-    ## Miért 
+    <h2>Miért</h2> 
   </summary>
 </details>

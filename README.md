@@ -5,6 +5,6 @@ Ebben a GitHub repo-ban a programtervező informatikus BSc alatt általam kész�
 <details>
   <summary>
     <h2>Miért kerültek át ide a tananyagok?</h2>
-    Számomra sokkal kényelmesebb ide felrakni az anyagokat.
   </summary>
+  Számomra sokkal kényelmesebb ide felrakni az anyagokat.
 </details>

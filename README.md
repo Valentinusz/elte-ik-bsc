@@ -14,5 +14,5 @@ A tárgyakat felvételi félévük szerint vannak csoportosítva. Ha egy tárgya
   <summary>
     <h2>Miért kerültek át ide a tananyagok?</h2>
   </summary>
-  Számomra sokkal kényelmesebb ide felrakni az anyagokat.
+  Számomra sokkal kényelmesebb ide felrakni az anyagokat. Nem kell SSH-val szenvedni, backend-et kódolni meg kellemesebb hogy rendesen verziókezelve vannak a dolgok.
 </details>

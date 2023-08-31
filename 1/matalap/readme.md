@@ -1,2 +1,2 @@
 # Matematikai alapok
-- Gyakorlatvezető: dr. Nagy Gábor | [http://compalg.inf.elte.hu/~nagy/](honlap)
+- Gyakorlatvezető: dr. Nagy Gábor | [honlap](http://compalg.inf.elte.hu/~nagy/)

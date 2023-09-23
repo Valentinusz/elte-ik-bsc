@@ -6,4 +6,5 @@
 - Gyakorlatvezető: Varga Dániel | [honlap](https://vargadaniel.web.elte.hu/)
 
 ## [Előadás diasorok](https://ggombos.web.elte.hu/oktatas/BigDataArchitekturaEsElemzo/EA/)
+## [Jegyzetem](https://valentinusz.github.io/materials/bigdata)
 

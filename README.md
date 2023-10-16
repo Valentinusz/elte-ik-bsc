@@ -4,6 +4,8 @@ Ebben a GitHub repo-ban a programtervező informatikus BSc alatt általam kész�
 
 A tárgyakat felvételi félévük szerint vannak csoportosítva. Ha egy tárgyat nem találsz meg az adott félévben érdemes a többi félév könyvtárát is megnézni.
 
+## [Jegyzetek](https://valentinusz.github.io/notes)
+
 ## Hasznos linkek
 - [Tantervi hálók](https://www.inf.elte.hu/tantervihalok#Alapk%C3%A9pz%C3%A9s%20\(BSc,%202018-t%C3%B3l)
 - [Gabeee oldala (tananyagok, hasznos dolgok)](https://abarbermate.web.elte.hu/gabeee)

@@ -2,7 +2,7 @@
 
 ## [Tárgy oldala (kicsit outdated)](http://webprogramozas.inf.elte.hu/#!/subjects/webprog-pti)
 
-- Előadó: dr. Horváth Győző | [honlap](https://lakis.web.elte.hu/)
+- Előadó: dr. Horváth Győző
 - Gyakorlatvezető: Nagy Bendegúz | [GitHub](https://github.com/nagybrandy)
 
 ## Oktatás

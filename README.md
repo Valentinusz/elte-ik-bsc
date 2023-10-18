@@ -1,8 +1,8 @@
 # ELTE IK tananyagok
 
-Ebben a GitHub repo-ban a programtervező informatikus BSc alatt általam készített és összegyűjtött tananyagok találhatók.
+Ebben a repo-ban a programtervező informatikus BSc alatt általam készített és összegyűjtött tananyagok találhatók.
 
-A tárgyakat felvételi félévük szerint vannak csoportosítva. Ha egy tárgyat nem találsz meg az adott félévben érdemes a többi félév könyvtárát is megnézni.
+A tárgyak felvételi félévük szerint vannak csoportosítva. Ha egy tárgyat nem találsz meg az adott félévben érdemes a többi félév könyvtárát is megnézni.
 
 ## [Jegyzetek](https://valentinusz.github.io/notes)
 

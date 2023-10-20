@@ -1,6 +1,8 @@
 package my_package;
 
+import java.awt.image.SampleModel;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 class Car implements Runnable {
     private int fuel;
@@ -13,6 +15,13 @@ class Car implements Runnable {
 
     @Override
     public void run() {
+        Object object = new Object();
+
+        Semaphore.b
+
+        object.notify();
+        object.notifyAll();
+
         while(this.fuel >= 5) {
             System.out.println(Thread.currentThread().getName() + ": brumm-brumm");
             this.fuel -= 5;

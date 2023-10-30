@@ -6,6 +6,12 @@ A tárgyak felvételi félévük szerint vannak csoportosítva. Ha egy tárgyat 
 
 ## [Jegyzetek](https://valentinusz.github.io/notes)
 
+Jelenleg a következő tárgyakhoz érthető el jegyzet:
+- Haladó Java (hiányos [kevés példa, NIO-ról nincs szó])
+- Adatbázisok II.
+- Big data architektúrák és elemző módszerek
+- Valószínűségszámítás és statisztika (F)
+
 ## Hasznos linkek
 - [Tantervi hálók](https://www.inf.elte.hu/tantervihalok#Alapk%C3%A9pz%C3%A9s%20\(BSc,%202018-t%C3%B3l)
 - [Gabeee oldala (tananyagok, hasznos dolgok)](https://abarbermate.web.elte.hu/gabeee)

@@ -1,0 +1,72 @@
+[
+  {
+    "DKOD": 7839,
+    "DNEV": "KING",
+    "FOGLALKOZAS": "PRESIDENT",
+    "FONOKE": 0,
+    "BELEPES": "81-NOV-17",
+    "FIZETES": 5000,
+    "JUTALEK": 0,
+    "OAZON": 10
+  },
+  {
+    "DKOD": 7698,
+    "DNEV": "BLAKE",
+    "FOGLALKOZAS": "MANAGER",
+    "FONOKE": 7839,
+    "BELEPES": "81-MAY-01",
+    "FIZETES": 2850,
+    "JUTALEK": 0,
+    "OAZON": 30
+  },
+  {
+    "DKOD": 7782,
+    "DNEV": "CLARK",
+    "FOGLALKOZAS": "MANAGER",
+    "FONOKE": 7839,
+    "BELEPES": "81-JUN-09",
+    "FIZETES": 2450,
+    "JUTALEK": 0,
+    "OAZON": 10
+  },
+  {
+    "DKOD": 7566,
+    "DNEV": "JONES",
+    "FOGLALKOZAS": "MANAGER",
+    "FONOKE": 7839,
+    "BELEPES": "81-APR-02",
+    "FIZETES": 2975,
+    "JUTALEK": 0,
+    "OAZON": 20
+  },
+  {
+    "DKOD": 7654,
+    "DNEV": "MARTIN",
+    "FOGLALKOZAS": "SALESMAN",
+    "FONOKE": 7698,
+    "BELEPES": "81-SEP-28",
+    "FIZETES": 1250,
+    "JUTALEK": 1400,
+    "OAZON": 30
+  },
+  {
+    "DKOD": 7499,
+    "DNEV": "ALLEN",
+    "FOGLALKOZAS": "SALESMAN",
+    "FONOKE": 7698,
+    "BELEPES": "81-FEB-20",
+    "FIZETES": 1600,
+    "JUTALEK": 300,
+    "OAZON": 30
+  },
+  {
+    "DKOD": 7844,
+    "DNEV": "TURNER",
+    "FOGLALKOZAS": "SALESMAN",
+    "FONOKE": 7698,
+    "BELEPES": "81-SEP-08",
+    "FIZETES": 1500,
+    "JUTALEK": 0,
+    "OAZON": 30
+  }
+]

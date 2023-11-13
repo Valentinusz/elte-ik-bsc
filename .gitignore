@@ -4,3 +4,6 @@
 *.xsim
 *.dtx
 *.toc
+.idea
+.vs
+.vscode

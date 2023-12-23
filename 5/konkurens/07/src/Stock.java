@@ -1,0 +1,3 @@
+public enum Stock {
+    INTEL, AMD, NVIDIA, MICROSOFT, APPLE, GOOGLE, AMAZON, ORACLE
+}

@@ -3,6 +3,12 @@
 
 ## Feladatok
 
+A `synchronised` blokkokhoz, nagyon hasonló módszer ahol monitor egy direkt erre a feladatra megtervezett objektum, amit
+`Lock`-nak nevezünk. Minden `Lock` a `java.util.Concurrent.Lock` interfész egy megvalósítása. Mely a következő
+műveletek definiálását írja elő.
+
+Mi a `ReentrantLock` implementációt fogjuk használni.
+
 ### LockedList
 
 Lock segítségével készíts egy `LockedList<T>` osztályt. Az osztály konstruktorában kapjon egy `List<T>` típusú listát

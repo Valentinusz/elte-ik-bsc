@@ -1,0 +1,32 @@
+html {
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  
+}
+body {
+  font-family: 'Noto Serif', serif;
+  max-width: 80%;
+  margin: 20px auto;
+  background-color: white;
+  padding: 30px;
+}
+
+.searchable-text-input {
+  float: right;
+  border: 2px solid orange;
+  border-radius: 4px;
+}
+span.separator {
+  background-color: hsla(38, 100%, 50%, 0.5);
+}
+sup {
+  color: #aaa;
+  font-size: xx-small;
+}
+.numchapter {
+  font-size: 30px;
+  float: left;
+  padding-right: 6px;
+  line-height: 20px;
+  color: #777;
+}

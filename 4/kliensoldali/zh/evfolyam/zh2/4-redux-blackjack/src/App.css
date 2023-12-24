@@ -1,0 +1,21 @@
+.container {
+    text-align: center;
+    vertical-align: middle;
+    height: 600px;
+}
+
+.result {
+    color: red;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 30px;
+}
+
+.card {
+    font-size: 110px;
+}
+
+h2 {
+    margin: 10px;
+}
+

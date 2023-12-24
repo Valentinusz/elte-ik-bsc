@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2023-01-01",
+    "localName": "Újév",
+    "name": "New Year's Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-03-15",
+    "localName": "Nemzeti ünnep",
+    "name": "1848 Revolution Memorial Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-04-07",
+    "localName": "Nagypéntek",
+    "name": "Good Friday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-04-09",
+    "localName": "Húsvétvasárnap",
+    "name": "Easter Sunday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-04-10",
+    "localName": "Húsvéthétfő",
+    "name": "Easter Monday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "A munka ünnepe",
+    "name": "Labour day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-05-28",
+    "localName": "Pünkösdvasárnap",
+    "name": "Pentecost",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-05-29",
+    "localName": "Pünkösdhétfő",
+    "name": "Whit Monday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-08-20",
+    "localName": "Az államalapítás ünnepe",
+    "name": "State Foundation Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-10-23",
+    "localName": "Nemzeti ünnep",
+    "name": "1956 Revolution Memorial Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-11-01",
+    "localName": "Mindenszentek",
+    "name": "All Saints Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-12-25",
+    "localName": "Karácsony",
+    "name": "Christmas Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  },
+  {
+    "date": "2023-12-26",
+    "localName": "Karácsony másnapja",
+    "name": "St. Stephen's Day",
+    "countryCode": "HU",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": ["Public"]
+  }
+]

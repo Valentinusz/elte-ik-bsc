@@ -1,0 +1,1 @@
+Bőven nem max pontos megoldás (canvasba kijavítva sose lett csak megjelent a jegyem neptunba xd).

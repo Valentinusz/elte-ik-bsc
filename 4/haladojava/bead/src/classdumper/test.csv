@@ -1,0 +1,25 @@
+cls,expected
+TestClass1,"public class TestClass1 extends java.lang.Thread implements java.lang.Runnable, java.io.Serializable {
+    private static final int CONST;
+    transient volatile boolean flag;
+    protected java.lang.Object obj;
+    public int n;
+
+    public static void printConst(...) { /* method body */ }
+}",
+TestClass2,"public class TestClass2 extends java.lang.Thread {
+    private static final int CONST;
+    transient volatile boolean flag;
+    protected java.lang.Object obj;
+    public int n;
+
+    public static void printConst(...) { /* method body */ }
+}",
+TestClass3,"class TestClass3 extends java.lang.Object {
+    private static final int CONST;
+    transient volatile boolean flag;
+    protected java.lang.Object obj;
+    public int n;
+
+    public static void printConst(...) { /* method body */ }
+}"

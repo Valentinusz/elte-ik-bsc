@@ -1,0 +1,42 @@
+# RDD
+
+from pyspark import SparkConf, SparkContext
+
+conf = SparkConf()
+sc = SparkContext(conf=conf)
+
+
+
+## 1. feladat
+
+def make_kmer_list(line):
+    result = []
+
+    for i in range(len(line) - 2):
+        kmer = line[i:i+3]
+        if 'T' in kmer:
+            result.append((kmer, 1))
+
+    return result
+
+from operator import add
+
+sc.textFile('kmerInput.txt')\
+    .flatMap(make_kmer_list)\
+    .reduceByKey(add)\
+    .filter(lambda kmer: kmer[1] > 100)\
+    .count()
+
+> 18
+
+
+
+## 2. feladat
+
+sc.textFile('weboldalak.txt')\
+    .map(lambda line: line.lower().split(' ', 1))\
+    .filter(lambda website: len(website[1].split(' ')) > 10)\
+    .map(lambda website: (website[0], len(website[1]), website[1].count('elte')))\
+    .max(lambda website: website[2])
+
+> ('elte.hu', 397, 6)

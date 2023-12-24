@@ -1,0 +1,98 @@
+# Dataframe
+
+from pyspark.sql import  *
+from pyspark.sql.functions import *
+
+spark = SparkSession.builder.getOrCreate()
+
+book_df = spark.read.option('header', True).option('inferSchema', True).csv('books.csv')
+book_df.createOrReplaceTempView('BOOKS')
+
+order_df = spark.read.option('header', True).option('inferSchema', True).csv('orders.csv')
+order_df.createOrReplaceTempView('ORDERS')
+
+
+
+## 3. feladat
+
+spark.sql(
+    """
+    SELECT author, COUNT(DISTINCT itemID) as cnt
+    FROM BOOKS
+    WHERE author IS NOT NULL
+    GROUP BY author
+    ORDER BY cnt DESC
+    LIMIT 3
+    """
+).show()
+
++--------------------+----+
+|              author| cnt|
++--------------------+----+
+|     Garcia Santiago|1479|
+|Shelley Admont, K...| 228|
+|       James Manning| 180|
++--------------------+----+
+
+
+
+## 4. feladat
+
+spark.sql(
+    """
+    SELECT author, count(distinct publisher) cnt
+    FROM BOOKS
+    WHERE author IS NOT NULL
+    GROUP BY author
+    HAVING cnt > 35
+    """
+).show()
+
++--------------------+---+
+|              author|cnt|
++--------------------+---+
+|       Lewis Carroll| 43|
+|         Jules Verne| 37|
+|         H. G. Wells| 52|
+|Frances Hodgson B...| 38|
++--------------------+---+
+
+
+
+## 5. feladat
+
+spark.sql(
+    """
+    SELECT AVG(sessionClick)
+    FROM (
+    SELECT sum(click) as sessionClick
+    FROM ORDERS
+    GROUP BY sessionID)
+    """
+).show()
+
++-----------------+
+|avg(sessionClick)|
++-----------------+
+|1.655570384913763|
++-----------------+
+
+
+
+## 6. feladat
+
+spark.sql(
+    """
+    SELECT  author, title, sum(ORDERS.ORDER) as cnt
+    FROM (ORDERS JOIN BOOKS ON ORDERS.itemID = BOOKS.itemID)
+    GROUP BY title, author
+    ORDER BY cnt DESC
+    LIMIT 1
+    """
+).show()
+
++------------------+--------------------+---+
+|            author|               title|cnt|
++------------------+--------------------+---+
+|Andreas Steinhöfel|Rico, Oskar und d...|170|
++------------------+--------------------+---+

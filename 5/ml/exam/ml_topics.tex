@@ -36,18 +36,21 @@
 	\subsection{Turing test}
 	A machine and a human both converse with a second human. The second human must evaluate which of the two is the machine.
 	The test is passed if the evaluator is fooled a significant fraction of the time.
+	\\[4pt]
 	\noindent
 	The AI Eugene Goostman achieved Turing's estimate of convincing 30\% of judges.
 	
 	
 	\subsection{Robot College Student test }
 	A machine enrolls in a university, taking and passing the same classes that humans would, obtaining a degree.
+	\\[4pt]
 	\noindent
-	Some LLMs can now pass university degree-level exams without even attending the classes.
+	Some LLMs can now pass university level exams without even attending classes.
 	
 	
 	\subsection{Employment test}
 	A machine performs an economically important job at least as well as a human would.
+	\\[4pt]
 	\noindent
 	AIs are now replacing humans in many roles like fast food and marketing.
 	
@@ -70,10 +73,17 @@
 	
 	
 	\section{Techniques for generative AI}
-	\subsection{Autoencoders}
+	\subsection{Autoencoder}
 	
-	Autoencoders are neural networks trained to reproduce their input data at the output layer. By using a bottleneck layer in the middle, autoencoders can learn a compressed representation of the input data, which can be used for generating new samples.
+	Neural networks trained to reproduce their input data at the output layer. By using a bottleneck layer in the middle, autoencoders can learn a compressed representation of the input data, which can be used for generating new samples.
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{images/auto_encoder}
+		\caption{autoencoder}
+		\label{fig:autoencoder}
+	\end{figure}
+
 	
 	\subsection{Generative Adversarial Network}
 	A generator and a discriminator, trained simultaneously through a competitive process. The generator aims to create realistic data, while the discriminator tries to differentiate between real and generated data.
@@ -93,15 +103,15 @@
 	\section{Foraging Ants}
 	\subsection{Model}
 	\begin{itemize}
-		\item Ants wander around on 2D grid:
+		\item ants wander around on 2D grid:
 		\begin{itemize}
-			\item Starting from nest
-			\item Avoid obstacles (if any)
-			\item Follow pheromone gradient (probabilistically)
+			\item starting from nest
+			\item avoid obstacles (if any)
+			\item follow pheromone gradient (probabilistically)
 		\end{itemize}
-		\item From their current location if not carrying any: pick up a piece of food
-		\item If at nest an carrying food: put down food
-		\item Ants deposite a unit of pheromone at their current location
+		\item at current location if not carrying food: pick up a piece of food
+		\item if at nest and carrying food: put down food
+		\item deposite a unit of pheromone at current location
 		\begin{itemize}
 			\item "A" if searching for food
 			\item "B" if carrying food
@@ -110,13 +120,13 @@
 	\end{itemize}
 
 	
-	\subsection{Ant Colony Optimization}
+	\subsection{Ant Colony Optimization (ACO)}
 	\begin{itemize}
-		\item a graph is used, pheromone is placed on the edges
+		\item instead of a grid a graph is used, pheromone is placed on edges
 		\item a random starting node is selected
 		\item next node is selected probabilistically following edge pheromone gradient
 		\item when a solution is found pheromone amounts on path are adjusted: proportionally to quality
-		\item when most ants select the same solution the simulation stops
+		\item the simulation ends when most ants select the same solution 
 	\end{itemize}
 	
 	
@@ -128,9 +138,13 @@
 		\item plays on a 2D grid
 		\item agents are split into two groups
 		\item each agent occupies exactly one tile
-		\item each agent has a personal tolerance level (in percentage)
-		\item an agent is happy if its tolerance level is higher than the share of its neighbours from the other group
-		\item if an agent is not happy it moves to an empty tile
+		\item each agent has a personal tolerance level in $\left[0,1 \right]$
+		\item an agent is happy if:
+		\[
+		\text{tolerance level} \ge \frac{\text{number of neighbours from the other group}}{\text{number of neighbours}}
+		\]
+		
+		\item if an agent is unhappy it moves to an empty tile
 	\end{itemize} 
 	
 	
@@ -142,24 +156,22 @@
 	
 	\section{Different approaches to machine learning}
 	\subsection{Supervised learning}
-	The algorithm is trained on a labeled dataset, where each output is known. The goal is to create a function that predicts the output of new unlabeled data.
+	In supervised learning we have access to input data and its desired outputs (labels). Our objective is to train a program to generalize the knowledge from our data, so the labels of new data can be predicted.
 	
 	
 	\subsection{Unsupervised learning}
-	The algorithm is trained on a dataset without any labels. The goal is to create a function that labels data.
-	
-	
-	\subsection{Deep learning}
-	Deep learning is a subset of machine learning that involves neural networks with multiple layers (deep neural networks). These networks can automatically learn hierarchical representations of data.
-	
+	In unsupervised learning the desired output of our input data is unknown. The goal is to learn the structure of the data, so that it can be clustered/categorized.
 	
 	\subsection{Reinforcement learning}
-	Reinforcement learning involves an agent that learns to make decisions by interacting with an environment. The agent receives feedback in the form of rewards or penalties based on the actions it takes, allowing it to learn optimal strategies over time.
+	In reinforcement learning an agent learns to make decisions by interacting with an environment. The agent receives feedback in the form of rewards or penalties based on the actions it takes, allowing it to adjust its behaviour in order to optimize strategies over time.
 	
+	\subsection{Deep learning}
+	A subset of machine learning composed of algorithms that permit software to train itself to perform tasks by exposing multilayered neural networks to vast amount of data.
+
 
 	
 	\section{Basic concept of supervised learning}
-	Given a training set of $n$ example input/output pairs $(x_1,y_1), (x_2,y_2), \dots, (x_n, y_n)$, the goal is to approximate the unknown function $f$ that maps input vectors to outputs, so that new data without output (called unlabeled data) can be predicted.
+	Given a training set of $n$ example input/output pairs $(x_1,y_1), (x_2,y_2), \dots, (x_n, y_n)$ (called labelled data), the goal is to approximate the (unknown) function $f$ that maps input vectors to outputs, so that the output of new unlabelled data can be predicted.
 	
 	\begin{figure}[H]
 		\centering
@@ -171,14 +183,15 @@
 	
 	
 	\section{Supervised learning by decision trees}
-	A decision tree is used to model the mapping between input vectors and decisions (output labels). It a sequence of tests done starting from the root until a leaf node is reached.
-	
-	The simplest kind of decision tree is a boolean decision tree, which are actually just logical statements of the form:
+	A decision tree is used to model the mapping between input vectors and decisions (output labels). It is a sequence of tests done starting from the root until a leaf node is reached.
+	\\[4pt]
+	The simplest kind of decision tree is a boolean decision tree, where each test has a single boolean outcome. This means the entire process can be represented as:
 	\[
 	OUTPUT \iff \left( Path_1 \lor Path_2 \lor \dots \right)
 	\]
-	Where each path is the conjunction of attribute value tests representing a path from the root to a leaf.
-	
+	where each path is the conjunction of attribute value tests representing a path from the root to a leaf.
+	\\[4pt]
+	\noindent
 	Most of the time decision tress represent more complex criteria including both discrete and continuous comparisons. 
 	\begin{figure}[H]
 		\centering
@@ -197,7 +210,7 @@
 		\label{fig:dectreebuilding}
 	\end{figure}
 	\noindent
-	Where PLURALITY\_VALUE returns the most common label from a set of data.
+	where PLURALITY\_VALUE returns the most common label from a set of data.
 	
 	\begin{figure}[H]
 		\centering
@@ -205,10 +218,9 @@
 		\caption{Decision tree}
 		\label{fig:dectreebuilding2}
 	\end{figure}
+	It is important to note this decision tree has shorter paths and is much simpler than our original tree. The algorithm does not have any knowledge about actual function it merely looks at the examples.
 	
-	It is important to notice this decision tree has shorter paths and is much simpler than our original tree. The learning algorithm looks at the examples, not at the actual function (because that function is what we want to determine through the learning process).
-	
-	This means that the built tree is fitted to our training data. This results in decision tress not generalizing well:
+	This means the tree is fitted to our training data. This results in decision tress not generalizing well:
 	\begin{itemize}
 		\item If we increase the number of attributes, overfitting is more likely
 		\item If we increase the number of training samples, overfitting is less likely
@@ -218,26 +230,30 @@
 	
 	\subsection{Pros}
 	\begin{itemize}
-		\item Ease of understanding
-		\item Scalability to large data sets
-		\item Versatility in handling discrete and continuous inputs
-		\item Performing classification and regression
+		\item Easy to understand
+		\item scales well to large data sets
+		\item can handle both discrete and continuous inputs
+		\item can performing classification and regression
 	\end{itemize}
 	
 	\subsection{Cons}
 	\begin{itemize}
 		\item Suboptimal accuracy (largely due to the greedy search)
-		\item If trees are very deep, then getting a prediction for a new example can be expensive 
-		\item Decision trees are unstable – adding just one new example can change the entire tree
+		\item If trees are very deep, making a prediction can be expensive 
+		\item decision trees are unstable – adding just one new example can change the entire tree
 	\end{itemize}
 	
 	
 	
 	\newpage
 	\section{Basic concept of unsupervised learning}
-	Sometimes labelled data is unavailable and in some cases not even its classes and characteristics of are known. The solution to this problem is the group similar data together in so called clusters.
-	
+	Sometimes we are presented with data without any labels. In some of these cases data may even lock distinguishing characteristics, resulting in manual labelling becoming impossible.
+	\noindent
+	\\[4pt]
 	Unsupervised learning takes a given set of data, and produces output data (labels) and a function, which maps input to output.
+	\noindent
+	\\[4pt]
+	A possible solution to this problem is partitioning data into cluster, groups of highly similar data.
 	
 	\begin{figure}[H]
 		\centering
@@ -249,16 +265,16 @@
 	
 	
 	\section{k-means algorithm}
-	\subsection{Algorithm}
-	
 	An unsupervised, iterative method for clustering data.
+	
+	\subsection{Algorithm}
 	\begin{enumerate}
 		\item define $k$, the number of clusters
 		\item initialize $k$ cluster centers at random
 		\item repeat:
 		\begin{enumerate}
 			\item assign each point based on the nearest cluster center
-			\item recalculate the center points (add and take the average of sample vectors)
+			\item move the center point of each cluster to mean of its members
 			\item if no points changed ownership exit
 		\end{enumerate}
 	\end{enumerate}
@@ -282,6 +298,7 @@
 	\end{table}
 	
 	\newpage
+	\noindent
 	First iteration:
 	\begin{multicols}{2}		
 		\begin{figure}[H]
@@ -345,7 +362,8 @@
 			\caption{Assign points to nearest center}
 		\end{figure}
 	\end{multicols}
-	After this the center points need to be recalculated:
+	\noindent
+	Recalculate center points:
 	\begin{align*}
 		k_1 &= \left(\frac{185 + 179 + 182 + 188}{4}, \frac{76 + 74 + 73 + 75}{4} \right) = \left(183.5, 74.5 \right) \\
 		k_2 &= \left(\frac{170 + 168}{2}, \frac{66 + 68}{2} \right) = \left(169, 67 \right) 
@@ -385,13 +403,14 @@
 		
 		\caption{Move cluster centers}
 	\end{figure}
+	\noindent
 	Second iteration: The points need to be reassigned, based on the new center points. In our case no points change ownership resulting in the termination of the algorithm.
 	
 	
 	
 	\newpage
 	\section{Mechanism of reinforcement learning}
-	Reinforcement learning is a type of machine learning paradigm where an agent learns to make decisions by interacting with an environment in order to maximize some notion of cumulative reward over time.
+	Reinforcement learning is a machine learning paradigm where an agent learns to make decisions by interacting with an environment in order to maximize some notion of cumulative reward over time.
 	\\[8pt]
 	\noindent
 	The Markov Decision Process (MDP) which is a mathematical framework that provides a formal way to model decision-making in situations where outcomes are partially random and partially under the control of a decision maker.
@@ -400,7 +419,7 @@
 		\item State Space ($S$): a set of states, representing the possible configurations or situations of the environment
 		\item Action Space ($A$): a set of possible actions that the agent can take in each state
 		\item Transition Model ($T{(s, a, s’)} \sim \Pr(s’\mid s, a)$): the likelihood of transitioning from state $s$ to $s’$ given a particular $a$ action 
-		\item Reward Function ($R$): assigns a numerical value, indicating the immediate reward associated with
+		\item Reward Function ($R$): assigns a numerical value, indicating the immediate reward associated with:
 		\begin{itemize}
 			\item being in a state ($R(s)$)
 			\item taking a specific action in a particular state ($R(s, a)$)
@@ -433,7 +452,7 @@
 		\item Q-Table: In Q-learning, a Q-table is used to store Q-values for all state-action pairs. Initially, the Q-table is filled with arbitrary values, and the agent updates these values as it interacts with the environment.
 		\item Learning Iteration: The agent iteratively interacts with the environment, updates the Q-values using the Bellman equation, and refines its policy over time.
 	\end{itemize}
-	
+	\noindent
 	Downsides of Q-learning:
 	\begin{itemize}
 		\item Cannot handle continuous action spaces
@@ -444,7 +463,7 @@
 	
 	\newpage
 	\section{Deep Learning methods, value learning and policy learning}
-	Deep learning algorithms can be classified based on their strategy for finding the optimal policy.
+	Deep learning algorithms can be classified based on their strategy for finding the optimal policy ($\pi^*$).
 	
 	\subsection{Value learning}
 	The optimal policy is derived from a learned function $Q$ called the value function. The optimal policy is always choosing the best possible action in every state:
@@ -491,15 +510,20 @@
 	
 	\section{Optimization by genetic algorithm}
 	A genetic algorithm is a population-based stochastic optimization method inspired by natural selection. It utilizes three operators inspired by biology: selection, crossover and mutation.
-	
+	\\[4pt]
+	\noindent
 	The individuals are evaluated according to some criterion called the fitness function on how good of a solution they can provide to the given problem. Better individuals have a higher fitness value, thus they have a higher chance to survive.
 	
 	
 	\subsection{Selection}
-	There are many ways to select chromosomes to survive to the next generation. In roulette wheel selection the chance of selecting an individual is proportionate to its fitness value.
+	There are many ways to select chromosomes to survive to the next generation. One such method is roulette wheel selection (also known as fitness proportionate selection), where the chance of selecting an individual is proportionate to its fitness value.
+	
+	\[
+	\text{expected count in crossover} = \frac{\text{fitness of individual}}{\text{total fitness of population}} \cdot \text{size of population}
+	\]
 	
 	\subsection{Crossover}
-	A random locus is selected. The tails of the individuals are exchanged.
+	A random locus is selected. The tails after the locus are exchanged.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\linewidth]{crossover}
@@ -562,12 +586,22 @@
 	\newpage
 	\section{Basic concept of genetic programming, differences with genetic algorithms}
 	Genetic programming applies the approach of genetic algorithm to the space of possible computer programs, allowing the generation of syntactically valid and executable programs.
+	\\[4pt]
+	\noindent
+	This way each individual becomes an expression tree representing a syntactically valid executable program.
 	
-	Each evolutionary operator is defined a bit differently. The whole approach requires the definition of:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\linewidth]{images/expr_tree}
+		\caption{Expression tree}
+		\label{fig:exprtree}
+	\end{figure}
+	\noindent
+	The approach requires the definition of the following:
 	
 	\begin{itemize}
-		\item set of terminals
-		\item set of functions
+		\item set of terminals (foo, bar, x, y, i)
+		\item set of functions (+, -, IF, \%)
 		\item the fitness measure 
 		\item the parameters for the run
 		\item the criterion for terminating a run
@@ -600,6 +634,7 @@
 	
 	
 	
+	\newpage
 	\section{The basic concept of swarm intelligence}
 	A collective system capable of performing complex tasks in a dynamic and changing environment without any external control or central coordination. Capable of achieving a collective performance that cannot normally be achieved by the organism alone.
 
@@ -647,39 +682,25 @@
 	\subsection{Firefly}
 	\begin{itemize}
 		\item similar to Particle Swarm Optimization
-		\item particles are firefly who emit light
-		\item brightness depends on how good of a solution they provide
-		\item light intensity reduces over distance and respects absorption
-		\item each individual moves towards brighter fireflies
+		\item particles are fireflies who emit light
+		\item light intensity reduces over distance and respects absorption ($\gamma$)
+		\item brightness depends on how good of a solution they provide:
+			\[
+				(I_0, d, \gamma) = I_0 \cdot e^{-\gamma d^2}
+			\]
+			where $d$ is a distance metric and $I_0$ is the individuals light intensity at 0 distance
+		\item each individual moves towards brighter fireflies and also do some random movement
 	\end{itemize}
 	
-	Attractiveness is calculated as $(I_0, d, \gamma) = I_0 \cdot e^{-\gamma d^2}$, where $d$ is a distance metric and $\gamma$ is the absorption coefficient.
-	
-	All fireflies approach better solutions and also do some random movement.
-	
-	Special cases:
+	\subsubsection{Special cases}
 	\begin{itemize}
 		\item $\gamma = 0$ clear air, all fireflies can see each other
 		\item $\gamma = \infty $ foggy air, fireflies can't see each other result in random walk
 	\end{itemize}
 	
 	\subsection{Grey wolf}
-	Population based meta-heuristics algorithm simulating the leadership hierarchy and hunting mechanism of grey wolves in nature. The species adhere to a strict social structure. In our case:
+	\href{https://en.wikiversity.org/wiki/Algorithm_models/Grey_Wolf_Optimizer}{\color{blue}{GWO algorithm}}
 	
-	\begin{itemize}
-		\item $\alpha$ best solution
-		\item $\beta$ second best solution
-		\item $\delta$ third best solution
-		\item $\omega$ rest of the solutions
-	\end{itemize}
-	
-	\noindent
-	Finding the optimal solution is like hunting prey. Hunting is guided by the 3 best solutions, $\omega$ wolves follow:
-	\begin{itemize}
-		\item find a fit prey (exploration)
-		\item encircle it
-		\item attack it (exploitation)
-	\end{itemize}
 	
 
 	
@@ -697,7 +718,7 @@
 		\label{fig:artificalneuron}
 	\end{figure}
 	
-	A single neuron is unable to solve complex problem, however an interconnected system of neurons can deliver complex behaviour. $\varphi$ is the activation function responsible for keeping the values in given range.
+	A single neuron is unable to solve complex problem, however an interconnected system of neurons can deliver complex behaviour. $\Phi$ is the activation function responsible for keeping the values in given range.
 	
 	\section{Perceptron, Perceptron training}
 	\subsection{Definition}

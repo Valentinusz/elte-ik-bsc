@@ -5,7 +5,8 @@
 
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
 \usepackage{mathtools}
-\usepackage{multicol, float}
+\usepackage{multirow, multicol, float}
+
 
 \usepackage{graphicx}
 \graphicspath{{./images}}
@@ -22,6 +23,8 @@
 
 
 \DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\step}{step}
+\newcommand{\stepfn}[1]{\step\left( #1 \right) }
 
 \title{\huge{Introduction to machine learning} \\[-4pt] \large exam topics \vspace{-15pt}}
 \author{Bálint Boda, Péter Szabó, Dominik Bocsi, Dániel Fülep}
@@ -718,29 +721,155 @@
 		\label{fig:artificalneuron}
 	\end{figure}
 	
-	A single neuron is unable to solve complex problem, however an interconnected system of neurons can deliver complex behaviour. $\Phi$ is the activation function responsible for keeping the values in given range.
+	A single neuron is unable to solve complex problems, however an interconnected system of neurons can deliver complex behaviour. $\Phi$ is the activation function responsible for keeping the values in given range.
 	
-	\section{Perceptron, Perceptron training}
+	Artificial neural network is a highly interconnected data processing system consisting of a large number of artificial neurons.
+	
+	In ANN, neurons are organized into a sequence of layers with full or partial connection between the layers. 
+	
+	
+	
+	\newpage
+	\section{Perceptron}
 	\subsection{Definition}
-	The perceptron is an supervised algorithm for learning a binary classifier called a threshold function. A (single-layer) perceptron is only capable of learning linear threshold functions. In the context of neural networks, a  perceptron is an artificial neuron using the Heaviside step function as the activation function. 
+	The (single-layer) perceptron is a supervised leanring algorithm for solving linearly separable patterns. (Multilayer perceptron also exist which are capable of separating linearly inseparable variables as well.)
 	
-	Multilayer perceptron also exist which are capable of separating linearly inseparable variables as well.
+	\begin{multicols}{2}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\linewidth]{images/linear_sep}
+			\caption{linearly separable pattern}
+			\label{fig:linearsep}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\linewidth]{images/linear_unsep}
+			\caption{linearly unseparable}
+			\label{fig:linearunsep}
+		\end{figure}
+		
+	\end{multicols}
+	\noindent
+	A perceptron is esentially an artificial neuron that uses the step function as the activation function:
+	\[
+	\Phi(x) =
+	\begin{cases}
+		1, \, &\text{if } x \ge 0 \\
+		0, \, &\text{if } x < 0
+	\end{cases}
+	\]
 	
 	
-	\subsection{Training}
+	
+	\subsection{Perceptron training}
 	
 	\begin{enumerate}
 		\item Initialization
 		\begin{itemize}
-			\item set the initial weights
+			\item set the initial weights $w_1, w_2, \dots w_m$
 			\item set the threshold $\theta$ to a random number in $\left[ -0.5, 0.5 \right] $
-			\item set the learning rate $\mu$ to a positive value less than 1
+			\item set the learning rate $\eta$ to a positive value less than 1
 		\end{itemize}
-		\item Activation (calculate actual output of at iteration)
-		\item Weight learning (update weights based on output)
-		\item Iteration (repeat steps 2-4 until convergence)
+		\item Activation (calculate output at iteration $p$):
+		\[
+		y(p) = \stepfn{\left[ \sum_{i=1}^{m}{x_i \cdot w_i} \right] - \theta}
+		\]
+		\item Weight training
+		\begin{itemize}
+			\item error (difference of desired and actual value): $e(p) = d(p) - y(p) $
+			\item weight correction: $\Delta w_i(p) = \eta \cdot x_i(p) \cdot e(p) $
+			\item new weight is adding the correction to the old weight: $w_i(p+1) = w_i(p) + \Delta w_i(p)$
+		\end{itemize}
+		\item Increase $p$ by one, repeat steps 2-4 until convergence
 	\end{enumerate}
 	
+	\subsubsection{Example}
+	Train a perceptron to perform logical operation AND. We groups iterations by input patterns into epochs. Each epoch has 4 possible input patterns: $00, 01, 10, 11$.
+	\\[4pt]
+	\noindent
+	Initial weights are given $w_1 = 0.3, w_2 = -0.1; \theta=0.2, \eta=0.1$
+	\\[8pt]
+	\noindent
+	The desired output is $0 \land 0 \iff 0$. The actual output is:
+	\begin{align*}
+		y(p) &= \stepfn{\left[ x_1(p) \cdot w_1(p) + x_2(p) \cdot w_2(p) \right] - \theta} \\
+		&= \stepfn{\left[ 0 \cdot 0.3 + x_2(p) \cdot -0.1 \right] - 0.2} \\
+		&= \stepfn{-0.2} \\
+		&= 0
+	\end{align*}
+	Error is the difference of desired and actual value:
+	\[
+	e(p) = d(p) - y(p) = 0 - 0 = 0
+	\]
+	The new weights are:
+	\begin{align*}
+		w_1 &= w_1 + \eta \cdot x_1(p) \cdot e(p) = 0.3 + 0.1 \cdot 0 \cdot 0 = 0.3 \\
+		w_2 &= w_2 + \eta \cdot x_2(p) \cdot e(p) = -0.1 + 0.1 \cdot 0 \cdot 0 = -0.1
+	\end{align*}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			\hline
+			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
+			1 & 0 & 0 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
+			\hline
+		\end{tabular}
+		\caption{First iteration}
+	\end{table}
+	Steps are repeated until convergence:
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			\hline
+			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
+			1 & 0 & 0 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
+			2 & 0 & 1 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
+			3 & 1 & 0 & 0.3 & -0.1 & 0 & 1 & -1& 0.2 & -0.1 \\
+			4 & 1 & 1 & 0.2 & -0.1 & 1 & 0 & 0 & 0.3 &  0 \\
+			\hline
+		\end{tabular}
+		\caption{First epoch}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			\hline
+			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
+			5 & 0 & 0 & 0.3 & 0    & 0 & 0 & 0 & 0.3 & 0 \\
+			6 & 0 & 1 & 0.3 & 0 & 0 & 0 & 0 & 0.3 & 0 \\
+			7 & 1 & 0 & 0.3 & 0 & 0 & 1 & -1& 0.2 & 0 \\
+			8 & 1 & 1 & 0.2 & 0 & 1 & 1 & 0 & 0.2 &  0 \\
+			\hline
+		\end{tabular}
+		\caption{Second epoch}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			\hline
+			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
+			17 & 0 & 0 & 0.1 & 0.1    & 0 & 0 & 0 & 0.1 & 0.1 \\
+			18 & 0 & 1 & 0.1 & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
+			19 & 1 & 0 & 0.1 & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
+			20 & 1 & 1 & 0.1 & 0.1 & 1 & 1 & 0 & 0.1 & 0.1 \\
+			\hline
+		\end{tabular}
+		\caption{Fifth epoch}
+	\end{table}
+	
+	
+	
+	\newpage
 	\section{Basic concept of CRISP-DM}
 	An open standard process model that describes common approaches used by data mining experts, that breaks the process of data mining into six major phases:
 	\begin{enumerate}

@@ -37,7 +37,7 @@
 	
 	\section{Tests for Artificial General Intelligence}
 	\subsection{Turing test}
-	A machine and a human both converse with a second human. The second human must evaluate which of the two is the machine.
+	A machine and a human both converse with another human. The second human must evaluate which of the two is the machine.
 	The test is passed if the evaluator is fooled a significant fraction of the time.
 	\\[4pt]
 	\noindent
@@ -48,7 +48,7 @@
 	A machine enrolls in a university, taking and passing the same classes that humans would, obtaining a degree.
 	\\[4pt]
 	\noindent
-	Some LLMs can now pass university level exams without even attending classes.
+	Some large language models can now pass university level exams without even attending classes.
 	
 	
 	\subsection{Employment test}
@@ -106,15 +106,15 @@
 	\section{Foraging Ants}
 	\subsection{Model}
 	\begin{itemize}
-		\item ants wander around on 2D grid:
+		\item ants wander around on a 2D grid:
 		\begin{itemize}
 			\item starting from nest
 			\item avoid obstacles (if any)
 			\item follow pheromone gradient (probabilistically)
 		\end{itemize}
-		\item at current location if not carrying food: pick up a piece of food
-		\item if at nest and carrying food: put down food
-		\item deposite a unit of pheromone at current location
+		\item at current location with food if not carrying any: pick up a piece of food
+		\item if at nest and carrying food: put it down 
+		\item deposit a unit of pheromone at current location
 		\begin{itemize}
 			\item "A" if searching for food
 			\item "B" if carrying food
@@ -141,12 +141,11 @@
 		\item plays on a 2D grid
 		\item agents are split into two groups
 		\item each agent occupies exactly one tile
-		\item each agent has a personal tolerance level in $\left[0,1 \right]$
+		\item each agent has a personal tolerance level between 0 and 1
 		\item an agent is happy if:
 		\[
 		\text{tolerance level} \ge \frac{\text{number of neighbours from the other group}}{\text{number of neighbours}}
 		\]
-		
 		\item if an agent is unhappy it moves to an empty tile
 	\end{itemize} 
 	
@@ -159,11 +158,11 @@
 	
 	\section{Different approaches to machine learning}
 	\subsection{Supervised learning}
-	In supervised learning we have access to input data and its desired outputs (labels). Our objective is to train a program to generalize the knowledge from our data, so the labels of new data can be predicted.
+	In supervised learning we have access to input data and its desired outputs (labels). Our objective is to train a program to generalize the knowledge from our data, so that the output of new unlabelled data can be predicted.
 	
 	
 	\subsection{Unsupervised learning}
-	In unsupervised learning the desired output of our input data is unknown. The goal is to learn the structure of the data, so that it can be clustered/categorized.
+	In unsupervised learning the desired output of our input data is unknown. The goal is to discover patterns and insights in the data without any explicit guidance or instruction. 
 	
 	\subsection{Reinforcement learning}
 	In reinforcement learning an agent learns to make decisions by interacting with an environment. The agent receives feedback in the form of rewards or penalties based on the actions it takes, allowing it to adjust its behaviour in order to optimize strategies over time.
@@ -174,7 +173,7 @@
 
 	
 	\section{Basic concept of supervised learning}
-	Given a training set of $n$ example input/output pairs $(x_1,y_1), (x_2,y_2), \dots, (x_n, y_n)$ (called labelled data), the goal is to approximate the (unknown) function $f$ that maps input vectors to outputs, so that the output of new unlabelled data can be predicted.
+	Given a training set of $n$ example input/output pairs $(x_1,y_1), (x_2,y_2), \dots, (x_n, y_n)$ (called labelled data), the goal is to approximate the (unknown) function $f$ that maps input vectors to outputs, so that the output of new unseen unlabelled data can be predicted.
 	
 	\begin{figure}[H]
 		\centering
@@ -186,16 +185,16 @@
 	
 	
 	\section{Supervised learning by decision trees}
-	A decision tree is used to model the mapping between input vectors and decisions (output labels). It is a sequence of tests done starting from the root until a leaf node is reached.
+	A decision tree is used to model the mapping between input vectors and decisions (output labels). It is a sequence of logical tests done starting from the root until a leaf node is reached.
 	\\[4pt]
 	The simplest kind of decision tree is a boolean decision tree, where each test has a single boolean outcome. This means the entire process can be represented as:
 	\[
 	OUTPUT \iff \left( Path_1 \lor Path_2 \lor \dots \right)
 	\]
-	where each path is the conjunction of attribute value tests representing a path from the root to a leaf.
+	where each path is the conjunction of attribute value tests in the path from root to leaf.
 	\\[4pt]
 	\noindent
-	Most of the time decision tress represent more complex criteria including both discrete and continuous comparisons. 
+	Most of the time decision tress represent more complex criteria that include both discrete and continuous comparisons. 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\linewidth]{dec_tree}
@@ -221,15 +220,15 @@
 		\caption{Decision tree}
 		\label{fig:dectreebuilding2}
 	\end{figure}
-	It is important to note this decision tree has shorter paths and is much simpler than our original tree. The algorithm does not have any knowledge about actual function it merely looks at the examples.
+	It is important to note this tree has shorter paths and is much simpler than our original tree. Both us and the algorithm lack knowledge about the actual mapping of input and output, which means the built tree depends on the insight (training data) we give during learning.
 	
-	This means the tree is fitted to our training data. This results in decision tress not generalizing well:
+	This means the tree is fitted to our training data, which means that decision tress do not generalize well:
 	\begin{itemize}
-		\item If we increase the number of attributes, overfitting is more likely
-		\item If we increase the number of training samples, overfitting is less likely
+		\item if we increase the number of attributes, overfitting is more likely
+		\item if we increase the number of training samples, overfitting is less likely
 	\end{itemize}
 	
-	To improve generalization a technique called pruning is used, during which we examine potentially nodes that only has leaf descendents. If the node appears to be irrelevant it is replaced with a leaf node.
+	To improve generalization a technique called pruning is used, during which we examine nodes that only have leaf descendants. If the node appears to be irrelevant it is replaced with a leaf node.
 	
 	\subsection{Pros}
 	\begin{itemize}
@@ -250,13 +249,13 @@
 	
 	\newpage
 	\section{Basic concept of unsupervised learning}
-	Sometimes we are presented with data without any labels. In some of these cases data may even lock distinguishing characteristics, resulting in manual labelling becoming impossible.
+	Sometimes we are presented with data without any labels. In some of these cases data may even lock distinguishing characteristics, meaning that manual labelling is impossible.
 	\noindent
 	\\[4pt]
 	Unsupervised learning takes a given set of data, and produces output data (labels) and a function, which maps input to output.
 	\noindent
 	\\[4pt]
-	A possible solution to this problem is partitioning data into cluster, groups of highly similar data.
+	A possible solution to this problem is partitioning data into clusters, groups of highly similar data.
 	
 	\begin{figure}[H]
 		\centering
@@ -273,18 +272,18 @@
 	\subsection{Algorithm}
 	\begin{enumerate}
 		\item define $k$, the number of clusters
-		\item initialize $k$ cluster centers at random
+		\item initialize $k$ cluster centres at random
 		\item repeat:
 		\begin{enumerate}
-			\item assign each point based on the nearest cluster center
-			\item move the center point of each cluster to mean of its members
+			\item assign each point to a cluster based on the nearest cluster centre
+			\item move the centre point of each cluster to mean of its members
 			\item if no points changed ownership exit
 		\end{enumerate}
 	\end{enumerate}
 	
 
 	\subsection{Example}
-	In a wrestling competition, wrestlers are divided into leagues based on their height and weight. Divide the competitors into two leagues ($k=2$) based on the data obtained using the k-means algorithm. Perform the calculation over two iterations, taking the values of the first and second competitors as the initial center points.
+	In a wrestling competition, wrestlers are divided into leagues based on their height and weight. Divide the competitors into two leagues ($k=2$) based on the data obtained using the k-means algorithm. Perform the calculation over two iterations, taking the values of the first and second competitors as the initial centre points.
 	
 	\begin{table}[H]
 		\centering
@@ -331,7 +330,7 @@
 					};
 				\end{axis}
 			\end{tikzpicture}
-			\caption{Initialize center points}
+			\caption{Initialize centre points}
 		\end{figure}
 		
 		\begin{figure}[H]
@@ -362,11 +361,11 @@
 					};
 				\end{axis}
 			\end{tikzpicture}
-			\caption{Assign points to nearest center}
+			\caption{Assign points to nearest centre}
 		\end{figure}
 	\end{multicols}
 	\noindent
-	Recalculate center points:
+	Recalculate centre points:
 	\begin{align*}
 		k_1 &= \left(\frac{185 + 179 + 182 + 188}{4}, \frac{76 + 74 + 73 + 75}{4} \right) = \left(183.5, 74.5 \right) \\
 		k_2 &= \left(\frac{170 + 168}{2}, \frac{66 + 68}{2} \right) = \left(169, 67 \right) 
@@ -404,10 +403,10 @@
 			\end{axis}
 		\end{tikzpicture}
 		
-		\caption{Move cluster centers}
+		\caption{Move cluster centres}
 	\end{figure}
 	\noindent
-	Second iteration: The points need to be reassigned, based on the new center points. In our case no points change ownership resulting in the termination of the algorithm.
+	Second iteration: The points need to be reassigned, based on the new centre points. In our case no points change ownership resulting in the termination of the algorithm.
 	
 	
 	
@@ -428,7 +427,7 @@
 			\item taking a specific action in a particular state ($R(s, a)$)
 			\item taking an action and ending up in a different state ($R(s, a, s’)$)
 		\end{itemize}
-		\item Policy ($\pi: S \rightarrow A$): a strategy that specifies the agent's behavior, determining which action to take in each state
+		\item Policy ($\pi: S \rightarrow A$): a strategy that specifies the agent's behaviour, determining which action to take in each state
 	\end{itemize}
 
 	\noindent
@@ -500,7 +499,7 @@
 	\section{Basic concept of evolutionary algorithms}
 	Evolutionary algorithms are stochastic search methods that computationally simulate the natural evolutionary process using the concept of the survival of the fittest.
 	\begin{itemize}
-		\item Gene: functional entity that encodes a specific feature of the individual (e.g. hair color)
+		\item Gene: functional entity that encodes a specific feature of the individual (e.g. hair colour)
 		\item Allele: value of gene (e.g. blonde)
 		\item Genotype: the specific combination of alleles carried by an individual
 		\item Phenotype: the physical makeup of an organism
@@ -732,7 +731,7 @@
 	\newpage
 	\section{Perceptron}
 	\subsection{Definition}
-	The (single-layer) perceptron is a supervised leanring algorithm for solving linearly separable patterns. (Multilayer perceptron also exist which are capable of separating linearly inseparable variables as well.)
+	The (single-layer) perceptron is a supervised learning algorithm for solving linearly separable patterns. (Multilayer perceptron also exist which are capable of separating linearly inseparable variables as well.)
 	
 	\begin{multicols}{2}
 		\begin{figure}[H]
@@ -744,13 +743,13 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.7\linewidth]{images/linear_unsep}
-			\caption{linearly unseparable}
+			\caption{linearly unseparable pattern}
 			\label{fig:linearunsep}
 		\end{figure}
 		
 	\end{multicols}
 	\noindent
-	A perceptron is esentially an artificial neuron that uses the step function as the activation function:
+	A perceptron is essentially an artificial neuron that uses the step function as the activation function:
 	\[
 	\Phi(x) =
 	\begin{cases}
@@ -760,9 +759,7 @@
 	\]
 	
 	
-	
 	\subsection{Perceptron training}
-	
 	\begin{enumerate}
 		\item Initialization
 		\begin{itemize}
@@ -787,10 +784,10 @@
 	Train a perceptron to perform logical operation AND. We groups iterations by input patterns into epochs. Each epoch has 4 possible input patterns: $00, 01, 10, 11$.
 	\\[4pt]
 	\noindent
-	Initial weights are given $w_1 = 0.3, w_2 = -0.1; \theta=0.2, \eta=0.1$
-	\\[8pt]
-	\noindent
-	The desired output is $0 \land 0 \iff 0$. The actual output is:
+	Initial weights are $w_1 = 0.3, w_2 = -0.1$, the threshold is $\theta=0.2$ and the learning rate is $\eta=0.1$.
+
+	\paragraph{First iteration}
+	The desired output $d(p)$ is $0 \land 0 \iff 0$. The actual output is:
 	\begin{align*}
 		y(p) &= \stepfn{\left[ x_1(p) \cdot w_1(p) + x_2(p) \cdot w_2(p) \right] - \theta} \\
 		&= \stepfn{\left[ 0 \cdot 0.3 + x_2(p) \cdot -0.1 \right] - 0.2} \\
@@ -810,7 +807,7 @@
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
-			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			Iteration & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
 			\hline
 			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
 			1 & 0 & 0 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
@@ -818,18 +815,19 @@
 		\end{tabular}
 		\caption{First iteration}
 	\end{table}
-	Steps are repeated until convergence:
+	\paragraph{Training}
+	Steps are repeated until convergence.
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
-			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			Iteration & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
 			\hline
 			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
 			1 & 0 & 0 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
 			2 & 0 & 1 & 0.3 & -0.1 & 0 & 0 & 0 & 0.3 & -0.1 \\
 			3 & 1 & 0 & 0.3 & -0.1 & 0 & 1 & -1& 0.2 & -0.1 \\
-			4 & 1 & 1 & 0.2 & -0.1 & 1 & 0 & 0 & 0.3 &  0 \\
+			4 & 1 & 1 & 0.2 & -0.1 & 1 & 0 & 1 & 0.3 &  0 \\
 			\hline
 		\end{tabular}
 		\caption{First epoch}
@@ -839,7 +837,7 @@
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
-			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			Iteration & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
 			\hline
 			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
 			5 & 0 & 0 & 0.3 & 0    & 0 & 0 & 0 & 0.3 & 0 \\
@@ -850,18 +848,20 @@
 		\end{tabular}
 		\caption{Second epoch}
 	\end{table}
-	
+	\newpage
+	\noindent
+	The algorithm continues until the fifth epoch (20th iteration):
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
-			Iter. & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
+			Iteration & \multicolumn{2}{c|}{Inputs} & \multicolumn{2}{c|}{Initial weights} & \multicolumn{2}{c|}{Output} & Error & \multicolumn{2}{c|}{New weight} \\
 			\hline
 			$p$ & $x_1(p)$ & $x_2(p)$ & $w_1(p)$ & $w_2(p)$ &$d(p)$ & $y(p)$ & $e(p)$ & $w_1(p+1)$ & $w_2(p+1)$ \\ \hline
-			17 & 0 & 0 & 0.1 & 0.1    & 0 & 0 & 0 & 0.1 & 0.1 \\
-			18 & 0 & 1 & 0.1 & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
-			19 & 1 & 0 & 0.1 & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
-			20 & 1 & 1 & 0.1 & 0.1 & 1 & 1 & 0 & 0.1 & 0.1 \\
+			17  & 0        & 0        & 0.1 & 0.1    & 0 & 0 & 0 & 0.1 & 0.1 \\
+			18  & 0        & 1        & 0.1  & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
+			19  & 1        & 0        & 0.1 & 0.1 & 0 & 0 & 0 & 0.1 & 0.1 \\
+			20  & 1        & 1        & 0.1 & 0.1 & 1 & 1 & 0 & 0.1 & 0.1 \\
 			\hline
 		\end{tabular}
 		\caption{Fifth epoch}

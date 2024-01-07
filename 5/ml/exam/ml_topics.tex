@@ -232,16 +232,16 @@
 	
 	\subsection{Pros}
 	\begin{itemize}
-		\item Easy to understand
+		\item easy to understand
 		\item scales well to large data sets
 		\item can handle both discrete and continuous inputs
-		\item can performing classification and regression
+		\item can perform both classification and regression
 	\end{itemize}
 	
 	\subsection{Cons}
 	\begin{itemize}
-		\item Suboptimal accuracy (largely due to the greedy search)
-		\item If trees are very deep, making a prediction can be expensive 
+		\item suboptimal accuracy (largely due to the greedy search)
+		\item if trees are very deep, making a prediction can be expensive 
 		\item decision trees are unstable – adding just one new example can change the entire tree
 	\end{itemize}
 	
@@ -521,7 +521,7 @@
 	There are many ways to select chromosomes to survive to the next generation. One such method is roulette wheel selection (also known as fitness proportionate selection), where the chance of selecting an individual is proportionate to its fitness value.
 	
 	\[
-	\text{expected count in crossover} = \frac{\text{fitness of individual}}{\text{total fitness of population}} \cdot \text{size of population}
+	\text{expected count in crossover} = \frac{\text{fitness of individual}}{\text{total fitness of population}}
 	\]
 	
 	\subsection{Crossover}
